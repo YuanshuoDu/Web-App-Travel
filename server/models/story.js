@@ -8,7 +8,7 @@ const storySchema = mongoose.Schema({
     message: String,
     tags: [String],
     selectedPicture: String,
-    saveCount: {
+    likeCount: {
         type: Number,
         default: 0
     },

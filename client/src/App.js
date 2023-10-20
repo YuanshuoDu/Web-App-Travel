@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
-import { useDispatch } from'react-redux';
+import { AppBar, Typography, Container, Grid, Grow } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
 import { getStories } from './actions/stories';
-import Posts from './components/stories/Stories';
-import useStyles from './styles';
+import Stories from './components/stories/Stories';
+import homeStyles from './styles';
 
 const App = () => {
-    const classes = useStyles();
+    const classes = homeStyles();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,20 +14,17 @@ const App = () => {
     }, [dispatch]);
 
     return (
-        <Container maxWidth="lg">
-            <AppBar className={classes.appBar} position="static" color="inherit">
-                <Typography className={classes.heading} variant="h2" align="center">Stories</Typography>
+        <Container >
+            <AppBar className={classes.appBar} position="sticky" color="inherit">
+                <Typography className={classes.title} variant="h2" align="center">AppBar</Typography>
             </AppBar>
-            <Grow in>
-                <Container>
-                    <Grid container justify="space-between" alignItems="stretch" spacing={3}>
-                        <Grid item xs={12} sm={7}>
-                            <Posts />
-                        </Grid>
 
-                    </Grid>
-                </Container>
-            </Grow>
+            <Container container className={classes.container}>
+                <Grid item xs={12} sm={8}>
+                    <Stories />
+                </Grid>
+            </Container>
+
         </Container>
     );
 }
