@@ -12,6 +12,9 @@ export default makeStyles(() => ({
     title: {
         color: 'rgba(0,1,1,1)',
     },
+    button: {
+        color: 'white',
+    },
     container: {
         display: 'flex',
         alignItems: 'center',

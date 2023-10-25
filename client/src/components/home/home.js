@@ -26,6 +26,7 @@ const Home = () => {
                 <Typography className={classes.title} variant="h2" align="center">AppBar</Typography>
             </AppBar>
             <Button
+                className={classes.button}
                 variant="contained"
                 color="primary"
                 startIcon={<AddIcon />}

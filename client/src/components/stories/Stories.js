@@ -12,7 +12,7 @@ const Stories = () => {
 
 
     return (
-        stories.length == 0 ? <CircularProgress /> : (
+        stories.length == 0 ? <div className={classes.containerProgress}><CircularProgress /></div> : (
            
                 <Grid className={classes.container} container alignItems="stretch" spacing={1}>
                     {stories.map((story) => (

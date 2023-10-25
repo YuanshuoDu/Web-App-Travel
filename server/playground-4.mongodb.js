@@ -12,11 +12,50 @@
 // Select the database to use.
 use('test');
 
-// Insert a few documents into the sales collection.
+// Insert a few documents into the stories collection.
 db.getCollection('stories').insertMany([
-  { 'creator': 'David Santamaria', 'title': 'Trip to Barcelona', 'country': 'Spain', 'city': 'Barcelona', 'message': 'Sagrada Familia, Barri Gòtic, Barceloneta Beach, Ramblas...', 'tags': ['culture', 'summer'], 'likeCount': 0, 'createdAt': new Date('2023-10-18T017:019:00Z'), 'selectedPicture': "" },
-  { 'creator': 'David Santamaria', 'title': 'Trip to Barcelona', 'country': 'Spain', 'city': 'Barcelona', 'message': 'Sagrada Familia, Barri Gòtic, Barceloneta Beach, Ramblas...', 'tags': ['culture', 'summer'], 'likeCount': 0, 'createdAt': new Date('2023-10-18T017:019:00Z'), 'selectedPicture': "" },
-  { 'creator': 'David Santamaria', 'title': 'Trip to Barcelona', 'country': 'Spain', 'city': 'Barcelona', 'message': 'Sagrada Familia, Barri Gòtic, Barceloneta Beach, Ramblas...', 'tags': ['culture', 'summer'], 'likeCount': 0, 'createdAt': new Date('2023-10-18T017:019:00Z'), 'selectedPicture': "" },
-  { 'creator': 'David Santamaria', 'title': 'Trip to Barcelona', 'country': 'Spain', 'city': 'Barcelona', 'message': 'Sagrada Familia, Barri Gòtic, Barceloneta Beach, Ramblas...', 'tags': ['culture', 'summer'], 'likeCount': 0, 'createdAt': new Date('2023-10-18T017:019:00Z'), 'selectedPicture': "" },
-
+  {
+    'creator': 'David Santamaria',
+    'title': 'Trip to Barcelona',
+    'country': 'Spain',
+    'city': 'Barcelona',
+    'message': 'Sagrada Familia, Barri Gòtic, Barceloneta Beach, Ramblas...',
+    'tags': ['culture', 'summer'],
+    'likeCount': 0,
+    'createdAt': new Date('2023-10-18T17:19:00Z'),
+    'selectedPicture': 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QDQ' // Inserta los datos base64 de la imagen de Barcelona
+  },
+  {
+    'creator': 'Eva López',
+    'title': 'Exploring Rome',
+    'country': 'Italy',
+    'city': 'Rome',
+    'message': 'Colosseum, Vatican City, Trevi Fountain...',
+    'tags': ['history', 'architecture'],
+    'likeCount': 0,
+    'createdAt': new Date('2023-10-19T09:30:00Z'),
+    'selectedPicture': 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QDQ' // Inserta los datos base64 de la imagen de Roma
+  },
+  {
+    'creator': 'Alice Johnson',
+    'title': 'Hiking in the Swiss Alps',
+    'country': 'Switzerland',
+    'city': 'Interlaken',
+    'message': 'Eiger, Mönch, Jungfrau, beautiful alpine landscapes...',
+    'tags': ['adventure', 'nature'],
+    'likeCount': 0,
+    'createdAt': new Date('2023-10-20T14:45:00Z'),
+    'selectedPicture': 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QDQ' // Inserta los datos base64 de la imagen de los Alpes Suizos
+  },
+  {
+    'creator': 'Carlos Rodriguez',
+    'title': 'Beach Vacation in Bali',
+    'country': 'Indonesia',
+    'city': 'Bali',
+    'message': 'White sandy beaches, rice terraces, Balinese temples...',
+    'tags': ['beach', 'relaxation'],
+    'likeCount': 0,
+    'createdAt': new Date('2023-10-21T12:15:00Z'),
+    'selectedPicture': 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QDQ' // Inserta los datos base64 de la imagen de Bali
+  }
 ]);

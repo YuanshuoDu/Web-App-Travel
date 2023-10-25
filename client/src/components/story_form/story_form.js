@@ -63,7 +63,7 @@ const CreateStory = () => {
                     </div>
                     <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setStoryData({ ...storyData, selectedPicture: base64 })} /></div>
                     <Button className={classes.submitButton} variant="contained" color="primary" size="large" type="submit" fullWidth onClick={handleCreate}>Create Story</Button>
-                    <Button className={classes.cancelButton} variant="contained" color="secondary" size="large" fullWidth onClick={handleGoBack}>Cancel</Button>
+                    <Button className={classes.cancelButton} variant="contained" color="grey" size="large" fullWidth onClick={handleGoBack}>Cancel</Button>
                 </form>
             </Paper>
         </Container>

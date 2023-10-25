@@ -40,9 +40,11 @@ export default makeStyles((theme) => ({
     margin: '15px 8px 0px 8px',
   },
   submitButton: {
-    margin: '30px 8px 10px 8px'
+    margin: '30px 8px 10px 8px',
+    color: 'white',
   },
   cancelButton: {
-    margin: '0px 8px 20px 8px'
+    margin: '0px 8px 20px 8px',
+    color: 'white',
   },
 }));
