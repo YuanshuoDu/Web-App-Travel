@@ -12,7 +12,7 @@ export const getStories = async (req, res) => {
 
 export const createStory = async (req, res) => {
     const story = req.body;
-    const newStory = new Story(story);
+    const newStory = new Story({ ...story, creator: req.userId, createdAt: new Date().toISOString() })
 
     try {
         await newStory.save();

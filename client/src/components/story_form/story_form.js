@@ -4,14 +4,21 @@ import storyFormStyles from './styles';
 import ChipInput from 'material-ui-chip-input';
 import FileBase from 'react-file-base64';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { createStory } from '../../actions/stories';
 
 
 const CreateStory = () => {
     const classes = storyFormStyles();
-    const [storyData, setStoryData] = useState({ title: '', message: '', country: '', city: '', tags: [], selectedPicture: '' });
-
+    const [storyData, setStoryData] = useState({ creator: 'Test', title: '', message: '', country: '', city: '', tags: [], selectedPicture: '' });
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
+    const handleCreate = (e) => {
+        e.preventDefault();
+        dispatch(createStory(storyData));
+    };
+    
     const handleGoBack = () => {
         navigate(-1);
     };
@@ -23,7 +30,6 @@ const CreateStory = () => {
     const deleteTag = (deleteTag) => {
         setStoryData({ ...storyData, tags: storyData.tags.filter((tag) => tag !== deleteTag) });
     };
-
 
     return (
         <Container >
@@ -55,8 +61,8 @@ const CreateStory = () => {
                         />
                     </div>
                     <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setStoryData({ ...storyData, selectedPicture: base64 })} /></div>
-                    <Button className={classes.submitButton} variant="contained" color="primary" size="large" type="submit" fullWidth>Create Story</Button>
-                    <Button className={classes.cancelButton} variant="contained" color="secondary" size="large" onClick={handleGoBack} fullWidth>Cancel</Button>
+                    <Button className={classes.submitButton} variant="contained" color="primary" size="large" type="submit" fullWidth onClick={handleCreate}>Create Story</Button>
+                    <Button className={classes.cancelButton} variant="contained" color="secondary" size="large" fullWidth onClick={handleGoBack}>Cancel</Button>
                 </form>
             </Paper>
         </Container>

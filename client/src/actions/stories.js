@@ -9,3 +9,13 @@ export const getStories = () => async (dispatch) => {
         console.log(error.message);
     }
 };
+
+export const createStory = (newStory) => async (dispatch) => {
+    try {
+        const { data } = await api.createStory(newStory);
+        dispatch({ type: 'CREATE', payload: data });
+
+    } catch(error) {
+        console.log(error.message);
+    }
+};
