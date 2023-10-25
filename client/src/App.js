@@ -1,32 +1,22 @@
-import React, { useEffect } from 'react';
-import { AppBar, Typography, Container, Grid, Grow } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import { getStories } from './actions/stories';
-import Stories from './components/stories/Stories';
-import homeStyles from './styles';
+import React from 'react';
+import { Container } from '@material-ui/core';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from './components/home/home';
+import CreateStory from './components/story_form/story_form';
 
 const App = () => {
-    const classes = homeStyles();
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getStories());
-    }, [dispatch]);
-
-    return (
-        <Container >
-            <AppBar className={classes.appBar} position="sticky" color="inherit">
-                <Typography className={classes.title} variant="h2" align="center">AppBar</Typography>
-            </AppBar>
-
-            <Container container className={classes.container}>
-                <Grid item xs={12} sm={8}>
-                    <Stories />
-                </Grid>
-            </Container>
-
-        </Container>
-    );
-}
+  return (
+    <BrowserRouter>
+      <Container maxWidth="xl">
+        <Routes>
+          <Route path="/" element={<HomePage/>} />
+          <Route path="/stories" element={<HomePage/>} />
+          <Route path="/createStory" element={<CreateStory/>} />
+        </Routes>
+      </Container>
+    </BrowserRouter>
+  );
+};
 
 export default App;

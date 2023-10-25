@@ -16,7 +16,7 @@ const Stories = () => {
            
                 <Grid className={classes.container} container alignItems="stretch" spacing={1}>
                     {stories.map((story) => (
-                        <Grid key={story._id} item xs={12} sm={6} md={5} lg={5} className={classes.storyItem}>
+                        <Grid key={story._id} item xs={12} sm={12} md={6} lg={3} className={classes.storyItem}>
                             <Story story={story} />
                         </Grid>
                     ))}
