@@ -17,6 +17,7 @@ const CreateStory = () => {
     const handleCreate = (e) => {
         e.preventDefault();
         dispatch(createStory(storyData));
+        navigate(-1);
     };
     
     const handleGoBack = () => {
@@ -42,13 +43,13 @@ const CreateStory = () => {
                     <TextField name="title" variant="outlined" label="Title" fullWidth value={storyData.title} onChange={(e) => setStoryData({ ...storyData, title: e.target.value })} />
                     <Grid container item xs={12} spacing={2} justifyContent="space-between">
                         <Grid item xs={6}>
-                            <TextField name="country" variant="outlined" label="Country" fullWidth />
+                            <TextField name="country" variant="outlined" label="Country" fullWidth value={storyData.country} onChange={(e) => setStoryData({ ...storyData, country: e.target.value })}/>
                         </Grid>
                         <Grid item xs={6}>
-                            <TextField name="city" variant="outlined" label="City" fullWidth />
+                            <TextField name="city" variant="outlined" label="City" fullWidth value={storyData.city} onChange={(e) => setStoryData({ ...storyData, city: e.target.value })}/>
                         </Grid>
                     </Grid>
-                    <TextField name="message" variant="outlined" label="Message" fullWidth multiline rows={4} value={storyData.message} onChange={(e) => setStoryData({ ...storyData, message: e.target.value })} />
+                    <TextField name="message" variant="outlined" label="Message" fullWidth multiline minRows={4} value={storyData.message} onChange={(e) => setStoryData({ ...storyData, message: e.target.value })} />
                     <div style={{ padding: '5px 8px', width: '100%' }}>
                         <ChipInput
                             name="tags"
