@@ -4,6 +4,7 @@ import LoginStyles from "./Login.module.css"
 import {useGoogleLogin} from '@react-oauth/google';
 import {useDispatch} from 'react-redux';
 import {signinGoogle, signin} from "../../redux/actions/auth";
+import {useHistory} from 'react-router-dom';
 
 function Login() {
     const [email,setEmail] = useState("");
