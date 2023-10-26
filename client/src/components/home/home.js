@@ -18,10 +18,10 @@ const Home = () => {
     }, [dispatch]);
 
     const openCreateStoryScreen = () => navigate('/createStory');
-    
+
 
     return (
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
             <AppBar className={classes.appBar} position="sticky" color="inherit">
                 <Typography className={classes.title} variant="h2" align="center">AppBar</Typography>
             </AppBar>
@@ -35,11 +35,7 @@ const Home = () => {
                 CREATE STORY
             </Button>
 
-            <Container container className={classes.container}>
-                <Grid item xs={12} sm={8}>
-                    <Stories />
-                </Grid>
-            </Container>
+            <Stories />
 
         </Container>
     );

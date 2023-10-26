@@ -4,6 +4,7 @@ export default makeStyles((theme) => ({
 
   container: {
     marginTop: theme.spacing(2),
+    justifyContent: 'center',
   },
   storyItem: {
     margin: theme.spacing(2),
@@ -12,7 +13,7 @@ export default makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '70vh', // Esto centra verticalmente en toda la altura del viewport
+    height: '70vh',
   }
 
 }));

@@ -8,15 +8,12 @@ const Stories = () => {
     const stories = useSelector((state) => state.stories);
     const classes = storiesStyles();
 
-    console.log(stories);
-
-
     return (
         stories.length == 0 ? <div className={classes.containerProgress}><CircularProgress /></div> : (
            
-                <Grid className={classes.container} container alignItems="stretch" spacing={1}>
+                <Grid className={classes.container} container alignItems="stretch">
                     {stories.map((story) => (
-                        <Grid key={story._id} item xs={12} sm={12} md={6} lg={3} className={classes.storyItem}>
+                        <Grid key={story._id} item xs={12} sm={5} md={4} lg={2} className={classes.storyItem}>
                             <Story story={story} />
                         </Grid>
                     ))}
