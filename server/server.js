@@ -12,7 +12,7 @@ app.use(express.json())
 app.use("/users", userRoutes)
 
 const PORT = process.env.PORT || 5000;
-const MONGOOSE_URL = "mongodb://localhost:27017/LSYSTEM"
+const MONGOOSE_URL = 'mongodb+srv://test:yVF6YxZPFBdIMswk@travelappcluster.1xu2xdn.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp'
 
 mongoose.connect(MONGOOSE_URL, {useNewUrlParser: true})
 .then(()=> app.listen(PORT, ()=>{
