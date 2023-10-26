@@ -72,10 +72,10 @@ function Signup() {
 
                 <div className={SignUp.footerContainer}>
                         <div>
-                            Already Signed Up? <Link to="/account/login">Login</Link>
+                            Already Signed Up? <Link to="/login">Login</Link>
                         </div>
                         <div>
-                            <Link to="/account/forgotpassword">Forgot Password?</Link>
+                            <Link to="/forgotpassword">Forgot Password?</Link>
                         </div>
                     </div>
 
