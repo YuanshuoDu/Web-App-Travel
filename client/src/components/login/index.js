@@ -49,7 +49,7 @@ function Login() {
                         Remember Me <input type="checkbox" />
                     </div>
                     <div>
-                        <Link to="/account/forgotpassowrd">Forgot password?</Link>
+                        <Link to="/forgotpassowrd">Forgot password?</Link>
                     </div>
                 </div>
 
