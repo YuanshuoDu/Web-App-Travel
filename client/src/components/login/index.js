@@ -59,7 +59,7 @@ function Login() {
                     <i class="fa-brands fa-google"></i>  Sign in with google</button>
                 
                     
-                    <span className={LoginStyles.notreg}>Not registered yet?  <Link className={LoginStyles.singupBTN} to="/account/signup">Signup</Link></span>
+                    <span className={LoginStyles.notreg}>Not registered yet?  <Link className={LoginStyles.singupBTN} to="/signup">Signup</Link></span>
                     
             </div>
 
