@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const API = axios.create({baseURL:"http://localhost:5000"})
+const API = axios.create({baseURL:"http://localhost:3000"})
 
 API.interceptors.request.use((req)=>{
     if(localStorage.getItem("user_info")){
@@ -19,3 +19,7 @@ export const signUp = (data) => API.post("/users/signup", data)
 export const signUpGoogle = (accessToken) => API.post("/users/signup", {
     googleAccessToken: accessToken
 })
+
+export const fetchStories = () => API.get("/stories");
+export const createStory = (newStory) => API.post("/stories", newStory);
+
