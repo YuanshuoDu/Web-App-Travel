@@ -5,7 +5,7 @@ import ChipInput from 'material-ui-chip-input';
 import FileBase from 'react-file-base64';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { createStory } from '../../actions/stories';
+import { createStory } from '../../redux/actions/stories';
 
 
 const CreateStory = () => {

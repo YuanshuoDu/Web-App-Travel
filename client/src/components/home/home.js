@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { AppBar, Typography, Container, Grid, Grow, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { useDispatch } from 'react-redux';
-import { getStories } from '../../actions/stories';
+import { getStories } from '../../redux/actions/stories';
 import Stories from '../stories/Stories';
 import homeStyles from './styles';
 import { useNavigate } from 'react-router-dom';

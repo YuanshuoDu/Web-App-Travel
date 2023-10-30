@@ -31,7 +31,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
+     
         <Container maxWidth="xl">
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -44,7 +44,7 @@ const App = () => {
           <Route path="/forgotpassowrd" element={<Forgotpassord/>}/> */}
           </Routes>
         </Container>
-      </BrowserRouter>
+     
     </ThemeProvider>
   );
 };

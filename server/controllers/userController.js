@@ -1,12 +1,12 @@
-const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
-const axios = require("axios")
-const config = require("config")
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import axios from 'axios';
+import config from 'config';
+import User from '../models/user.js';
 
-const User = require("../models/user")
 
 
-const signinController = async(req, res) => {
+export const signinController = async(req, res) => {
     if(req.body.googleAccessToken){
         // gogole-auth
         const {googleAccessToken} = req.body;
@@ -43,7 +43,7 @@ const signinController = async(req, res) => {
                     .status(400)
                     .json({message: "Invalid access token!"})
             })
-    }else{
+    } else{
         // normal-auth
         const {email, password} = req.body;
         if (email === "" || password === "") 
@@ -76,7 +76,7 @@ const signinController = async(req, res) => {
   
 }
 
-const signupController = async(req, res) => {
+export const signupController = async(req, res) => {
     if (req.body.googleAccessToken) {
         const {googleAccessToken} = req.body;
 
@@ -146,9 +146,4 @@ const signupController = async(req, res) => {
         }
 
     }
-}
-
-module.exports = {
-    signinController,
-    signupController
 }
