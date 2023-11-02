@@ -34,6 +34,8 @@ export default makeStyles({
   likeButton: {
     padding: '10px 15px 10px 12px',
     display: 'flex',
-
+  },
+  link: {
+    textDecoration: 'none',
   },
 });
