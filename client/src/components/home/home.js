@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppBar, Typography, Container, Grid, Grow, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { useDispatch } from 'react-redux';
@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const classes = homeStyles();
+    const [currentId, setCurrentId] = useState(0);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -35,7 +36,7 @@ const Home = () => {
                 CREATE STORY
             </Button>
 
-            <Stories />
+            <Stories setCurrentId={setCurrentId} />
 
         </Container>
     );
