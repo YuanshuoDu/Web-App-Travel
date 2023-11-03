@@ -6,6 +6,7 @@ import { getStories } from '../../redux/actions/stories';
 import Stories from '../stories/Stories';
 import homeStyles from './styles';
 import { useNavigate } from 'react-router-dom';
+import Nav from "../nav"
 
 
 const Home = () => {
@@ -23,9 +24,10 @@ const Home = () => {
 
     return (
         <Container maxWidth="lg">
-            <AppBar className={classes.appBar} position="sticky" color="inherit">
+            {/* <AppBar className={classes.appBar} position="sticky" color="inherit">
                 <Typography className={classes.title} variant="h2" align="center">AppBar</Typography>
-            </AppBar>
+            </AppBar> */}
+            <Nav />
             <Button
                 className={classes.button}
                 variant="contained"
