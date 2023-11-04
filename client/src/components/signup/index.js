@@ -10,7 +10,7 @@
 // const InitState = {
 //     firstName: "",
 //     lastName: "",
-//     userName: "",
+//     // userName: "",
 //     email: '',
 //     password: '',
 //     confirmPassword: ''
@@ -37,10 +37,11 @@
 
 //     function handleOnSubmit(e) {
 //         e.preventDefault();
-//         if (sForm.firstName !== "" && sForm.lastName !== "" && sForm.userNames !== "" && sForm.password !== "" && sForm.confirmPassword !== "" && sForm.email !== "" && sForm.password === sForm.confirmPassword && sForm.password.length >= 4) {
+//         if (sForm.firstName !== "" && sForm.lastName !== "" &&  sForm.password !== "" && sForm.confirmPassword !== "" && sForm.email !== "" && sForm.password === sForm.confirmPassword && sForm.password.length >= 4) {
 //             dispatch(signup(sForm,nagivate))
 //         }
 //     }
+//     // sForm.userNames !== "" &&
 
 //     const login = useGoogleLogin({onSuccess: handleGoogleLoginSuccess});
 //     return (
@@ -56,10 +57,10 @@
 //                     <label>LAST NAME</label>
 //                     <input name="lastName" onChange={handleChange} placeholder="enter your last name" type="text"/>
 //                 </div>
-//                 <div className={SignUp.inputContainer}>
+//                 {/* <div className={SignUp.inputContainer}>
 //                     <label>USER NAME</label>
-//                     <input name="username" onChange={handleChange} placeholder="enter your user name" type="text"/>
-//                 </div>
+//                     <input name="userName" onChange={handleChange} placeholder="enter your user name" type="text"/>
+//                 </div> */}
 //                 <div className={SignUp.inputContainer}>
 //                     <label>EMAIL</label>
 //                     <input name="email" onChange={handleChange} placeholder="enter your email" type="email"/>
@@ -121,7 +122,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 const InitState = {
     firstName: "",
     lastName: "",
-    userName: "",
+    // userName: "",
     email: '',
     password: '',
     confirmPassword: ''
@@ -144,10 +145,11 @@ function Signup() {
 
     function handleOnSubmit(e) {
         e.preventDefault();
-        if (sForm.firstName !== "" && sForm.lastName !== "" && sForm.userName !== "" && sForm.password !== "" && sForm.confirmPassword !== "" && sForm.email !== "" && sForm.password === sForm.confirmPassword && sForm.password.length >= 4) {
+        if (sForm.firstName !== "" && sForm.lastName !== "" &&  sForm.password !== "" && sForm.confirmPassword !== "" && sForm.email !== "" && sForm.password === sForm.confirmPassword && sForm.password.length >= 4) {
             dispatch(signup(sForm, navigate));
         }
     }
+    // sForm.userName !== "" &&
 
     const login = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
 
@@ -207,7 +209,7 @@ function Signup() {
                                 value={sForm.email}
                             />
                         </Grid>
-                        <Grid item xs={12}>
+                        {/* <Grid item xs={12}>
                             <TextField
                                 required
                                 fullWidth
@@ -218,7 +220,7 @@ function Signup() {
                                 onChange={handleChange}
                                 value={sForm.userName}
                             />
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs={12}>
                             <TextField
                                 required
@@ -233,17 +235,31 @@ function Signup() {
                             />
                         </Grid>
                         <Grid item xs={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                name="confirmPassword"
+                                label="Confirm Password"
+                                type="password"
+                                id="confirmPassword"
+                                autoComplete="new-password"
+                                onChange={handleChange}
+                                value={sForm.confirmPassword}
+                            />
+                        </Grid>
+                        {/* <Grid item xs={12}>
                             <FormControlLabel
                                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                                 label="I want to receive inspiration, marketing promotions and updates via email."
                             />
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
+                        onClick={handleOnSubmit}
                     >
                         Sign Up
                     </Button>

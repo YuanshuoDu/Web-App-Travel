@@ -622,7 +622,7 @@ function Nav(props) {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              backgroundColor: 'rgba(0, 0, 0, 0.9)', // 调整这里的alpha通道值
+              backgroundColor: 'rgba(0, 0, 0, 0.9)', // 
             }}
           >
             LOGO
@@ -639,7 +639,7 @@ function Nav(props) {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -682,10 +682,56 @@ function Nav(props) {
                       <Link to="/signup">Signup</Link>
                     </Typography>
                   </MenuItem>
+                  <Button href="/login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+                 Login
+                  </Button>
                 </div>
               )}
             </Menu>
-          </Box>
+          </Box> */}
+
+          {authenticated ? (
+            <div>
+              
+              <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+              >
+                <IconButton color="inherit" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                
+                
+                <Avatar  alt="User Avatar" src="/static/images/avatar/2.jpg" />
+                <MenuItem component={Link} to="/profile" onClick={handleCloseUserMenu}>
+                <Typography textAlign="center"> profile </Typography>
+                </MenuItem>
+                <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+                </IconButton>
+
+                // Render the authenticated settings menu
+
+              </Menu>
+            </div>
+          ) : (
+            <Button href="/login" variant="contained" startIcon={<AccountCircleIcon />} sx={{ my: 1, mx: 1.5 }}>
+                 Login
+                  </Button>
+          )}
+
+
+
+
         </Toolbar>
       </Container>
     </AppBar>

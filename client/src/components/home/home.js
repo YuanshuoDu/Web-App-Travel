@@ -29,8 +29,8 @@ const Home = () => {
         sx={{
           pt: 8,
           pb: 6,
-          backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)', // 替换为你的背景图片路径
-          backgroundSize: 'cover', // 可根据需要调整背景大小
+          backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)', // background image
+          backgroundSize: 'cover', // make sure the image covers the whole canvas
         }}
         >
         
