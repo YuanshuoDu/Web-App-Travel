@@ -71,7 +71,7 @@ import {signinGoogle, signin} from "../../redux/actions/auth";
 // export default Login;
 
 
-import * as React from 'react';
+// import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -194,7 +194,7 @@ function Login() {
                     </Link>
                 </Grid>
                 <Grid item>
-                    <Link href="/signup" variant="body2">
+                    <Link to="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                     </Link>
                 </Grid>

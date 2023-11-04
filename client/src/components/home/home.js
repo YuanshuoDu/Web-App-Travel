@@ -7,6 +7,8 @@ import Stories from '../stories/Stories';
 import homeStyles from './styles';
 import { useNavigate } from 'react-router-dom';
 import Nav from "../nav"
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
 
 const Home = () => {
@@ -23,24 +25,77 @@ const Home = () => {
 
 
     return (
+        <Box
+        sx={{
+          pt: 8,
+          pb: 6,
+          backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)', // 替换为你的背景图片路径
+          backgroundSize: 'cover', // 可根据需要调整背景大小
+        }}
+        >
+        
         <Container maxWidth="lg">
+            
             {/* <AppBar className={classes.appBar} position="sticky" color="inherit">
                 <Typography className={classes.title} variant="h2" align="center">AppBar</Typography>
             </AppBar> */}
             <Nav />
-            <Button
-                className={classes.button}
-                variant="contained"
-                color="primary"
-                startIcon={<AddIcon />}
-                onClick={openCreateStoryScreen}
-            >
-                CREATE STORY
-            </Button>
+        <main>
+            {/* Hero unit */}
+            {/* <Box
+            sx={{
+                bgcolor: 'background.paper',
+                pt: 8,
+                pb: 6,
+            }}
+            > */}
+            <Container maxWidth="sm">
+                <Typography
+                component="h1"
+                variant="h2"
+                align="center"
+                color="text.primary"
+                gutterBottom
+                >
+                Album layout
+                </Typography>
+                <Typography variant="h5" align="center" color="text.secondary" paragraph>
+                Something short and leading about the collection below—its contents,
+                the creator, etc. Make it short and sweet, but not too short so folks
+                don&apos;t simply skip over it entirely.
+                </Typography>
+                <Stack
+                sx={{ pt: 4 }}
+                direction="row"
+                spacing={2}
+                justifyContent="center"
+                >
+                <Button
+                    className={classes.button}
+                    variant="contained"
+                    color="primary"
+                    startIcon={<AddIcon />}
+                    onClick={openCreateStoryScreen}
+                >
+                    CREATE STORY
+                </Button>
 
-            <Stories setCurrentId={setCurrentId} />
+                </Stack>
+            </Container>
+            
 
-        </Container>
+            {/* End hero unit */}
+
+
+
+            
+        </main>
+        
+        
+    </Container>
+    <Stories setCurrentId={setCurrentId} />
+    </Box>
+
     );
 }
 
