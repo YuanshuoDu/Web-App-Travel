@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Paper, Typography, CircularProgress, Divider, Chip, Card, CardActions, IconButton } from '@material-ui/core/';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
-import { getStory } from '../../redux/actions/stories';
+import { getStory, deleteStory } from '../../redux/actions/stories';
 import useStyles from './styles';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
@@ -15,10 +16,9 @@ const StoryDetail = () => {
   const { story } = useSelector((state) => state.stories);
   const dispatch = useDispatch();
   const classes = useStyles();
+  const navigate = useNavigate();
   const { id } = useParams();
   var userLikePost = false;
-
-
 
   var handleButtonClick = () => {
     if (userLikePost) {
@@ -42,9 +42,15 @@ const StoryDetail = () => {
     setAnchorEl(null);
   };
 
-
-  //if (!story) return null;
-
+  const handleDelete = (id) => {
+    try {
+      dispatch(deleteStory(id));
+      alert('Story deleted successfully.');
+      navigate(-1);
+    } catch (error) {
+      alert(`Error: couldn't delete the story.`);
+    }
+  }
 
   if (!story) {
     return (
@@ -80,7 +86,7 @@ const StoryDetail = () => {
           onClose={handleClose}
         >
           <MenuItem onClick={() => alert('Update story')}>Edit story</MenuItem>
-          <MenuItem onClick={() => alert('Delete story')}>Delete story</MenuItem>
+          <MenuItem onClick={() => handleDelete(story._id)}>Delete story</MenuItem>
         </Menu>
         <div className={classes.textSection}>
           <Typography variant="h4" component="h2">{story.title}</Typography>

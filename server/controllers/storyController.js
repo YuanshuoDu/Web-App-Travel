@@ -1,4 +1,5 @@
 import Story from '../models/story.js';
+import mongoose from 'mongoose';
 
 export const getStories = async (req, res) => {
     try {
@@ -34,4 +35,14 @@ export const createStory = async (req, res) => {
     } catch(error) {
         res.status(409).json({message: error.message});
     }
+}
+
+export const deleteStory = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No story with id: ${id}`);
+
+    await Story.findByIdAndRemove(id);
+
+    res.json({ message: "Story deleted successfully." });
 }
