@@ -1,5 +1,5 @@
 import express from 'express';
-import { getStories, getStory, createStory, deleteStory } from '../controllers/storyController.js';
+import { getStories, getStory, createStory, deleteStory, updateStory } from '../controllers/storyController.js';
 
 const router = express.Router();
 
@@ -7,5 +7,6 @@ router.get('/', getStories);
 router.get('/:id', getStory);
 router.post('/', createStory);
 router.delete('/:id', deleteStory);
+router.patch('/:id', updateStory);
 
 export default router;

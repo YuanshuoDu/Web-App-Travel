@@ -46,3 +46,16 @@ export const deleteStory = async (req, res) => {
 
     res.json({ message: "Story deleted successfully." });
 }
+
+export const updateStory = async (req, res) => {
+    const { id } = req.params;
+    const { title, message, tags, country, city, selectedPicture} = req.body;
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No story with id: ${id}`);
+
+    const updatedStory = { _id: id, title, message, tags, country, city, selectedPicture };
+
+    await Story.findByIdAndUpdate(id, updatedStory, { new: true });
+
+    res.json(updatedStory);
+}

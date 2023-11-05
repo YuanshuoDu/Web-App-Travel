@@ -42,6 +42,10 @@ const StoryDetail = () => {
     setAnchorEl(null);
   };
 
+  const handleEdit = (id) => {
+    navigate(`/editStory/${story._id}`);
+  }
+
   const handleDelete = (id) => {
     try {
       dispatch(deleteStory(id));
@@ -85,7 +89,7 @@ const StoryDetail = () => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={() => alert('Update story')}>Edit story</MenuItem>
+          <MenuItem onClick={() => handleEdit(story._id)}>Edit story</MenuItem>
           <MenuItem onClick={() => handleDelete(story._id)}>Delete story</MenuItem>
         </Menu>
         <div className={classes.textSection}>

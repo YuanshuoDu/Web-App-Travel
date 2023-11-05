@@ -35,3 +35,13 @@ export const deleteStory = (id) => async (dispatch) => {
         console.log(error);
     }
 };
+
+export const updateStory = (id, story) => async (dispatch) => {
+    try {
+      const { data } = await api.updateStory(id, story);
+  
+      dispatch({ type: 'UPDATE', payload: data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
