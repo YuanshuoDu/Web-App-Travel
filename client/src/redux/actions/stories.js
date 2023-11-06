@@ -2,8 +2,10 @@ import * as api from '../../api/index.js';
 
 export const getStories = () => async (dispatch) => {
     try {
+        dispatch({ type: 'START_LOADING' });
         const { data } = await api.fetchStories();
         dispatch({ type: 'FETCH_ALL', payload: data });
+        dispatch({ type: 'END_LOADING' });
     } catch (error) {
         console.log(error.message);
     }
@@ -11,8 +13,10 @@ export const getStories = () => async (dispatch) => {
 
 export const getStory = (id) => async (dispatch) => {
     try {
+        dispatch({ type: 'START_LOADING' });
         const { data } = await api.fetchStory(id);
         dispatch({ type: 'FETCH_STORY', payload: { story: data } });
+        dispatch({ type: 'END_LOADING' });
     } catch (error) {
         console.log(error);
     }
@@ -20,8 +24,10 @@ export const getStory = (id) => async (dispatch) => {
 
 export const createStory = (newStory) => async (dispatch) => {
     try {
+        dispatch({ type: 'START_LOADING' });
         const { data } = await api.createStory(newStory);
         dispatch({ type: 'CREATE', payload: data });
+        dispatch({ type: 'END_LOADING' });
     } catch (error) {
         console.log(error.message);
     }
