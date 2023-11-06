@@ -25,17 +25,6 @@ const Home = () => {
 
     const openCreateStoryScreen = () => navigate('/createStory');
 
-    const [authenticated, setAuthenticated] = useState(false);
-
-  useEffect(() => {
-    if (props.auth.authData) {
-      setAuthenticated(true);
-    } else {
-      setAuthenticated(false);
-    }
-  }, [props.auth]);
-
-
     return (
         <Box
         sx={{

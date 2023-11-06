@@ -9,7 +9,6 @@ import HomePage from './components/home/home';
 import StoryForm from './components/story_form/story_form';
 import StoryDetail from './components/story_detail/story_detail';
 
-
 const App = () => {
 
   const theme = createTheme({
