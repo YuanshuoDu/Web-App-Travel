@@ -16,17 +16,15 @@ export const getStory = async (req, res) => {
 
     try {
         const story = await Story.findById(id);
-        console.log(story);
         res.status(200).json(story);
     } catch (error) {
         res.status(404).json({ message: error.message });
-        console.log('Not found');
     }
 }
 
 export const createStory = async (req, res) => {
     const story = req.body;
-    const newStory = new Story({ ...story, creator: req.userId, createdAt: new Date().toISOString() })
+    const newStory = new Story({ ...story, creator: "Test"/*req.userId*/, createdAt: new Date().toISOString() })
 
     try {
         await newStory.save();

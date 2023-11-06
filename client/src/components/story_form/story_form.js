@@ -10,13 +10,13 @@ import { updateStory } from '../../api';
 import { getStory } from '../../redux/actions/stories';
 
 
-const StoryForm = () => {
+const StoryForm = ({ currentId, setCurrentId }) => {
     const { id } = useParams();
     const classes = storyFormStyles();
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { story } = useSelector((state) => state.stories);
+    const { selectedStory, stories, isLoading } = useSelector((state) => state.stories);
 
     useEffect( () => {
         if (id) {
@@ -28,28 +28,31 @@ const StoryForm = () => {
     const [storyData, setStoryData] = useState({ creator: '', title: '', message: '', country: '', city: '', tags: [], selectedPicture: '' });
 
     useEffect(() => {
-        if (story) {
+        if (selectedStory) {
             setStoryData({
-                creator: story.creator || '',
-                title: story.title || '',
-                message: story.message || '',
-                country: story.country || '',
-                city: story.city || '',
-                tags: story.tags || [],
-                selectedPicture: story.selectedPicture || '',
-                likeCount: story.likeCount || 0,
-                createdAt: story.createdAt || Date()
+                creator: selectedStory.creator || '',
+                title: selectedStory.title || '',
+                message: selectedStory.message || '',
+                country: selectedStory.country || '',
+                city: selectedStory.city || '',
+                tags: selectedStory.tags || [],
+                selectedPicture: selectedStory.selectedPicture || '',
+                likeCount: selectedStory.likeCount || 0,
+                createdAt: selectedStory.createdAt || Date()
             });
         }
-    }, [story]);
+    }, [selectedStory]);
 
     const handleCreate = (e) => {
         e.preventDefault();
-        console.log(storyData);
+
         if (id) {
-            
+            console.log('Update story');
+            console.log(id);
+            console.log(storyData);
             dispatch(updateStory(id, storyData));
         } else {
+            console.log('Create story');
             dispatch(createStory(storyData));
         }
         navigate(-1);

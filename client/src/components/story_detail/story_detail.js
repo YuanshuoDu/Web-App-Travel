@@ -13,7 +13,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
 const StoryDetail = () => {
-  const { story } = useSelector((state) => state.stories);
+  const { selectedStory, stories, isLoading} = useSelector((state) => state.stories);
   const dispatch = useDispatch();
   const classes = useStyles();
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ const StoryDetail = () => {
   };
 
   const handleEdit = (id) => {
-    navigate(`/editStory/${story._id}`);
+    navigate(`/editStory/${id}`);
   }
 
   const handleDelete = (id) => {
@@ -56,7 +56,7 @@ const StoryDetail = () => {
     }
   }
 
-  if (!story) {
+  if (isLoading) {
     return (
       <Paper elevation={6} className={classes.loadingPaper}>
         <CircularProgress size="3em" />
@@ -77,31 +77,31 @@ const StoryDetail = () => {
       <div className={classes.card}>
         <IconButton
           className={classes.optionsButton}
-          aria-controls="card-options-menu"
+          aria-controls="card-options"
           aria-haspopup="true"
           onClick={handleMenuClick}
         >
           <MoreVertIcon />
         </IconButton>
         <Menu
-          id="card-options-menu"
+          id="card-options"
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={() => handleEdit(story._id)}>Edit story</MenuItem>
-          <MenuItem onClick={() => handleDelete(story._id)}>Delete story</MenuItem>
+          <MenuItem onClick={() => handleEdit(selectedStory._id)}>Edit story</MenuItem>
+          <MenuItem onClick={() => handleDelete(selectedStory._id)}>Delete story</MenuItem>
         </Menu>
         <div className={classes.textSection}>
-          <Typography variant="h4" component="h2">{story.title}</Typography>
+          <Typography variant="h4" component="h2">{selectedStory.title || ""}</Typography>
           <div className={classes.creationInfo}>
             <Typography variant="body1">
-              Created by: {story.creator}
+              Created by: {selectedStory.creator || ""}
             </Typography>
-            <Typography variant="body2">{moment(story.createdAt).fromNow()}</Typography>
+            <Typography variant="body2">{moment(selectedStory.createdAt || Date()).fromNow()}</Typography>
           </div>
-          <TagList tags={story.tags} />
-          <Typography gutterBottom variant="body1" component="p">{story.message}</Typography>
+          <TagList tags={selectedStory.tags || []} />
+          <Typography gutterBottom variant="body1" component="p">{selectedStory.message || ""}</Typography>
           <CardActions className={classes.likeButton}>
             {userLikePost ?
               (
@@ -115,12 +115,12 @@ const StoryDetail = () => {
                 </IconButton>
               )
             }
-            <Typography variant="body2">{story.likeCount}</Typography>
+            <Typography variant="body2">{selectedStory.likeCount || 0}</Typography>
           </CardActions>
           <Divider style={{ margin: '20px' }} />
         </div>
         <div className={classes.imageSection}>
-          <img className={classes.picture} src={story.selectedPicture || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={story.title} />
+          <img className={classes.picture} src={selectedStory.selectedPicture || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={selectedStory.title || ""} />
         </div>
 
 
