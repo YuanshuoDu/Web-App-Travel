@@ -507,6 +507,7 @@ import { connect } from "react-redux";
 import { LOGOUT } from "../../redux/const/actionsTypes";
 import { deepPurple } from "@material-ui/core/colors";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import HomeIcon from '@mui/icons-material/Home';
 
 
 const pages = ['Contact'];
@@ -549,26 +550,33 @@ function Nav(props) {
   }
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar position="static" sx={{ 
+      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+      // backgroundColor: 'transparent', 
+      borderRadius: '30px',
+      // boxShadow: 'none',
+    }}>
+      <Container maxWidth="m">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+          <HomeIcon fontSize="large" sx={{ ml: 5, }}/>
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="#navbar"
+            href="/"
             sx={{
+              ml: 2,
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
+              fontFamily: 'inherit',
+              fontWeight: 500,
+              letterSpacing: '.2rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Travel Planner
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -602,17 +610,18 @@ function Nav(props) {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center"
+                  >{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/home"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -622,17 +631,16 @@ function Nav(props) {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              backgroundColor: 'rgba(0, 0, 0, 0.9)', // 
             }}
           >
             LOGO
-          </Typography>
+          </Typography> */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ ml: 2, my: 2, color: 'white', display: 'block', letterSpacing: '.2rem', }}
               >
                 {page}
               </Button>
@@ -709,6 +717,7 @@ function Nav(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
               >
+                {/* Render the authenticated settings menu */}
                 <IconButton color="inherit" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 
                 
@@ -719,13 +728,16 @@ function Nav(props) {
                 <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                 </IconButton>
 
-                // Render the authenticated settings menu
+               
 
               </Menu>
             </div>
           ) : (
-            <Button href="/login" variant="contained" startIcon={<AccountCircleIcon />} sx={{ my: 1, mx: 1.5 }}>
-                 Login
+
+            // the authenticated
+            <Button href="/login" variant="contained" color="primary"
+             startIcon={<AccountCircleIcon />} sx={{ my: 5, mx: 10 }}>
+                 Sign In
                   </Button>
           )}
 

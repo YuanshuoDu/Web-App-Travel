@@ -164,13 +164,15 @@ function Signup() {
                     alignItems: 'center',
                 }}
             >
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <Avatar sx={{ m: 3, bgcolor: 'secondary.main' }}>
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
-                <Box component="form" noValidate onSubmit={handleOnSubmit} sx={{ mt: 3 }}>
+                <Box component="form" noValidate 
+                // onSubmit={handleOnSubmit} 
+                sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -258,7 +260,7 @@ function Signup() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 4, mb: 1, color: 'primary', height: '50px' }}
                         onClick={handleOnSubmit}
                     >
                         Sign Up
@@ -268,8 +270,9 @@ function Signup() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                        ><GoogleIcon />
+                        sx={{ mt: 1, mb: 2, height: '50px' }}
+                        color="primary"
+                        ><GoogleIcon sx={{ mr: 1 }}/>
                         Sign in with google
                     </Button>
                     <Grid container justifyContent="flex-end">

@@ -85,6 +85,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import GoogleIcon from '@mui/icons-material/Google';
+import Nav from "../nav"
 
 
 
@@ -121,7 +122,8 @@ function Login() {
     }
 
     return (
-
+        // <div>
+        //     <Nav />
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -132,7 +134,7 @@ function Login() {
                 alignItems: 'center',
             }}
             >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 3, bgcolor: 'secondary.main' }}>
                 <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -172,7 +174,7 @@ function Login() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 2, mb: 1, color: 'primary', height: '50px' }}
                 >
                 Sign In
                 </Button>
@@ -182,7 +184,7 @@ function Login() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 1, mb: 2, color: 'primary', height: '50px' }}
                 ><GoogleIcon />
                 Sign in with google
                 </Button>
@@ -202,6 +204,7 @@ function Login() {
             </Box>
             </Box>
         </Container>
+        // </div>
 
     );
     }

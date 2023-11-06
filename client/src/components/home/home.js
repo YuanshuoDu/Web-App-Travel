@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import Nav from "../nav"
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+// import backgroundImage from '../../../public/images/background.png';
+import backgroundImage  from '../../images/background.png';
 
 
 const Home = () => {
@@ -23,15 +25,28 @@ const Home = () => {
 
     const openCreateStoryScreen = () => navigate('/createStory');
 
+    const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    if (props.auth.authData) {
+      setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
+    }
+  }, [props.auth]);
+
 
     return (
         <Box
         sx={{
-          pt: 8,
-          pb: 6,
-          backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)', // background image
-          backgroundSize: 'cover', // make sure the image covers the whole canvas
-        }}
+            ml: 0,
+            mr: 0,
+            pt: 8,
+            pb: 6,
+            background: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            maxWidth: '100%',
+          }}
         >
         
         <Container maxWidth="lg">
@@ -49,8 +64,9 @@ const Home = () => {
                 pb: 6,
             }}
             > */}
+            <div style={{ marginTop: '60px' }} />
             <Container maxWidth="sm">
-                <Typography
+                {/* <Typography
                 component="h1"
                 variant="h2"
                 align="center"
@@ -63,13 +79,15 @@ const Home = () => {
                 Something short and leading about the collection below—its contents,
                 the creator, etc. Make it short and sweet, but not too short so folks
                 don&apos;t simply skip over it entirely.
-                </Typography>
+                </Typography> */}
                 <Stack
                 sx={{ pt: 4 }}
                 direction="row"
                 spacing={2}
                 justifyContent="center"
                 >
+
+            
                 <Button
                     className={classes.button}
                     variant="contained"
