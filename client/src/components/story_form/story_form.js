@@ -28,7 +28,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     const [storyData, setStoryData] = useState({ creator: '', title: '', message: '', country: '', city: '', tags: [], selectedPicture: '' });
 
     useEffect(() => {
-        if (selectedStory) {
+        if (id && selectedStory) {
             setStoryData({
                 creator: selectedStory.creator || '',
                 title: selectedStory.title || '',
