@@ -13,7 +13,7 @@ export const loadUser = () => async (dispath)=>{
 export const signin = (data2, navigate) => async (dispath) =>{
     try{
         const {data} = await api.signIn(data2)
-
+        console.log("I have logged in");
         dispath({type: AUTH, data})
         navigate("/")
     }catch(err){
@@ -37,6 +37,7 @@ export const signup = (formData, navigate) => async (dispatch)=>{
     try{
         // signup user
         const {data} = await api.signUp(formData)
+        console.log("I have signed up");
 
         dispatch({type : AUTH, data})
         navigate("/")
