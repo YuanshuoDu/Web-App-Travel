@@ -9,15 +9,9 @@ export default makeStyles(() => ({
     //     alignItems: 'center',
     //     borderRadius: 15,
     // },
-    title: {
-        color: 'rgba(0,1,1,1)',
-    },
+
     button: {
         color: 'white',
     },
-    container: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
+
 }));
