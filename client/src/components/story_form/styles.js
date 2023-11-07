@@ -47,4 +47,12 @@ export default makeStyles((theme) => ({
     margin: '0px 8px 20px 8px',
     color: 'white',
   },
+  loadingPaper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '20px',
+    borderRadius: '15px',
+    height: '60vh',
+  },
 }));

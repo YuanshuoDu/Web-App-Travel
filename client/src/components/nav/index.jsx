@@ -580,7 +580,7 @@ function Nav(props) {
       
             }}
           >
-            Travel Planner
+            Stories
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

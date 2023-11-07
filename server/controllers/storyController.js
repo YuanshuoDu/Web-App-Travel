@@ -1,4 +1,5 @@
 import Story from '../models/story.js';
+import mongoose from 'mongoose';
 
 export const getStories = async (req, res) => {
     try {
@@ -15,17 +16,15 @@ export const getStory = async (req, res) => {
 
     try {
         const story = await Story.findById(id);
-        console.log(story);
         res.status(200).json(story);
     } catch (error) {
         res.status(404).json({ message: error.message });
-        console.log('Not found');
     }
 }
 
 export const createStory = async (req, res) => {
     const story = req.body;
-    const newStory = new Story({ ...story, creator: req.userId, createdAt: new Date().toISOString() })
+    const newStory = new Story({ ...story, creator: "Test"/*req.userId*/, createdAt: new Date().toISOString() })
 
     try {
         await newStory.save();
@@ -34,4 +33,27 @@ export const createStory = async (req, res) => {
     } catch(error) {
         res.status(409).json({message: error.message});
     }
+}
+
+export const deleteStory = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No story with id: ${id}`);
+
+    await Story.findByIdAndRemove(id);
+
+    res.json({ message: "Story deleted successfully." });
+}
+
+export const updateStory = async (req, res) => {
+    const { id } = req.params;
+    const { title, message, tags, country, city, selectedPicture} = req.body;
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No story with id: ${id}`);
+
+    const updatedStory = { _id: id, title, message, tags, country, city, selectedPicture };
+
+    await Story.findByIdAndUpdate(id, updatedStory, { new: true });
+
+    res.json(updatedStory);
 }

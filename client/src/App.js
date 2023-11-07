@@ -6,9 +6,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from "./components/login";
 import Signup from "./components/signup";
 import HomePage from './components/home/home';
-import CreateStory from './components/story_form/story_form';
+import StoryForm from './components/story_form/story_form';
 import StoryDetail from './components/story_detail/story_detail';
-
 
 const App = () => {
 
@@ -39,7 +38,8 @@ const App = () => {
             <Route path="/signup" element={<Signup />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/stories" element={<HomePage />} />
-            <Route path="/createStory" element={<CreateStory />} />
+            <Route path="/createStory" element={<StoryForm />} />
+            <Route path="/editStory/:id" element={<StoryForm />} />
             <Route path="/stories/:id" element={<StoryDetail/>} />
 
             {/* <Route path="/profile" element={<Profile/>}/>
