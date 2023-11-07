@@ -11,13 +11,32 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 // import backgroundImage from '../../../public/images/background.png';
 import backgroundImage  from '../../images/background.png';
+import { LOGOUT } from "../../redux/const/actionsTypes";
+import { connect } from "react-redux";
 
 
-const Home = () => {
+
+const Home = (props) => {
     const classes = homeStyles();
     const [currentId, setCurrentId] = useState(0);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    // Logic for checking if the user is authenticated
+    const [authenticated, setAuthenticated] = useState(false);
+
+    useEffect(() => {
+        if (props.auth.authData) {
+        setAuthenticated(true);
+        } else {
+        setAuthenticated(false);
+        }
+    }, [props.auth]);
+
+    function handleLogOut(e) {
+        e.preventDefault();
+        dispatch({ type: LOGOUT });
+    }
 
     useEffect(() => {
         dispatch(getStories());
@@ -25,18 +44,10 @@ const Home = () => {
 
     const openCreateStoryScreen = () => navigate('/createStory');
 
-    const [authenticated, setAuthenticated] = useState(false);
-
-  useEffect(() => {
-    if (props.auth.authData) {
-      setAuthenticated(true);
-    } else {
-      setAuthenticated(false);
-    }
-  }, [props.auth]);
-
 
     return (
+        <Container maxWidth="xl">
+
         <Box
         sx={{
             ml: 0,
@@ -66,19 +77,17 @@ const Home = () => {
             > */}
             <div style={{ marginTop: '60px' }} />
             <Container maxWidth="sm">
-                {/* <Typography
+                <Typography
                 component="h1"
                 variant="h2"
                 align="center"
                 color="text.primary"
                 gutterBottom
                 >
-                Album layout
+                Welcome to HomePage
                 </Typography>
-                <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                Something short and leading about the collection below—its contents,
-                the creator, etc. Make it short and sweet, but not too short so folks
-                don&apos;t simply skip over it entirely.
+                {/* <Typography variant="h5" align="center" color="text.secondary" paragraph>
+                1234567890
                 </Typography> */}
                 <Stack
                 sx={{ pt: 4 }}
@@ -86,17 +95,20 @@ const Home = () => {
                 spacing={2}
                 justifyContent="center"
                 >
-
-            
-                <Button
-                    className={classes.button}
+            <div>
+            {authenticated ? (
+                    <Button
                     variant="contained"
                     color="primary"
                     startIcon={<AddIcon />}
                     onClick={openCreateStoryScreen}
-                >
-                    CREATE STORY
-                </Button>
+                    >
+                    Create Story
+                    </Button>
+                ) : (
+                    <p>Please log in to create a story.</p>
+                )}
+                </div>
 
                 </Stack>
             </Container>
@@ -113,8 +125,11 @@ const Home = () => {
     </Container>
     <Stories setCurrentId={setCurrentId} />
     </Box>
-
+    </Container>
     );
 }
 
-export default Home;
+const mapStateToProps = (state) => ({ auth: state.auth });
+
+// export default Home;
+export default connect(mapStateToProps)(Home);

@@ -1,106 +1,3 @@
-// import React, {useState} from "react";
-// import SignUp from "./Signup.module.css"
-// import {Link,useNavigate} from "react-router-dom"
-
-// import {useGoogleLogin} from '@react-oauth/google';
-// import {useDispatch} from 'react-redux';
-// import {signup, signupGoogle} from "../../redux/actions/auth";
-
-
-// const InitState = {
-//     firstName: "",
-//     lastName: "",
-//     // userName: "",
-//     email: '',
-//     password: '',
-//     confirmPassword: ''
-// }
-
-
-// function Signup() {
-//     const nagivate = useNavigate();
-//     const dispatch = useDispatch();
-//     const [sForm,
-//         setsForm] = useState(InitState)
-
-//     const handleChange = (e) => setsForm({
-//         ...sForm,
-//         [e.target.name]: e.target.value
-//     });
-
-//     function handleGoogleLoginSuccess(tokenResponse) {
-
-//         const accessToken = tokenResponse.access_token;
-
-//         dispatch(signupGoogle(accessToken,nagivate))
-//     }
-
-//     function handleOnSubmit(e) {
-//         e.preventDefault();
-//         if (sForm.firstName !== "" && sForm.lastName !== "" &&  sForm.password !== "" && sForm.confirmPassword !== "" && sForm.email !== "" && sForm.password === sForm.confirmPassword && sForm.password.length >= 4) {
-//             dispatch(signup(sForm,nagivate))
-//         }
-//     }
-//     // sForm.userNames !== "" &&
-
-//     const login = useGoogleLogin({onSuccess: handleGoogleLoginSuccess});
-//     return (
-//         <div className={SignUp.loginContainer}>
-//             <div className={SignUp.loginContainerv2}>
-//                 <h1>Create your account</h1>
-
-//                 <div className={SignUp.inputContainer}>
-//                     <label>FRIST NAME</label>
-//                     <input onChange={handleChange} name="firstName" placeholder="enter your first name" type="text"/>
-//                 </div>
-//                 <div className={SignUp.inputContainer}>
-//                     <label>LAST NAME</label>
-//                     <input name="lastName" onChange={handleChange} placeholder="enter your last name" type="text"/>
-//                 </div>
-//                 {/* <div className={SignUp.inputContainer}>
-//                     <label>USER NAME</label>
-//                     <input name="userName" onChange={handleChange} placeholder="enter your user name" type="text"/>
-//                 </div> */}
-//                 <div className={SignUp.inputContainer}>
-//                     <label>EMAIL</label>
-//                     <input name="email" onChange={handleChange} placeholder="enter your email" type="email"/>
-//                 </div>
-
-//                 <div className={SignUp.inputContainer}>
-//                     <label>PASSWORD</label>
-//                     <input name="password" onChange={handleChange} placeholder="enter your password" type="password"/>
-//                 </div>
-
-//                 <div className={SignUp.inputContainer}>
-//                     <label>CONFIRM PASSWORD</label>
-//                     <input name="confirmPassword" onChange={handleChange} placeholder="retype your password" type="password"/>
-//                 </div>
-
-//                 <div className={SignUp.footerContainer}>
-//                         <div>
-//                             Already Signed Up? <Link to="/login">Login</Link>
-//                         </div>
-//                         <div>
-//                             <Link to="/forgotpassword">Forgot Password?</Link>
-//                         </div>
-//                     </div>
-
-//                 <button onClick={handleOnSubmit} className={SignUp.loginBTN}>REGISTER</button>
-//                  <span className={SignUp.or}>or</span>
-//                  <button  onClick={() => login()}  className={SignUp.googleBTN}>
-//                     <i class="fa-brands fa-google"></i>  Sign up with google</button>
-
-                 
-//             </div>
-
-//         </div>
-//     )
-// }
-
-// export default Signup;
-
-
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
@@ -122,7 +19,6 @@ import GoogleIcon from '@mui/icons-material/Google';
 const InitState = {
     firstName: "",
     lastName: "",
-    // userName: "",
     email: '',
     password: '',
     confirmPassword: ''
@@ -149,7 +45,7 @@ function Signup() {
             dispatch(signup(sForm, navigate));
         }
     }
-    // sForm.userName !== "" &&
+
 
     const login = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
 
@@ -211,18 +107,7 @@ function Signup() {
                                 value={sForm.email}
                             />
                         </Grid>
-                        {/* <Grid item xs={12}>
-                            <TextField
-                                required
-                                fullWidth
-                                id="username"
-                                label="User Name"
-                                name="userName"
-                                autoComplete="username"
-                                onChange={handleChange}
-                                value={sForm.userName}
-                            />
-                        </Grid> */}
+
                         <Grid item xs={12}>
                             <TextField
                                 required
@@ -249,12 +134,6 @@ function Signup() {
                                 value={sForm.confirmPassword}
                             />
                         </Grid>
-                        {/* <Grid item xs={12}>
-                            <FormControlLabel
-                                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                label="I want to receive inspiration, marketing promotions and updates via email."
-                            />
-                        </Grid> */}
                     </Grid>
                     <Button
                         type="submit"

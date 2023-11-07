@@ -494,6 +494,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import homeStyles from './styles';
 
 // import React, { useState, useEffect } from "react";
 // import { makeStyles } from "@material-ui/core/styles";
@@ -508,14 +509,16 @@ import { LOGOUT } from "../../redux/const/actionsTypes";
 import { deepPurple } from "@material-ui/core/colors";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HomeIcon from '@mui/icons-material/Home';
+import { Grid } from '@mui/material';
+
 
 
 const pages = ['Contact'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Nav(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const classes = homeStyles();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -556,10 +559,10 @@ function Nav(props) {
       borderRadius: '30px',
       // boxShadow: 'none',
     }}>
-      <Container maxWidth="m">
-        <Toolbar disableGutters>
+      <Container maxWidth="xl">
+        {/* <Toolbar disableGutters> */}
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-          <HomeIcon fontSize="large" sx={{ ml: 5, }}/>
+          <HomeIcon fontSize="large" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, ml: 5, }}/>
           <Typography
             variant="h6"
             noWrap
@@ -570,10 +573,11 @@ function Nav(props) {
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'inherit',
-              fontWeight: 500,
+              fontWeight: 700,
               letterSpacing: '.2rem',
               color: 'inherit',
               textDecoration: 'none',
+      
             }}
           >
             Travel Planner
@@ -616,26 +620,8 @@ function Nav(props) {
               ))}
             </Menu>
           </Box>
-          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/home"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography> */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
@@ -698,10 +684,24 @@ function Nav(props) {
             </Menu>
           </Box> */}
 
-          {authenticated ? (
+{/* <Typography variant="subtitle1">
+              Welcome, {props.auth.authData.email}
+              </Typography> */}
+
+    <Box >
+    <Toolbar title="Open settings">
+    {authenticated ? (
             <div>
-              
-              <Menu
+              <div>
+                <div>
+                
+                <Tooltip title="Open settings">
+                
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
@@ -716,39 +716,48 @@ function Nav(props) {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
-              >
-                {/* Render the authenticated settings menu */}
-                <IconButton color="inherit" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                
-                
-                <Avatar  alt="User Avatar" src="/static/images/avatar/2.jpg" />
-                <MenuItem component={Link} to="/profile" onClick={handleCloseUserMenu}>
+              > 
+              
+              <MenuItem component={Link} to="/profile" onClick={handleCloseUserMenu}>
                 <Typography textAlign="center"> profile </Typography>
                 </MenuItem>
                 <MenuItem onClick={handleLogOut}>Logout</MenuItem>
-                </IconButton>
-
-               
-
               </Menu>
+              
+                </div>
+              </div>
             </div>
           ) : (
-
-            // the authenticated
-            <Button href="/login" variant="contained" color="primary"
-             startIcon={<AccountCircleIcon />} sx={{ my: 5, mx: 10 }}>
+            <div>
+              <i className="fa-solid fa-user"></i>
+              <div>
+                <Typography>Account</Typography>
+                <div>
+                <Button href="/login" variant="contained" 
+                  color="primary" 
+                  className={classes.button}
+                  startIcon={<AccountCircleIcon />} sx={{ my: 5, mx: 2 }}>
                  Sign In
                   </Button>
+                </div>
+              </div>
+            </div>
           )}
-
-
-
+  
 
         </Toolbar>
+        </Box>
       </Container>
     </AppBar>
   );
 }
+
+
+
+
+
+
+
 
 const mapStateToProps = (state) => ({ auth: state.auth });
 

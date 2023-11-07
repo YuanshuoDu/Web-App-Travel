@@ -1,84 +1,17 @@
 import { useState} from "react";
 import * as React from 'react';
-import { Link,useNavigate } from "react-router-dom";
-// import LoginStyles from "./Login.module.css"
+import { Link, useNavigate } from "react-router-dom";
+
 import {useGoogleLogin} from '@react-oauth/google';
 import {useDispatch} from 'react-redux';
 import {signinGoogle, signin} from "../../redux/actions/auth";
 
-// function Login() {
-//     const [email,setEmail] = useState("");
-//     const [password,setPassword] = useState("");
-
-//     const navigate = useNavigate ()
-//     const dispatch = useDispatch()
-
-
-//     function handleGoogleLoginSuccess(tokenResponse) {
-
-//         const accessToken = tokenResponse.access_token;
-
-//         dispatch(signinGoogle(accessToken,navigate))
-//     }
-//     const login = useGoogleLogin({onSuccess: handleGoogleLoginSuccess});
-
-//     function handleSubmit(e){
-//         e.preventDefault();
-//         if(email !== "" && password !== ""){
-//             dispatch(signin({email,password}, navigate))
-//         }
-
-//     }
-
-//     return (
-//         <div className={LoginStyles.loginContainer}>
-//             <div className={LoginStyles.loginContainerv2}>
-//                 <h1>Welcome back</h1>
-
-//                 <div className={LoginStyles.inputContainer}>
-//                     <label>EMAIL</label>
-//                     <input onChange={e=> setEmail(e.target.value)} placeholder="enter your email" type="email"/>
-//                 </div>
-
-//                 <div className={LoginStyles.inputContainer}>
-//                     <label>PASSWORD</label>
-//                     <input onChange={e=> setPassword(e.target.value)} placeholder="enter your password" type="password"/>
-//                 </div>
-
-//                 <div className={LoginStyles.forgetmeContainer}>
-//                     <div>
-//                         Remember Me <input type="checkbox" />
-//                     </div>
-//                     <div>
-//                         <Link to="/forgotpassowrd">Forgot password?</Link>
-//                     </div>
-//                 </div>
-
-//                 <button onClick={handleSubmit} className={LoginStyles.loginBTN}>LOGIN</button>
-//                 <span className={LoginStyles.or}>or</span>
-//                  <button onClick={() => login()} className={LoginStyles.googleBTN}>
-//                     <i class="fa-brands fa-google"></i>  Sign in with google</button>
-                
-                    
-//                     <span className={LoginStyles.notreg}>Not registered yet?  <Link className={LoginStyles.singupBTN} to="/signup">Signup</Link></span>
-                    
-//             </div>
-
-//         </div>
-//     )
-// }
-
-// export default Login;
-
-
-// import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-// import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -86,6 +19,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import GoogleIcon from '@mui/icons-material/Google';
 import Nav from "../nav"
+import homeStyles from './styles';
 
 
 
@@ -93,16 +27,18 @@ function Login() {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
 
-    const navigate = useNavigate ()
-    const dispatch = useDispatch()
+    const classes = homeStyles();
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
+    const navigate = useNavigate ();
+    const dispatch = useDispatch();
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+    const handleEmailSubmit = (e) => {
+        setEmail(e.target.value);
+    };
+
+    const handlePasswordSubmit = (e) => {
+        setPassword(e.target.value);
+    };
 
 
     function handleGoogleLoginSuccess(tokenResponse) {
@@ -118,7 +54,6 @@ function Login() {
         if(email !== "" && password !== ""){
             dispatch(signin({email,password}, navigate))
         }
-
     }
 
     return (
@@ -151,7 +86,7 @@ function Login() {
             autoComplete="email"
             autoFocus
             value={email}
-            onChange={handleEmailChange}
+            onChange={handleEmailSubmit}
         />
         <TextField
             fullWidth
@@ -163,17 +98,18 @@ function Login() {
             id="password"
             autoComplete="current-password"
             value={password}
-            onChange={handlePasswordChange}
+            onChange={handlePasswordSubmit}
         />
                 <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
                 />
                 <Button
-                onSubmit={handleSubmit}
+                onClick={handleSubmit}
                 type="submit"
                 fullWidth
                 variant="contained"
+                className={classes.button}
                 sx={{ mt: 2, mb: 1, color: 'primary', height: '50px' }}
                 >
                 Sign In
@@ -184,6 +120,7 @@ function Login() {
                 type="submit"
                 fullWidth
                 variant="contained"
+                className={classes.button}
                 sx={{ mt: 1, mb: 2, color: 'primary', height: '50px' }}
                 ><GoogleIcon />
                 Sign in with google
