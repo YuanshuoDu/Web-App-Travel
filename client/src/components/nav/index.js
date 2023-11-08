@@ -82,6 +82,7 @@ function Nav(props) {
           aria-haspopup="true"
           onClick={goHome}
           color="inherit"
+          sx={{ paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }}
         >
           <HomeIcon fontSize="large" />
         </IconButton>
@@ -222,7 +223,7 @@ function Nav(props) {
       {authenticated ? (
         <div>
           <Tooltip title="Log in">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 4 }}>
               <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
             </IconButton>
           </Tooltip>
