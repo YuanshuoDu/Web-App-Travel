@@ -8,7 +8,7 @@ const Stories = ({ setCurrentId }) => {
     const { stories, isLoading } = useSelector((state) => state.stories);
     const classes = storiesStyles();
 
-    if (!stories.length && !isLoading) return <Typography variant="h6">No stories found</Typography>;
+    if (!stories.length && !isLoading) return <div className={classes.containerProgress}><Typography variant="h6">No stories found</Typography></div>;
 
     return (
         isLoading ? <div className={classes.containerProgress}><CircularProgress /*color="white"*/ style={{ color: 'white' }}/></div> : (

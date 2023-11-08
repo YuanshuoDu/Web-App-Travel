@@ -22,6 +22,7 @@ import { deepPurple } from "@material-ui/core/colors";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HomeIcon from '@mui/icons-material/Home';
 import { Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -31,6 +32,7 @@ function Nav(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const classes = navStyles();
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -64,17 +66,26 @@ function Nav(props) {
     dispatch({ type: LOGOUT });
   }
 
+  const goHome = () => navigate('/');
+
   return (
-    <AppBar position="static" sx={{
-      backgroundColor: 'rgba(255, 255, 255, 0.2)',
-      // backgroundColor: 'transparent', 
-      borderRadius: '30px',
-      // boxShadow: 'none',
-    }}>
+    <AppBar position="static" className={classes.appBar}
+      sx={{
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+      }}>
       <Container maxWidth="xl">
         {/* <Toolbar disableGutters> */}
         {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-        <HomeIcon fontSize="large" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, ml: 5, }} />
+        <IconButton
+          aria-label="home"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          onClick={goHome}
+          color="inherit"
+        >
+          <HomeIcon fontSize="large" sx={{ display: { md: 'flex' }, mr: 1, ml: 5, }} />
+        </IconButton>
+
         <Typography
           variant="h6"
           noWrap
@@ -95,7 +106,7 @@ function Nav(props) {
           Stories
         </Typography>
 
-        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+        {/*<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -131,9 +142,9 @@ function Nav(props) {
               </MenuItem>
             ))}
           </Menu>
-        </Box>
+            </Box>*/}
 
-        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+        {/*<Box sx={{ display: { xs: 'none', md: 'flex' } }}>
           {pages.map((page) => (
             <Button
               key={page}
@@ -143,7 +154,7 @@ function Nav(props) {
               {page}
             </Button>
           ))}
-        </Box>
+        </Box>+/}
 
         {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
@@ -207,7 +218,7 @@ function Nav(props) {
                 <div>
                   <div>
 
-                    <Tooltip title="Open settings">
+                    <Tooltip title="Log in">
 
                       <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                         <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -231,9 +242,9 @@ function Nav(props) {
                     >
 
                       <MenuItem component={Link} to="/profile" onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center"> profile </Typography>
+                        <Typography textAlign="center">Profile </Typography>
                       </MenuItem>
-                      <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+                      <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
                     </Menu>
 
                   </div>
@@ -241,18 +252,12 @@ function Nav(props) {
               </div>
             ) : (
               <div>
-                <i className="fa-solid fa-user"></i>
-                <div>
-                  <Typography>Account</Typography>
-                  <div>
-                    <Button href="/login" variant="contained"
-                      color="primary"
-                      className={classes.button}
-                      startIcon={<AccountCircleIcon />} sx={{ my: 5, mx: 2 }}>
-                      Sign In
-                    </Button>
-                  </div>
-                </div>
+                <Button href="/login" variant="contained"
+                  color="inherit"
+                  style={{ background: '#E7AC72'}}
+                  startIcon={<AccountCircleIcon />} sx={{ my: 5, mx: 2 }}>
+                  Log In
+                </Button>
               </div>
             )}
 

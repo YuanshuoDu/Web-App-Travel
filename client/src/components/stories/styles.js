@@ -11,7 +11,7 @@ export default makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '70vh',
+    height: '30vh',
   },
   storyItem: {
     margin: theme.spacing(3),

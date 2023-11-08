@@ -9,12 +9,6 @@ export default makeStyles((theme) => ({
     borderRadius: '15px',
     height: '60vh',
   },
-  optionsButton: {
-    position: 'absolute', 
-    top: '40px', 
-    right: '20px' 
-  },
-  
   card: {
     display: 'flex',
     width: '100%',
@@ -25,8 +19,14 @@ export default makeStyles((theme) => ({
   },
   storyPaper: {
     padding: '20px',
-    margin: '20px 0 0 0',
+    margin: '20px 0 0 0px',
     borderRadius: '20px'
+  },
+  titleRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+
   },
   textSection: {
     flex: 1,
@@ -43,7 +43,6 @@ export default makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end'
   },
-  
   imageSection: {
     marginLeft: '20px',
     marginRight: '20px',
@@ -51,7 +50,6 @@ export default makeStyles((theme) => ({
       marginLeft: 0,
       marginRight: 0,
     },
-
   },
   picture: {
     objectFit: 'cover',
