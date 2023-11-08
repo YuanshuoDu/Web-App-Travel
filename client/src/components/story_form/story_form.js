@@ -10,6 +10,11 @@ import { updateStory } from '../../api';
 import { getStory } from '../../redux/actions/stories';
 import backgroundImage from '../../images/background.png';
 import Nav from "../nav"
+import { Alert, AlertTitle } from '@mui/material';
+
+
+import { useSelector } from "react-redux";
+import Login from "../login";
 
 
 const StoryForm = ({ currentId, setCurrentId }) => {
@@ -19,6 +24,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { selectedStory, stories, isLoading, error } = useSelector((state) => state.stories);
+    const authData = useSelector((state) => state.auth.authData);
 
     useEffect(() => {
         if (id) {
@@ -65,14 +71,31 @@ const StoryForm = ({ currentId, setCurrentId }) => {
         navigate(-1);
     };
 
-    const addTag = (tag) => {
-        setStoryData({ ...storyData, tags: [...storyData.tags, tag] });
-    };
+  const handleCreate = (e) => {
+    e.preventDefault();
+    dispatch(createStory(storyData));
+    navigate(-1);
+  };
 
-    const deleteTag = (deleteTag) => {
-        setStoryData({ ...storyData, tags: storyData.tags.filter((tag) => tag !== deleteTag) });
-    };
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
+  const addTag = (tag) => {
+    setStoryData({ ...storyData, tags: [...storyData.tags, tag] });
+  };
+
+  const deleteTag = (deleteTag) => {
+    setStoryData({
+      ...storyData,
+      tags: storyData.tags.filter((tag) => tag !== deleteTag),
+    });
+  };
+
+  // check if the user is authenticated
+  const isAuthenticated = !!authData; // if authData is exist, then user is authenticated
+
+  if (isAuthenticated) {
     return (
         <div style={{ backgroundImage: `url(${backgroundImage})` }}>
             <Container maxWidth="xl">
@@ -115,6 +138,19 @@ const StoryForm = ({ currentId, setCurrentId }) => {
             </Container>
         </div>
     );
-}
+  } else {
+    return (
+    <div>
+        <Alert severity="warning">
+  <AlertTitle>Info</AlertTitle>
+  Please <strong>log in</strong> to access this page - check it out!
+  </Alert>
+      <Login />
+    </div>
+    )
+  }
+};
+
 
 export default StoryForm;
+
