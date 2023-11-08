@@ -13,7 +13,7 @@ export default makeStyles((theme) => ({
     justifyContent: 'center',
     height: '30vh',
   },
-  storyItem: {
+  story: {
     margin: theme.spacing(3),
   },
 

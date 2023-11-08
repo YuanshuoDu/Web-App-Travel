@@ -83,7 +83,6 @@ const Home = (props) => {
                                 component="h1"
                                 variant="h2"
                                 align="center"
-                                color="black"
                                 gutterBottom
                             >
                                 Welcome to Stories
@@ -99,7 +98,7 @@ const Home = (props) => {
                                 justifyContent="center"
                             >
                                 <div>
-                                    {authenticated ? (
+                                    {!authenticated ? (
                                         <Button
                                             className={classes.button}
                                             variant="contained"
