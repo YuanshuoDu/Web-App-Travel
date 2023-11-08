@@ -71,15 +71,6 @@ const StoryForm = ({ currentId, setCurrentId }) => {
         navigate(-1);
     };
 
-  const handleCreate = (e) => {
-    e.preventDefault();
-    dispatch(createStory(storyData));
-    navigate(-1);
-  };
-
-  const handleGoBack = () => {
-    navigate(-1);
-  };
 
   const addTag = (tag) => {
     setStoryData({ ...storyData, tags: [...storyData.tags, tag] });
