@@ -71,11 +71,12 @@ function Nav(props) {
   return (
     <AppBar position="static" className={classes.appBar}
       sx={{
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        display: 'flex',
+        flexDirection: 'row'
       }}>
-      <Container maxWidth="xl">
-        {/* <Toolbar disableGutters> */}
-        {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+
+      <div className={classes.home}>
         <IconButton
           aria-label="home"
           aria-controls="menu-appbar"
@@ -83,7 +84,7 @@ function Nav(props) {
           onClick={goHome}
           color="inherit"
         >
-          <HomeIcon fontSize="large" sx={{ display: { md: 'flex' }, mr: 1, ml: 5, }} />
+          <HomeIcon fontSize="large" />
         </IconButton>
 
         <Typography
@@ -94,19 +95,22 @@ function Nav(props) {
           sx={{
             ml: 2,
             mr: 2,
+            mt: 5,
             display: { xs: 'none', md: 'flex' },
             fontFamily: 'inherit',
             fontWeight: 700,
-            letterSpacing: '.2rem',
+            letterSpacing: '.1rem',
             color: 'inherit',
             textDecoration: 'none',
+            alignContent: 'center'
 
           }}
         >
           Stories
         </Typography>
+      </div>
 
-        {/*<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+      {/*<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -144,7 +148,7 @@ function Nav(props) {
           </Menu>
             </Box>*/}
 
-        {/*<Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+      {/*<Box sx={{ display: { xs: 'none', md: 'flex' } }}>
           {pages.map((page) => (
             <Button
               key={page}
@@ -207,64 +211,55 @@ function Nav(props) {
             </Menu>
           </Box> */}
 
-        {/* <Typography variant="subtitle1">
+      {/* <Typography variant="subtitle1">
               Welcome, {props.auth.authData.email}
               </Typography> */}
 
-        <Box >
-          <Toolbar title="Open settings">
-            {authenticated ? (
-              <div>
-                <div>
-                  <div>
+      {/*<Box >
+          <Toolbar disableGutters title="Open settings">*/}
+      {authenticated ? (
+        <div>
+          <Tooltip title="Log in">
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            </IconButton>
+          </Tooltip>
+          <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
 
-                    <Tooltip title="Log in">
+            <MenuItem component={Link} to="/profile" onClick={handleCloseUserMenu}>
+              <Typography textAlign="center">Profile </Typography>
+            </MenuItem>
+            <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
+          </Menu>
+        </div>
+      ) : (
+        <div>
+          <Button href="/login" variant="contained"
+            color="inherit"
+            style={{ background: '#E7AC72' }}
+            startIcon={<AccountCircleIcon />} sx={{ my: 5, mx: 2 }}>
+            Log In
+          </Button>
+        </div>
+      )}
+      {/* </Toolbar>
+        </Box>*/}
 
-                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                      </IconButton>
-                    </Tooltip>
-                    <Menu
-                      sx={{ mt: '45px' }}
-                      id="menu-appbar"
-                      anchorEl={anchorElUser}
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      open={Boolean(anchorElUser)}
-                      onClose={handleCloseUserMenu}
-                    >
-
-                      <MenuItem component={Link} to="/profile" onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">Profile </Typography>
-                      </MenuItem>
-                      <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
-                    </Menu>
-
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div>
-                <Button href="/login" variant="contained"
-                  color="inherit"
-                  style={{ background: '#E7AC72'}}
-                  startIcon={<AccountCircleIcon />} sx={{ my: 5, mx: 2 }}>
-                  Log In
-                </Button>
-              </div>
-            )}
-
-
-          </Toolbar>
-        </Box>
-      </Container>
     </AppBar>
   );
 }
