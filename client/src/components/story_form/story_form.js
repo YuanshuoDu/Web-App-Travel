@@ -47,12 +47,8 @@ const StoryForm = ({ currentId, setCurrentId }) => {
         e.preventDefault();
 
         if (id) {
-            console.log('Update story');
-            console.log(id);
-            console.log(storyData);
             dispatch(updateStory(id, storyData));
         } else {
-            console.log('Create story');
             dispatch(createStory(storyData));
         }
         navigate(-1);

@@ -26,6 +26,10 @@ const Home = (props) => {
     const [authenticated, setAuthenticated] = useState(false);
 
     useEffect(() => {
+        dispatch(getStories());
+    }, [dispatch]);
+
+    useEffect(() => {
         if (props.auth.authData) {
             setAuthenticated(true);
         } else {
@@ -37,10 +41,6 @@ const Home = (props) => {
         e.preventDefault();
         dispatch({ type: LOGOUT });
     }
-
-    useEffect(() => {
-        dispatch(getStories());
-    }, [dispatch]);
 
     const openCreateStoryScreen = () => navigate('/createStory');
 
@@ -100,6 +100,7 @@ const Home = (props) => {
                                 <div>
                                     {authenticated ? (
                                         <Button
+                                            className={classes.button}
                                             variant="contained"
                                             color="primary"
                                             startIcon={<AddIcon />}
