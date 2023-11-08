@@ -36,6 +36,7 @@ export const signinController = async(req, res) => {
                 res
                     .status(200)
                     .json({result: existingUser, token})
+                    console.log("google signin for 1h");
                     
             })
             .catch(err => {
@@ -67,10 +68,12 @@ export const signinController = async(req, res) => {
             res
                 .status(200)
                 .json({result: existingUser, token})
+                console.log("normal signin for 1h");
         } catch (err) {
             res
                 .status(500)
                 .json({message: "Something went wrong!"})
+                console.log(err);
         }
     }
   
@@ -107,11 +110,13 @@ export const signupController = async(req, res) => {
                 res
                     .status(200)
                     .json({result, token})
+                    console.log("google signup for 1h");
             })
             .catch(err => {
                 res
                     .status(400)
                     .json({message: "Invalid access token!"})
+
             })
 
     } else {
@@ -139,10 +144,12 @@ export const signupController = async(req, res) => {
             res
                 .status(200)
                 .json({result, token})
+                console.log("normal signup for 1h");
         } catch (err) {
             res
                 .status(500)
                 .json({message: "Something went wrong!"})
+                console.log(err);
         }
 
     }
