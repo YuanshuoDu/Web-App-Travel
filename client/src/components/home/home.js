@@ -56,6 +56,7 @@ const Home = (props) => {
                     background: `url(${backgroundImage})`,
                     backgroundSize: 'cover',
                     maxWidth: '100%',
+                 
                 }}
             >
 
@@ -82,14 +83,14 @@ const Home = (props) => {
                                 component="h1"
                                 variant="h2"
                                 align="center"
-                                color="text.primary"
+                                color="black"
                                 gutterBottom
                             >
-                                Welcome to HomePage
+                                Welcome to Stories
                             </Typography>
-                            {/* <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                1234567890
-                </Typography> */}
+                            {<Typography variant="h5" align="center" color="black" paragraph>
+                                Your passport to a world of adventure and inspiration
+                            </Typography>}
 
                             <Stack
                                 sx={{ pt: 4 }}
@@ -109,16 +110,13 @@ const Home = (props) => {
                                             Create Story
                                         </Button>
                                     ) : (
-                                        <p>Please log in to create a story.</p>
+                                        <p></p>
                                     )}
                                 </div>
 
 
                             </Stack>
                         </Container>
-
-
-                        {/* End hero unit */}
                     </main>
 
                 </Container>

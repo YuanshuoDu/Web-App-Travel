@@ -7,11 +7,11 @@ export const getStories = () => async (dispatch) => {
         console.log('Start loading');
         const { data } = await api.fetchStories();
         console.log('I have stories');
-        //console.log(data);
         dispatch({ type: 'FETCH_ALL', payload: data });
-        dispatch({ type: 'END_LOADING' });
+        dispatch({type: 'SUCCESS'});
     } catch (error) {
         console.log(error.message);
+        dispatch({type: 'ERROR'});
     }
 };
 
@@ -20,9 +20,10 @@ export const getStory = (id) => async (dispatch) => {
         dispatch({ type: 'START_LOADING' });
         const { data } = await api.fetchStory(id);
         dispatch({ type: 'FETCH_STORY', payload: { story: data } });
-        dispatch({ type: 'END_LOADING' });
+        dispatch({type: 'SUCCESS'});
     } catch (error) {
         console.log(error);
+        dispatch({type: 'ERROR'});
     }
 };
 
@@ -31,9 +32,10 @@ export const createStory = (newStory) => async (dispatch) => {
         dispatch({ type: 'START_LOADING' });
         const { data } = await api.createStory(newStory);
         dispatch({ type: 'CREATE', payload: data });
-        dispatch({ type: 'END_LOADING' });
+        dispatch({type: 'SUCCESS'});
     } catch (error) {
         console.log(error.message);
+        dispatch({type: 'ERROR'});
     }
 };
 
@@ -41,18 +43,22 @@ export const deleteStory = (id) => async (dispatch) => {
     try {
         await api.deleteStory(id);
         dispatch({ type: 'DELETE', payload: id });
+        dispatch({type: 'SUCCESS'});
     } catch (error) {
         console.log(error);
+        dispatch({type: 'ERROR'});
     }
 };
 
 export const updateStory = (id, story) => async (dispatch) => {
     try {
-        const { data } = await api.updateStory(id, story);
+        const data = await api.updateStory(id, story);
         dispatch({ type: 'UPDATE', payload: data });
+        dispatch({type: 'SUCCESS'});
         //alert('Story updated successfully');
     } catch (error) {
         console.log(error);
+        dispatch({type: 'ERROR'});
     }
 };
 

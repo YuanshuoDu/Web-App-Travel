@@ -4,11 +4,19 @@ export default makeStyles(() => ({
     appBar: {
         display: 'flex',
         flexDirection: 'row',
-        margin: '30px 0',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        //margin: '30px 0',
+        justifyContent: 'space-between',
         borderRadius: '30px',
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        // backgroundColor: 'transparent', 
+        borderRadius: '40px',
+        paddingLeft: '20px',
+        paddingRight: '20px'
+    },
+    home: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
 
     button: {

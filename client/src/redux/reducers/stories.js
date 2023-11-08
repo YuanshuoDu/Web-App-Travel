@@ -1,7 +1,8 @@
 const initialState = {
     stories: [],
     selectedStory: null,
-    isLoading: true
+    isLoading: true,
+    error: false
 };
 
 export default (state = initialState, action) => {
@@ -18,8 +19,10 @@ export default (state = initialState, action) => {
             return { ...state, stories: state.stories.map((story) => (story._id === action.payload._id ? action.payload : story)) };
         case 'START_LOADING':
             return { ...state, isLoading: true };
-        case 'END_LOADING':
-            return { ...state, isLoading: false };
+        case 'SUCCESS':
+            return { ...state, error: false, isLoading: false };
+        case 'ERROR':
+            return { ...state, error: true, isLoading: false };
         default:
             return state;
     }
