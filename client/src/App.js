@@ -9,7 +9,18 @@ import HomePage from './components/home/home';
 import StoryForm from './components/story_form/story_form';
 import StoryDetail from './components/story_detail/story_detail';
 
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { loadUser } from './redux/actions/auth';
+
+
 const App = () => {
+
+  const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadUser());
+    }, [dispatch]);
 
   const theme = createTheme({
     palette: {

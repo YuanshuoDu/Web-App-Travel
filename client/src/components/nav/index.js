@@ -15,6 +15,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import navStyles from './styles';
+
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { LOGOUT } from "../../redux/const/actionsTypes";
@@ -24,9 +25,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import { Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-
-
-const pages = ['Contact'];
+const pages = ["Contact"];
 
 function Nav(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -125,24 +124,23 @@ function Nav(props) {
             id="menu-appbar"
             anchorEl={anchorElNav}
             anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left',
+              vertical: "bottom",
+              horizontal: "left",
             }}
             keepMounted
             transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
+              vertical: "top",
+              horizontal: "left",
             }}
             open={Boolean(anchorElNav)}
             onClose={handleCloseNavMenu}
             sx={{
-              display: { xs: 'block', md: 'none' },
+              display: { xs: "block", md: "none" },
             }}
           >
             {pages.map((page) => (
               <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center"
-                >{page}</Typography>
+                <Typography textAlign="center">{page}</Typography>
               </MenuItem>
             ))}
           </Menu>
@@ -153,8 +151,12 @@ function Nav(props) {
             <Button
               key={page}
               onClick={handleCloseNavMenu}
-              sx={{ ml: 2, my: 2, color: 'white', display: 'block', letterSpacing: '.2rem', }}
-            >
+              sx={{
+                ml: 2,
+                my: 2,
+                color: "white",
+                display: "block",
+                letterSpacing: ".2rem",
               {page}
             </Button>
           ))}
@@ -263,13 +265,6 @@ function Nav(props) {
     </AppBar>
   );
 }
-
-
-
-
-
-
-
 
 const mapStateToProps = (state) => ({ auth: state.auth });
 
