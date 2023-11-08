@@ -40,7 +40,7 @@ export const deleteStory = async (req, res) => {
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No story with id: ${id}`);
 
-    await Story.findByIdAndRemove(id);
+    await Story.findByIdAndDelete(id);
 
     res.json({ message: "Story deleted successfully." });
 }

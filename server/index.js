@@ -18,8 +18,9 @@ const uri = `mongodb+srv://${username}:${password}@travelappcluster.1xu2xdn.mong
 //const uri = 'mongodb+srv://test:yVF6YxZPFBdIMswk@travelappcluster.1xu2xdn.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp';
 const port = process.env.PORT || 3000;
 
+
 // Database connection
-mongoose.connect(uri, {useNewUrlParser: true})
+mongoose.connect(uri)
     .then(() => app.listen(port, () => console.log(`Server running on port: ${port}`)))
     .catch((error) => console.log(error.message));
 

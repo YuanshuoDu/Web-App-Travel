@@ -11,6 +11,7 @@ import useStyles from './styles';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import backgroundImage from '../../images/background.png';
 
 const StoryDetail = () => {
   const { selectedStory, stories, isLoading} = useSelector((state) => state.stories);
@@ -56,7 +57,7 @@ const StoryDetail = () => {
     }
   }
 
-  if (isLoading) {
+  if (isLoading || !selectedStory) {
     return (
       <Paper elevation={6} className={classes.loadingPaper}>
         <CircularProgress size="3em" />
