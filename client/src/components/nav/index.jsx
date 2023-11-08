@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import homeStyles from "./styles";
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+import navStyles from './styles';
+
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { LOGOUT } from "../../redux/const/actionsTypes";
@@ -28,7 +29,7 @@ const pages = ["Contact"];
 function Nav(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const classes = homeStyles();
+  const classes = navStyles();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -134,7 +135,6 @@ function Nav(props) {
             ))}
           </Menu>
         </Box>
-
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
           {pages.map((page) => (
             <Button
@@ -146,13 +146,10 @@ function Nav(props) {
                 color: "white",
                 display: "block",
                 letterSpacing: ".2rem",
-              }}
-            >
               {page}
             </Button>
           ))}
         </Box>
-
         <Box>
           <Toolbar title="Open settings">
             {authenticated ? (
@@ -215,6 +212,7 @@ function Nav(props) {
                 </div>
               </div>
             )}
+
           </Toolbar>
         </Box>
       </Container>

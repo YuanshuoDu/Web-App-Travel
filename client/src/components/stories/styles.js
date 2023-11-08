@@ -14,7 +14,7 @@ export default makeStyles((theme) => ({
     height: '70vh',
   },
   storyItem: {
-    margin: theme.spacing(2),
+    margin: theme.spacing(3),
   },
 
 }));

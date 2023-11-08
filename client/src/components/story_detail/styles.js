@@ -9,12 +9,12 @@ export default makeStyles((theme) => ({
     borderRadius: '15px',
     height: '60vh',
   },
-  picture: {
-    objectFit: 'cover',
-    width: '100%',
-    borderRadius: '15px',
-    maxHeight: '400px',
+  optionsButton: {
+    position: 'absolute', 
+    top: '40px', 
+    right: '20px' 
   },
+  
   card: {
     display: 'flex',
     width: '100%',
@@ -43,11 +43,21 @@ export default makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end'
   },
+  
   imageSection: {
     marginLeft: '20px',
+    marginRight: '20px',
     [theme.breakpoints.down('sm')]: {
       marginLeft: 0,
+      marginRight: 0,
     },
+
+  },
+  picture: {
+    objectFit: 'cover',
+    width: '100%',
+    borderRadius: '15px',
+    maxHeight: '400px',
   },
 
 }));
