@@ -36,6 +36,10 @@ const StoryDetail = () => {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const authData = useSelector((state) => state.auth.authData);  // check if the user is authenticated
+
+
+
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -45,18 +49,29 @@ const StoryDetail = () => {
   };
 
   const handleEdit = (id) => {
-    navigate(`/editStory/${id}`);
+    if (authData) { // use is authenticated
+      navigate(`/editStory/${id}`);
+    } else {
+      alert('You must be logged in to edit a story.');
+    }
   }
 
   const handleDelete = (id) => {
+    if (authData) {
+    // user has logged in to delete a story
     try {
       dispatch(deleteStory(id));
       alert('Story deleted successfully.');
       navigate(-1);
     } catch (error) {
       alert(`Error: couldn't delete the story.`);
+    } 
+  } else {
+        // user has not logged in to popup an alert
+        alert('You must be logged in to delete a story.');
+      }
     }
-  }
+
 
   function TagList({ tags }) {
     return (

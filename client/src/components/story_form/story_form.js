@@ -12,8 +12,6 @@ import backgroundImage from '../../images/background.png';
 import Nav from "../nav"
 import { Alert, AlertTitle } from '@mui/material';
 
-
-import { useSelector } from "react-redux";
 import Login from "../login";
 
 
@@ -52,24 +50,6 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     }, [selectedStory]);
 
 
-
-    const handleCreate = (e) => {
-        e.preventDefault();
-
-        if (id) {
-            dispatch(updateStory(id, storyData));
-            /*if (error) {
-                alert(`Error: couldn't update the story. Please, try again`);
-            } */
-        } else {
-            dispatch(createStory(storyData));
-        }
-        navigate(-1);
-    };
-
-    const handleGoBack = () => {
-        navigate(-1);
-    };
 
   const handleCreate = (e) => {
     e.preventDefault();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AppBar, Typography, Container, Grid, Grow, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getStories } from '../../redux/actions/stories';
 import Stories from '../stories/Stories';
 import homeStyles from './styles';
@@ -22,25 +22,12 @@ const Home = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // Logic for checking if the user is authenticated
-    const [authenticated, setAuthenticated] = useState(false);
+    const authData = useSelector((state) => state.auth.authData);  // check if the user is authenticated
 
     useEffect(() => {
         dispatch(getStories());
     }, [dispatch]);
 
-    useEffect(() => {
-        if (props.auth.authData) {
-            setAuthenticated(true);
-        } else {
-            setAuthenticated(false);
-        }
-    }, [props.auth]);
-
-    function handleLogOut(e) {
-        e.preventDefault();
-        dispatch({ type: LOGOUT });
-    }
 
     const openCreateStoryScreen = () => navigate('/createStory');
 
@@ -98,7 +85,7 @@ const Home = (props) => {
                                 justifyContent="center"
                             >
                                 <div>
-                                    {!authenticated ? (
+                                {authData ? (
                                         <Button
                                             className={classes.button}
                                             variant="contained"
@@ -126,7 +113,5 @@ const Home = (props) => {
     );
 }
 
-const mapStateToProps = (state) => ({ auth: state.auth });
 
-// export default Home;
-export default connect(mapStateToProps)(Home);
+export default Home;
