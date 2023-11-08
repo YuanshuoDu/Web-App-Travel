@@ -51,6 +51,7 @@ export const signupGoogle = (accessToken, navigate) => async (dispatch)=>{
         // signup user
 
         const {data} = await api.signUpGoogle(accessToken)
+        console.log("I have signed up with google");
 
         dispatch({type : AUTH, data})
         navigate("/")
