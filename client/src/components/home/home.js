@@ -73,7 +73,7 @@ const Home = () => {
                 justifyContent="center"
               >
                 <div>
-                  {/* {authData ? ( */}
+                  {authData ? (
                     <Button
                       className={classes.button}
                       variant="contained"
@@ -83,9 +83,9 @@ const Home = () => {
                     >
                       Create Story
                     </Button>
-                  {/* ) : (
+                  ) : (
                     <p></p>
-                  )} */}
+                  )} 
                 </div>
               </Stack>
             </Container>
