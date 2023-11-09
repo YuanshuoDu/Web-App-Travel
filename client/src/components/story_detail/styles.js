@@ -9,12 +9,6 @@ export default makeStyles((theme) => ({
     borderRadius: '15px',
     height: '60vh',
   },
-  picture: {
-    objectFit: 'cover',
-    width: '100%',
-    borderRadius: '15px',
-    maxHeight: '400px',
-  },
   card: {
     display: 'flex',
     width: '100%',
@@ -25,8 +19,14 @@ export default makeStyles((theme) => ({
   },
   storyPaper: {
     padding: '20px',
-    margin: '20px 0 0 0',
+    margin: '20px 0 0 0px',
     borderRadius: '20px'
+  },
+  titleRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+
   },
   textSection: {
     flex: 1,
@@ -45,9 +45,17 @@ export default makeStyles((theme) => ({
   },
   imageSection: {
     marginLeft: '20px',
+    marginRight: '20px',
     [theme.breakpoints.down('sm')]: {
       marginLeft: 0,
+      marginRight: 0,
     },
+  },
+  picture: {
+    objectFit: 'cover',
+    width: '100%',
+    borderRadius: '15px',
+    maxHeight: '400px',
   },
 
 }));
