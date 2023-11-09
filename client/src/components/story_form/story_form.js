@@ -50,32 +50,39 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     }, [selectedStory]);
 
 
+    const handleCreate = (e) => {
+        e.preventDefault();
 
-  const handleCreate = (e) => {
-    e.preventDefault();
-    dispatch(createStory(storyData));
-    navigate(-1);
-  };
+        if (id) {
+            dispatch(updateStory(id, storyData));
+            /*if (error) {
+                alert(`Error: couldn't update the story. Please, try again`);
+            } */
+        } else {
+            dispatch(createStory(storyData));
+        }
+        navigate(-1);
+    };
 
-  const handleGoBack = () => {
-    navigate(-1);
-  };
+    const handleGoBack = () => {
+        navigate(-1);
+    };
 
-  const addTag = (tag) => {
-    setStoryData({ ...storyData, tags: [...storyData.tags, tag] });
-  };
+    const addTag = (tag) => {
+        setStoryData({ ...storyData, tags: [...storyData.tags, tag] });
+    };
 
-  const deleteTag = (deleteTag) => {
-    setStoryData({
-      ...storyData,
-      tags: storyData.tags.filter((tag) => tag !== deleteTag),
-    });
-  };
+    const deleteTag = (deleteTag) => {
+        setStoryData({
+            ...storyData,
+            tags: storyData.tags.filter((tag) => tag !== deleteTag),
+        });
+    };
 
-  // check if the user is authenticated
-//   const isAuthenticated = !!authData; // if authData is exist, then user is authenticated
+    // check if the user is authenticated
+    //   const isAuthenticated = !!authData; // if authData is exist, then user is authenticated
 
-//   if (isAuthenticated) {
+    //   if (isAuthenticated) {
     return (
         <div style={{ backgroundImage: `url(${backgroundImage})` }}>
             <Container maxWidth="xl">
@@ -117,18 +124,18 @@ const StoryForm = ({ currentId, setCurrentId }) => {
                 </Container>
             </Container>
         </div>
-//     );
-//   } else {
-//     return (
-//     <div>
-//         <Alert severity="warning">
-//   <AlertTitle>Info</AlertTitle>
-//   Please <strong>log in</strong> to access this page - check it out!
-//   </Alert>
-//       <Login />
-//     </div>
+        //     );
+        //   } else {
+        //     return (
+        //     <div>
+        //         <Alert severity="warning">
+        //   <AlertTitle>Info</AlertTitle>
+        //   Please <strong>log in</strong> to access this page - check it out!
+        //   </Alert>
+        //       <Login />
+        //     </div>
     )
-  }
+}
 // };
 
 
