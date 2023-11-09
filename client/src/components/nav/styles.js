@@ -1,23 +1,26 @@
 import { makeStyles } from "@material-ui/core";
 
 export default makeStyles(() => ({
-    // appBar: {
-    //     display: 'flex',
-    //     flexDirection: 'row',
-    //     margin: '30px 0',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     borderRadius: 15,
-    // },
-    title: {
-        color: 'rgba(0,1,1,1)',
+    appBar: {
+        display: 'flex',
+        flexDirection: 'row',
+        //margin: '30px 0',
+        justifyContent: 'space-between',
+        borderRadius: '30px',
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        // backgroundColor: 'transparent', 
+        borderRadius: '40px',
+        paddingLeft: '20px',
+        paddingRight: '20px'
     },
+    home: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+
     button: {
         color: 'white',
     },
-    container: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
+
 }));

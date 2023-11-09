@@ -39,6 +39,9 @@ export default makeStyles((theme) => ({
     width: '100%',
     margin: '15px 8px 0px 8px',
   },
+  selectFileText: {
+    fontSize: '12px', // Adjust the font size as needed
+  },
   submitButton: {
     margin: '30px 8px 10px 8px',
     color: 'white',
@@ -46,5 +49,13 @@ export default makeStyles((theme) => ({
   cancelButton: {
     margin: '0px 8px 20px 8px',
     color: 'white',
+  },
+  loadingPaper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '20px',
+    borderRadius: '15px',
+    height: '60vh',
   },
 }));
