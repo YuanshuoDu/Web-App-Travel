@@ -19,6 +19,7 @@ import Stack from "@mui/material/Stack";
 import backgroundImage from "../../images/background.png";
 import { LOGOUT } from "../../redux/const/actionsTypes";
 import { connect } from "react-redux";
+import SearchBar from '../home/search_bar/search_bar.js';
 
 const Home = () => {
   const classes = homeStyles();
@@ -28,9 +29,9 @@ const Home = () => {
 
   const authData = useSelector((state) => state.auth.authData); // check if the user is authenticated
 
-  useEffect(() => {
+  /*useEffect(() => {
     dispatch(getStories());
-  }, [dispatch]);
+  }, [dispatch]);*/
 
   const openCreateStoryScreen = () => navigate("/createStory");
 
@@ -65,6 +66,9 @@ const Home = () => {
                   Your passport to a world of adventure and inspiration
                 </Typography>
               }
+              <SearchBar
+          
+          />
 
               <Stack
                 sx={{ pt: 4 }}

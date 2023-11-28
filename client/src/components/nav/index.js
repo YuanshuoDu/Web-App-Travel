@@ -25,7 +25,6 @@ import HomeIcon from '@mui/icons-material/Home';
 import { Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const pages = ["Contact"];
 
 function Nav(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -67,6 +66,10 @@ function Nav(props) {
 
   const goHome = () => navigate('/');
 
+  const handleChange = (value) => {
+    console.log(value);
+  };
+
   return (
     <AppBar position="static" className={classes.appBar}
       sx={{
@@ -87,7 +90,11 @@ function Nav(props) {
           <HomeIcon fontSize="large" />
         </IconButton>
 
-        <Typography
+     
+          
+      
+
+        {<Typography
           variant="h6"
           noWrap
           component="a"
@@ -107,7 +114,7 @@ function Nav(props) {
           }}
         >
           Stories
-        </Typography>
+        </Typography>}
       </div>
 
       {authenticated ? (
