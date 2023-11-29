@@ -75,7 +75,8 @@ function Nav(props) {
       sx={{
         backgroundColor: 'rgba(255, 255, 255, 0.3)',
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        height: '60px',
       }}>
 
       <div className={classes.home}>
@@ -102,7 +103,7 @@ function Nav(props) {
           sx={{
             ml: 2,
             mr: 2,
-            mt: 5,
+            mt: 2,
             display: { xs: 'none', md: 'flex' },
             fontFamily: 'inherit',
             fontWeight: 700,
@@ -120,12 +121,12 @@ function Nav(props) {
       {authenticated ? (
         <div>
           <Tooltip title="Options">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 4 }}>
+            <IconButton onClick={handleOpenUserMenu} sx={{ mt: 0.5, mr: 4 }}>
               <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
             </IconButton>
           </Tooltip>
           <Menu
-            sx={{ mt: '45px' }}
+            sx={{ mt: 0 }}
             id="menu-appbar"
             anchorEl={anchorElUser}
             anchorOrigin={{
@@ -152,7 +153,7 @@ function Nav(props) {
           <Button href="/login" variant="contained"
             color="inherit"
             style={{ background: '#E7AC72' }}
-            startIcon={<AccountCircleIcon />} sx={{ my: 5, mx: 2 }}>
+            startIcon={<AccountCircleIcon />} sx={{ my: 1.5, mx: 2 }}>
             Log In
           </Button>
         </div>
