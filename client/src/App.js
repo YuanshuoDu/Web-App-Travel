@@ -8,6 +8,7 @@ import Signup from "./components/signup";
 import HomePage from './components/home/home';
 import StoryForm from './components/story_form/story_form';
 import StoryDetail from './components/story_detail/story_detail';
+import Profile from './components/profile';
 
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -53,8 +54,8 @@ const App = () => {
             <Route path="/editStory/:id" element={<StoryForm />} />
             <Route path="/stories/:id" element={<StoryDetail/>} />
 
-            {/* <Route path="/profile" element={<Profile/>}/>
-          <Route path="/forgotpassowrd" element={<Forgotpassord/>}/> */}
+            <Route path="/profile" element={<Profile/>}/>
+          {/* <Route path="/forgotpassowrd" element={<Forgotpassord/>}/>  */}
           </Routes>
         </Container>
      
