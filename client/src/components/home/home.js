@@ -24,14 +24,25 @@ import SearchBar from '../home/search_bar/search_bar.js';
 const Home = () => {
   const classes = homeStyles();
   const [currentId, setCurrentId] = useState(0);
+  //const [stories, setStories] = useState([])
+  const [searchResults, setSearchResults] = useState([])
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const authData = useSelector((state) => state.auth.authData); // check if the user is authenticated
+  const {stories, isLoading} = useSelector((state) => state.stories);
 
-  /*useEffect(() => {
+  useEffect(() => {
     dispatch(getStories());
-  }, [dispatch]);*/
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (stories) {
+      setSearchResults(stories);
+    }
+
+  }, []);
+
 
   const openCreateStoryScreen = () => navigate("/createStory");
 
@@ -66,9 +77,7 @@ const Home = () => {
                   Your passport to a world of adventure and inspiration
                 </Typography>
               }
-              <SearchBar
-          
-          />
+              <SearchBar stories={stories} setSearchResults={setSearchResults} />
 
               <Stack
                 sx={{ pt: 4 }}
@@ -95,7 +104,7 @@ const Home = () => {
             </Container>
           </main>
         </Container>
-        <Stories setCurrentId={setCurrentId} />
+        <Stories setCurrentId={setCurrentId} searchResults={searchResults} isLoading={isLoading} />
       </Box>
     </Container>
   );

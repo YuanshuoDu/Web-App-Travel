@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 
-export default makeStyles(() => ({
-    body: {
+export default makeStyles((theme) => ({
+    /*body: {
         backgroundColor: 'rgb(209, 204, 204)',
     },
     templateContainer: {
@@ -31,5 +31,26 @@ export default makeStyles(() => ({
     },
     templateImage: {
         height: '250px',
+    },*/
+    searchContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: '#fff',
+        padding: theme.spacing(1.5),
+        borderRadius: '30px',
+
+    },
+    searchInput: {
+        flex: 1,
+        '& .MuiInput-underline:before': {
+            borderBottom: 'none', // Remove the underline
+        },
+        '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+            borderBottom: 'none', // Remove the underline when hovering
+        },
+
+
+
     },
 }));
