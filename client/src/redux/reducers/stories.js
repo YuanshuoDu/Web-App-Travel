@@ -17,6 +17,8 @@ export default (state = initialState, action) => {
             return { ...state, stories: state.stories.filter((story) => story._id !== action.payload) };
         case 'UPDATE':
             return { ...state, stories: state.stories.map((story) => (story._id === action.payload._id ? action.payload : story)) };
+        case 'SEARCH':
+            return { ...state, stories: action.payload };
         case 'START_LOADING':
             return { ...state, isLoading: true };
         case 'SUCCESS':

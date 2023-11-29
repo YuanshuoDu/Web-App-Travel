@@ -62,6 +62,17 @@ export const updateStory = (id, story) => async (dispatch) => {
     }
 };
 
+export const searchStories = (stories) => async (dispatch) => {
+    try {
+    
+        dispatch({ type: 'SEARCH', payload: stories });
+      
+    } catch (error) {
+        console.log(error);
+
+    }
+};
+
 /*export function updateStory(id, story) {
     return function action(dispatch) {
         const request = axios({
