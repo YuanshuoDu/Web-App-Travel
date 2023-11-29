@@ -37,7 +37,9 @@ export default makeStyles((theme) => ({
         alignItems: 'center',
         borderRadius: theme.shape.borderRadius,
         backgroundColor: '#fff',
-        padding: theme.spacing(1.5),
+        padding: theme.spacing(1),
+        paddingLeft: theme.spacing(3),
+        paddingRight: theme.spacing(2),
         borderRadius: '30px',
 
     },

@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import {
-  AppBar,
   Typography,
   Container,
-  Grid,
-  Grow,
   Button,
+  Paper
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { useDispatch, useSelector } from "react-redux";
 import { getStories } from "../../redux/actions/stories";
 import Stories from "../stories/Stories";
 import homeStyles from "./styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Nav from "../nav";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -20,29 +18,41 @@ import backgroundImage from "../../images/background.png";
 import { LOGOUT } from "../../redux/const/actionsTypes";
 import { connect } from "react-redux";
 import SearchBar from '../home/search_bar/search_bar.js';
+import Pagination from '../Pagination';
+
+// to obtain the query string from the url
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 const Home = () => {
   const classes = homeStyles();
   const [currentId, setCurrentId] = useState(0);
-  //const [stories, setStories] = useState([])
+  //const [stories, setStories] = useState([]);
+  //const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState([])
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const authData = useSelector((state) => state.auth.authData); // check if the user is authenticated
-  const {stories, isLoading} = useSelector((state) => state.stories);
+  // check if the user is authenticated
+  const authData = useSelector((state) => state.auth.authData);
 
-  useEffect(() => {
+  const { stories, isLoading } = useSelector((state) => state.stories);
+
+  const query = useQuery();
+  // get the page number from the query string or set it to 1
+  const page = query.get('page') || 1;
+
+  /*useEffect(() => {
     dispatch(getStories());
-  }, [dispatch]);
+  }, [dispatch]);*/
 
   useEffect(() => {
-    if (stories) {
-      setSearchResults(stories);
-    }
-
-  }, []);
-
+    //console.log('stories home ' + stories.isArray);
+    //console.log('isLoading home ' + isLoading);
+    setSearchResults(stories);
+    //console.log('searchResults home ' + searchResults.isArray);
+  }, [stories]);
 
   const openCreateStoryScreen = () => navigate("/createStory");
 
@@ -77,14 +87,13 @@ const Home = () => {
                   Your passport to a world of adventure and inspiration
                 </Typography>
               }
-              <SearchBar stories={stories} setSearchResults={setSearchResults} />
 
               <Stack
-                sx={{ pt: 4 }}
                 direction="row"
                 spacing={2}
                 justifyContent="center"
               >
+
                 <div>
                   {authData ? (
                     <Button
@@ -101,6 +110,13 @@ const Home = () => {
                   )}
                 </div>
               </Stack>
+
+              <SearchBar stories={stories} setSearchResults={setSearchResults} />
+
+
+              <Paper className={classes.pagination} elevation={6}>
+                <Pagination page={page} />
+              </Paper>
             </Container>
           </main>
         </Container>

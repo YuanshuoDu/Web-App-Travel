@@ -9,8 +9,8 @@ const Stories = ({ setCurrentId, searchResults, isLoading }) => {
     const classes = storiesStyles();
 
     if (!searchResults.length && !isLoading) {
-        //console.log('searchResults ' + searchResults);
-        //console.log('isLoading ' + isLoading);
+        //console.log('searchResults stories ' + searchResults.isArray);
+        //console.log('isLoading stories ' + isLoading);
         return <div className={classes.containerProgress}><Typography variant="h6">No stories found</Typography></div>;
     }
 
