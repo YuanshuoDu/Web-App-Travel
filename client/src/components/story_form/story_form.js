@@ -75,7 +75,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
   // check if the user is authenticated
   const isAuthenticated = !!authData; // if authData is exist, then user is authenticated
 
-  if (isAuthenticated) {
+  //if (isAuthenticated) {
     return (
         <div style={{ backgroundImage: `url(${backgroundImage})` }}>
             <Container maxWidth="xl">
@@ -118,7 +118,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
             </Container>
         </div>
     );
-  } else {
+  /*} else {
     return (
     <div>
         <Alert severity="warning">
@@ -128,7 +128,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
       <Login />
     </div>
     )
-  }
+  }*/
 };
 
 

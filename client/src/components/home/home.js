@@ -17,8 +17,8 @@ import Stack from "@mui/material/Stack";
 import backgroundImage from "../../images/background.png";
 import { LOGOUT } from "../../redux/const/actionsTypes";
 import { connect } from "react-redux";
-import SearchBar from '../home/search_bar/search_bar.js';
-import FilterButtons from '../home/filter_buttons/filter_buttons';
+import SearchBar from './search/search.js';
+//import FilterButtons from '../home/filter_buttons/filter_buttons';
 import Pagination from '../Pagination';
 
 // to obtain the query string from the url
@@ -101,7 +101,7 @@ const Home = () => {
               >
 
                 <div>
-                  {authData ? (
+                  {!authData ? (
                     <Button
                       className={classes.button}
                       variant="contained"
@@ -118,7 +118,6 @@ const Home = () => {
               </Stack>
 
               <SearchBar stories={stories} setSearchResults={setSearchResults} />
-              <FilterButtons handleClick={handleClick} />
 
               <Paper className={classes.pagination} elevation={6}>
                 <Pagination page={page} />
