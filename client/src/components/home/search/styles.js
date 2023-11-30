@@ -55,4 +55,11 @@ export default makeStyles((theme) => ({
 
 
     },
+    filterFlex: {
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '10px', // Adjust the gap (separation) between buttons
+        marginTop: '10px', // Adjust top margin as needed
+        color: 'white',
+      },
 }));

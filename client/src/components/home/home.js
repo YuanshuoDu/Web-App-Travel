@@ -17,7 +17,8 @@ import Stack from "@mui/material/Stack";
 import backgroundImage from "../../images/background.png";
 import { LOGOUT } from "../../redux/const/actionsTypes";
 import { connect } from "react-redux";
-import SearchBar from '../home/search_bar/search_bar.js';
+import SearchBar from './search/search.js';
+//import FilterButtons from '../home/filter_buttons/filter_buttons';
 import Pagination from '../Pagination';
 
 // to obtain the query string from the url
@@ -31,6 +32,7 @@ const Home = () => {
   //const [stories, setStories] = useState([]);
   //const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState([])
+  const [selectedFilter, setSelectedFilter] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -53,6 +55,10 @@ const Home = () => {
     setSearchResults(stories);
     //console.log('searchResults home ' + searchResults.isArray);
   }, [stories]);
+
+  const handleClick = (event) => {
+    setSelectedFilter(event.target.value);
+  };
 
   const openCreateStoryScreen = () => navigate("/createStory");
 
@@ -95,7 +101,7 @@ const Home = () => {
               >
 
                 <div>
-                  {authData ? (
+                  {!authData ? (
                     <Button
                       className={classes.button}
                       variant="contained"
@@ -112,7 +118,6 @@ const Home = () => {
               </Stack>
 
               <SearchBar stories={stories} setSearchResults={setSearchResults} />
-
 
               <Paper className={classes.pagination} elevation={6}>
                 <Pagination page={page} />
