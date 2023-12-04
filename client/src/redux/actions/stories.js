@@ -78,3 +78,28 @@ export const updateStory = (id, story) => async (dispatch) => {
     }
 };*/
 
+export const likeStory = (id, story) => async (dispatch) => {
+    try {
+        const data = await api.likeStory(id, story);
+        dispatch({ type: 'UPDATE', payload: data });
+        dispatch({ type: 'ADD_TO_LIKE_COLLECTION', payload: story });
+        dispatch({type: 'SUCCESS'});
+        //alert('Story updated successfully');
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+// export const addToLikeCollection = (id) => async (dispatch) => {
+//     try {
+//         dispatch({ type: 'START_LOADING' });
+//         const { data } = await api.fetchStory(id);
+//         dispatch({ type: 'ADD_TO_LIKE_COLLECTION', payload: { story: data } });
+//         dispatch({type: 'SUCCESS'});
+//     } catch (error) {
+//         console.log(error);
+//         dispatch({type: 'ERROR'});
+//     }
+// };

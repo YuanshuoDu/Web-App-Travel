@@ -6,7 +6,7 @@ import moment from 'moment';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
-import { getStory, deleteStory } from '../../redux/actions/stories';
+import { getStory, deleteStory, likeStory } from '../../redux/actions/stories';
 import useStyles from './styles';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
@@ -20,15 +20,15 @@ const StoryDetail = () => {
   const classes = useStyles();
   const navigate = useNavigate();
   const { id } = useParams();
-  var userLikePost = false;
+  // var userLikePost = false;
 
-  var handleButtonClick = () => {
-    if (userLikePost) {
-      userLikePost = false;
-    } else {
-      userLikePost = true;
-    }
-  };
+  const [userLikePost, setUserLikePost] = useState(false);
+
+var handleButtonClick = () => {
+  setUserLikePost(!userLikePost);
+  dispatch(likeStory(selectedStory._id, selectedStory.likeCount));
+};
+
 
   useEffect(() => {
     dispatch(getStory(id));
@@ -138,7 +138,7 @@ const StoryDetail = () => {
                   </div>
                   <TagList tags={selectedStory.tags || []} />
                   <Typography gutterBottom variant="body1" component="p">{selectedStory.message || ""}</Typography>
-                  <CardActions className={classes.likeButton}>
+                  <CardActions className={classes.likeButton} onClick={() => dispatch(likeStory(selectedStory._id)) }>
                     {userLikePost ?
                       (
                         <IconButton size="small" onClick={handleButtonClick}>
@@ -151,7 +151,8 @@ const StoryDetail = () => {
                         </IconButton>
                       )
                     }
-                    <Typography variant="body2">{selectedStory.likeCount || 0}</Typography>
+                    <Typography variant="body2">{selectedStory.likeCount}</Typography>
+
                   </CardActions>
                   <Divider style={{ margin: '20px' }} />
                 </div>
