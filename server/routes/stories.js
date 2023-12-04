@@ -1,6 +1,6 @@
 import express from 'express';
 import { getStories, getStory, createStory, deleteStory, updateStory } from '../controllers/storyController.js';
-
+import authmiddle from "../middleware/authmiddle.js";
 const router = express.Router();
 
 router.get('/', getStories);
