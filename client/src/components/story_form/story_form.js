@@ -51,11 +51,16 @@ const StoryForm = ({ currentId, setCurrentId }) => {
 
 
 
-  const handleCreate = (e) => {
-    e.preventDefault();
-    dispatch(createStory(storyData));
-    navigate(-1);
-  };
+    const handleCreate = (e) => {
+        e.preventDefault();
+        navigate(-1);
+        if (id) {
+            dispatch(updateStory(id, storyData));
+        } else {
+            dispatch(createStory(storyData));
+        }
+   
+    };
 
   const handleGoBack = () => {
     navigate(-1);
@@ -75,7 +80,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
   // check if the user is authenticated
   const isAuthenticated = !!authData; // if authData is exist, then user is authenticated
 
-  //if (isAuthenticated) {
+  if (isAuthenticated) {
     return (
         <div style={{ backgroundImage: `url(${backgroundImage})` }}>
             <Container maxWidth="xl">
@@ -118,7 +123,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
             </Container>
         </div>
     );
-  /*} else {
+  } else {
     return (
     <div>
         <Alert severity="warning">
@@ -128,7 +133,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
       <Login />
     </div>
     )
-  }*/
+  }
 };
 
 

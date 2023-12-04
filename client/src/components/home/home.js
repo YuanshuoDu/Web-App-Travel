@@ -101,7 +101,7 @@ const Home = () => {
               >
 
                 <div>
-                  {!authData ? (
+                  {authData ? (
                     <Button
                       className={classes.button}
                       variant="contained"
