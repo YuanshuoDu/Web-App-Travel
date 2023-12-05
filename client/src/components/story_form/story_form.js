@@ -50,12 +50,16 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     }, [selectedStory]);
 
 
-
-  const handleCreate = (e) => {
-    e.preventDefault();
-    dispatch(createStory(storyData));
-    navigate(-1);
-  };
+    const handleCreate = (e) => {
+        e.preventDefault();
+        navigate(-1);
+        if (id) {
+            dispatch(updateStory(id, storyData));
+        } else {
+            dispatch(createStory(storyData));
+        }
+   
+    };
 
   const handleGoBack = () => {
     navigate(-1);

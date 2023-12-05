@@ -60,6 +60,8 @@ function Login() {
         e.preventDefault();
         if(email !== "" && password !== ""){
             dispatch(signin({email,password}, navigate))
+        } else {
+            alert("Please fill in all the fields. Email and password are required.")
         }
     }
 

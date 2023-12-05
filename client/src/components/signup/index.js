@@ -43,6 +43,8 @@ function Signup() {
         e.preventDefault();
         if (sForm.firstName !== "" && sForm.lastName !== "" &&  sForm.password !== "" && sForm.confirmPassword !== "" && sForm.email !== "" && sForm.password === sForm.confirmPassword && sForm.password.length >= 4) {
             dispatch(signup(sForm, navigate));
+        } else {
+            alert("Please fill in all the fields. Password and confirm password must be the same and at least 4 characters long.")
         }
     }
 
