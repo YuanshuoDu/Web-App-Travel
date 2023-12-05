@@ -2,15 +2,16 @@ import mongoose from 'mongoose';
 
 const storySchema = mongoose.Schema({
     creator: String,
+    firstName: String,
     title: String,
     country: String,
     city: String,
     message: String,
     tags: [String],
     selectedPicture: String,
-    likeCount: {
-        type: Number,
-        default: 0
+    likes: {
+        type: [String],
+        default: []
     },
     createdAt: {
         type: Date,
