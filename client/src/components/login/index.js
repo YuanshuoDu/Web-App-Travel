@@ -43,11 +43,18 @@ function Login() {
 
     function handleGoogleLoginSuccess(tokenResponse) {
 
+        console.log('Google Login Success:', tokenResponse);
         const accessToken = tokenResponse.access_token;
 
         dispatch(signinGoogle(accessToken,navigate))
     }
-    const login = useGoogleLogin({onSuccess: handleGoogleLoginSuccess});
+
+    function handleGoogleLoginFailure(error) {
+        console.error('Google Login Failed:', error);
+    }
+
+    const login = useGoogleLogin({onSuccess: handleGoogleLoginSuccess,
+        onFailure: handleGoogleLoginFailure,});
 
     function handleSubmit(e){
         e.preventDefault();

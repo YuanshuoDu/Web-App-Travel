@@ -18,6 +18,7 @@ export const signin = (data2, navigate) => async (dispath) =>{
         navigate("/")
     }catch(err){
         console.log(err);
+        console.log("Error in login");
     }
 }
 
@@ -27,9 +28,11 @@ export const signinGoogle = (accessToken, navigate) => async (dispatch)=>{
         const {data} = await api.signInGoogle(accessToken)
 
         dispatch({type : AUTH, data})
+        console.log("I have logged in with google");
         navigate("/")
     }catch(err){
         console.log(err)
+        console.log("Error in login with google");
     }
 }
 
@@ -43,6 +46,7 @@ export const signup = (formData, navigate) => async (dispatch)=>{
         navigate("/")
     }catch(err){
         console.log(err)
+        console.log("Error in signup");
     }
 }
 
@@ -57,5 +61,6 @@ export const signupGoogle = (accessToken, navigate) => async (dispatch)=>{
         navigate("/")
     }catch(err){
         console.log(err)
+        console.log("Error in signup with google");
     }
 }

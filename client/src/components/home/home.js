@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {
+  Paper,
+  AppBar,
   Typography,
   Container,
+  Grid,
+  Grow,
   Button,
-  Paper
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +23,7 @@ import { connect } from "react-redux";
 import SearchBar from './search/search.js';
 //import FilterButtons from '../home/filter_buttons/filter_buttons';
 import Pagination from '../Pagination';
+
 
 // to obtain the query string from the url
 function useQuery() {
@@ -60,6 +64,7 @@ const Home = () => {
     setSelectedFilter(event.target.value);
   };
 
+
   const openCreateStoryScreen = () => navigate("/createStory");
 
   return (
@@ -99,7 +104,6 @@ const Home = () => {
                 spacing={2}
                 justifyContent="center"
               >
-
                 <div>
                   {authData ? (
                     <Button

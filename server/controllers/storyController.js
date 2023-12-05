@@ -61,3 +61,15 @@ export const updateStory = async (req, res) => {
 
     res.json(updatedStory);
 }
+
+export const likeStory = async (req, res) => {
+    const { id } = req.params;
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No story with id: ${id}`);
+
+    const stories = await Story.findById(id);
+    const updatedStory = await Story.findByIdAndUpdate(id, { likeCount: stories.likeCount + 1 }, { new: true });
+   
+    res.json(updatedStory);
+}
+

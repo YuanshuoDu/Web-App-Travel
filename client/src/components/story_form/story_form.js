@@ -50,7 +50,6 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     }, [selectedStory]);
 
 
-
     const handleCreate = (e) => {
         e.preventDefault();
         navigate(-1);

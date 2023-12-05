@@ -24,6 +24,10 @@ export default (state = initialState, action) => {
             return { ...state, stories: state.stories.map((story) => (story._id === action.payload._id ? action.payload : story)) };
         case 'SEARCH':
             return { ...state, stories: action.payload };
+        case 'LIKE':
+            return { ...state, stories: state.stories.map((story) => (story._id === action.payload._id ? action.payload : story)) };
+        case 'ADD_TO_LIKE_COLLECTION':
+            return [...state, action.payload];
         case 'START_LOADING':
             return { ...state, isLoading: true };
         case 'SUCCESS':
