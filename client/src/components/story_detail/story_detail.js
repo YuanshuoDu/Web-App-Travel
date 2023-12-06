@@ -24,10 +24,10 @@ const StoryDetail = () => {
 
   const [userLikePost, setUserLikePost] = useState(false);
 
-var handleButtonClick = () => {
-  setUserLikePost(!userLikePost);
-  dispatch(likeStory(selectedStory._id, selectedStory.likeCount));
-};
+  var handleButtonClick = () => {
+    setUserLikePost(!userLikePost);
+    dispatch(likeStory(selectedStory._id, selectedStory.likeCount));
+  };
 
 
   useEffect(() => {
@@ -36,7 +36,7 @@ var handleButtonClick = () => {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const authData = useSelector((state) => state.auth.authData);  // check if the user is authenticated
+  const authData = useSelector((state) => state.auth.authData);
 
 
 
@@ -49,7 +49,7 @@ var handleButtonClick = () => {
   };
 
   const handleEdit = (id) => {
-    if (authData) { // use is authenticated
+    if (authData) {
       navigate(`/editStory/${id}`);
     } else {
       alert('You must be logged in to edit a story.');
@@ -58,19 +58,19 @@ var handleButtonClick = () => {
 
   const handleDelete = (id) => {
     if (authData) {
-    // user has logged in to delete a story
-    try {
-      dispatch(deleteStory(id));
-      alert('Story deleted successfully.');
-      navigate(-1);
-    } catch (error) {
-      alert(`Error: couldn't delete the story.`);
-    } 
-  } else {
-        // user has not logged in to popup an alert
-        alert('You must be logged in to delete a story.');
+      // User has logged in to delete a story
+      try {
+        dispatch(deleteStory(id));
+        alert('Story deleted successfully.');
+        navigate(-1);
+      } catch (error) {
+        alert(`Error: couldn't delete the story.`);
       }
+    } else {
+      // User has not logged in to popup an alert
+      alert('You must be logged in to delete a story.');
     }
+  }
 
 
   function TagList({ tags }) {
@@ -138,7 +138,7 @@ var handleButtonClick = () => {
                   </div>
                   <TagList tags={selectedStory.tags || []} />
                   <Typography gutterBottom variant="body1" component="p">{selectedStory.message || ""}</Typography>
-                  <CardActions className={classes.likeButton} onClick={() => dispatch(likeStory(selectedStory._id)) }>
+                  <CardActions className={classes.likeButton} onClick={() => dispatch(likeStory(selectedStory._id))}>
                     {userLikePost ?
                       (
                         <IconButton size="small" onClick={handleButtonClick}>

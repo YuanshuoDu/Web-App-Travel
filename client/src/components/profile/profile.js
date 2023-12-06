@@ -17,7 +17,6 @@ import Nav from "../nav";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import backgroundImage from "../../images/background.png";
-import { LOGOUT } from "../../redux/const/actionsTypes";
 import { connect } from "react-redux";
 import useStyles from './styles';
 import { useParams, useHistory, Link } from 'react-router-dom';

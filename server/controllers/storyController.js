@@ -62,6 +62,7 @@ export const getStories = async (req, res) => {
                 { message: { $regex: new RegExp(searchTerm, 'i') } },
                 { city: { $regex: new RegExp(searchTerm, 'i') } },
                 { country: { $regex: new RegExp(searchTerm, 'i') } },
+                { tags: { $in: [searchTerm] } },
             ],
         };
 
