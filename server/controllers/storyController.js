@@ -2,12 +2,16 @@ import Story from '../models/story.js';
 import mongoose from 'mongoose';
 
 export const getStories = async (req, res) => {
+    const { page } = req.query;
     try {
-        const stories = await Story.find();
-        res.status(200).json(stories);
-    } catch(error) {
+        const LIMIT = 8;
+        const startIndex = (Number(page) - 1) * LIMIT; 
+        const total = await Story.countDocuments({});
+        const stories = await Story.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
+        res.status(200).json({ data: stories, currentPage: Number(page), numPages: Math.ceil(total / LIMIT) });
+    } catch (error) {
         // Not found
-        res.status(404).json({message: error.message});
+        res.status(404).json({ message: error.message });
     }
 }
 
@@ -24,7 +28,7 @@ export const getStory = async (req, res) => {
 
 export const createStory = async (req, res) => {
     const story = req.body;
-    const newStory = new Story({ ...story, creator: req.userId, createdAt: new Date().toISOString() })
+    const newStory = new Story({ ...story, creator: "Test"/*req.userId*/, createdAt: new Date().toISOString() })
 
     try {
         await newStory.save();
@@ -60,26 +64,11 @@ export const updateStory = async (req, res) => {
 
 export const likeStory = async (req, res) => {
     const { id } = req.params;
-
-    if (!req.userId) {
-        return res.json({ message: "Unauthenticated" });
-    }
     
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No story with id: ${id}`);
 
     const stories = await Story.findById(id);
-
-    const index = stories.likes.findIndex((id) => id === String(req.userId));
-
-    if (index === -1) {
-        // like the story
-        stories.likes.push(req.userId);
-    } else {
-        // dislike the story
-        stories.likes = stories.likes.filter((id) => id !== String(req.userId));
-    }
-
-    const updatedStory = await Story.findByIdAndUpdate(id, stories, { new: true });
+    const updatedStory = await Story.findByIdAndUpdate(id, { likeCount: stories.likeCount + 1 }, { new: true });
    
     res.json(updatedStory);
 }

@@ -23,7 +23,6 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     const dispatch = useDispatch();
     const { selectedStory, stories, isLoading, error } = useSelector((state) => state.stories);
     const authData = useSelector((state) => state.auth.authData);
-    const user = JSON.parse(localStorage.getItem('user_info'));
 
     useEffect(() => {
         if (id) {
@@ -32,12 +31,12 @@ const StoryForm = ({ currentId, setCurrentId }) => {
 
     }, [id]);
 
-    const [storyData, setStoryData] = useState({title: '', message: '', country: '', city: '', tags: [], selectedPicture: '' });
+    const [storyData, setStoryData] = useState({ creator: '', title: '', message: '', country: '', city: '', tags: [], selectedPicture: '' });
 
     useEffect(() => {
         if (id && selectedStory) {
             setStoryData({
-                // creator: selectedStory.creator || '',
+                creator: selectedStory.creator || '',
                 title: selectedStory.title || '',
                 message: selectedStory.message || '',
                 country: selectedStory.country || '',
@@ -51,15 +50,16 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     }, [selectedStory]);
 
 
-
-  const handleCreate = (e) => {
-    e.preventDefault();
-    dispatch(createStory({ ...storyData, firstName: user?.result?.firstName }));
-    navigate(-1);
-    console.log(storyData);
-    console.log(user?.result?.firstName);
-    console.log("create story");
-  } ;
+    const handleCreate = (e) => {
+        e.preventDefault();
+        navigate(-1);
+        if (id) {
+            dispatch(updateStory(id, storyData));
+        } else {
+            dispatch(createStory(storyData));
+        }
+   
+    };
 
   const handleGoBack = () => {
     navigate(-1);
@@ -76,20 +76,10 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     });
   };
 
-//   if (!user?.result?.firstname) {
-//     return (
-//         <div>
-//         <Alert severity="warning">
-//   <AlertTitle>Info</AlertTitle>
-//   Please <strong>log in</strong> to access this page - check it out!
-//   </Alert>
-//       <Login />
-//     </div>)
-//     };
   // check if the user is authenticated
   const isAuthenticated = !!authData; // if authData is exist, then user is authenticated
 
-//   if (isAuthenticated) {
+  if (isAuthenticated) {
     return (
         <div style={{ backgroundImage: `url(${backgroundImage})` }}>
             <Container maxWidth="xl">
@@ -132,17 +122,17 @@ const StoryForm = ({ currentId, setCurrentId }) => {
             </Container>
         </div>
     );
-//   } else {
-//     return (
-//     <div>
-//         <Alert severity="warning">
-//   <AlertTitle>Info</AlertTitle>
-//   Please <strong>log in</strong> to access this page - check it out!
-//   </Alert>
-//       <Login />
-//     </div>
-//     )
-//   }
+  } else {
+    return (
+    <div>
+        <Alert severity="warning">
+  <AlertTitle>Info</AlertTitle>
+  Please <strong>log in</strong> to access this page - check it out!
+  </Alert>
+      <Login />
+    </div>
+    )
+  }
 };
 
 

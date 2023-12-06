@@ -1,9 +1,6 @@
 import jwt from "jsonwebtoken";
 import JWT_SECRET from "config";
 
-// to like a story, 
-//click the like button ==> auth middleware checks if the user is authenticated ==> if yes,next to the controller
-
 const authmiddle = async (req, res, next) => {
     try {
       const token = req.headers.authorization.split(" ")[1];
