@@ -20,7 +20,12 @@ export const signUpGoogle = (accessToken) => API.post("/users/signup", {
     googleAccessToken: accessToken
 })
 
-export const fetchStories = (page) => API.get(`/stories?page=${page}`);
+export const fetchStories = (page, filter, searchTerm) => API.get(`/stories?page=${page}`, {
+    params: {
+      filter: filter,
+      searchTerm: searchTerm,
+    },
+  });
 export const fetchStory = (id) => API.get(`/stories/${id}`);
 export const createStory = (newStory) => API.post("/stories", newStory);
 export const deleteStory = (id) => API.delete(`/stories/${id}`);
