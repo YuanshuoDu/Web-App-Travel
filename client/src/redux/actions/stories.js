@@ -1,11 +1,11 @@
 import * as api from '../../api/index.js';
 //import axios from "axios"
 
-export const getStories = (page) => async (dispatch) => {
+export const getStories = (page, filter, searchTerm) => async (dispatch) => {
     try {
         dispatch({ type: 'START_LOADING' });
         console.log('Start loading');
-        const { data: { data, currentPage, numPages }  } = await api.fetchStories(page);
+        const { data: { data, currentPage, numPages }  } = await api.fetchStories(page, filter, searchTerm);
         console.log('I have stories ' + data);
         dispatch({ type: 'FETCH_ALL', payload: { data, currentPage, numPages } });
         dispatch({type: 'SUCCESS'});

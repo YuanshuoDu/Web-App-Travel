@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import {
   Paper,
-  AppBar,
   Typography,
   Container,
-  Grid,
-  Grow,
   Button,
+  //InputAdornment,
+  TextField, 
+  //IconButton,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+//import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from "react-redux";
 import { getStories } from "../../redux/actions/stories";
 import Stories from "../stories/Stories";
@@ -18,11 +19,11 @@ import Nav from "../nav";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import backgroundImage from "../../images/background.png";
-import { LOGOUT } from "../../redux/const/actionsTypes";
-import { connect } from "react-redux";
-import SearchBar from './search/search.js';
+//import SearchBar from './search/search.js';
 //import FilterButtons from '../home/filter_buttons/filter_buttons';
-import Pagination from '../Pagination';
+//import Pagination from '../Pagination';
+import { Link } from 'react-router-dom';
+import { Pagination, PaginationItem } from '@material-ui/lab';
 
 
 // to obtain the query string from the url
@@ -35,15 +36,20 @@ const Home = () => {
   const [currentId, setCurrentId] = useState(0);
   //const [stories, setStories] = useState([]);
   //const [isLoading, setIsLoading] = useState(false);
-  const [searchResults, setSearchResults] = useState([])
-  const [selectedFilter, setSelectedFilter] = useState(null);
+  //const [searchResults, setSearchResults] = useState([])
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filter, setFilter] = useState('all');
+
+  const handleInputChange = (event) => {
+      setSearchTerm(event.target.value);
+  };
 
   // check if the user is authenticated
   const authData = useSelector((state) => state.auth.authData);
 
-  const { stories, isLoading } = useSelector((state) => state.stories);
+  const { stories, isLoading, numPages } = useSelector((state) => state.stories);
 
   const query = useQuery();
   // get the page number from the query string or set it to 1
@@ -53,17 +59,22 @@ const Home = () => {
     dispatch(getStories());
   }, [dispatch]);*/
 
-  useEffect(() => {
+  /*useEffect(() => {
     //console.log('stories home ' + stories.isArray);
     //console.log('isLoading home ' + isLoading);
     setSearchResults(stories);
     //console.log('searchResults home ' + searchResults.isArray);
-  }, [stories]);
+  }, [stories]);*/
 
-  const handleClick = (event) => {
-    setSelectedFilter(event.target.value);
-  };
 
+
+
+  useEffect(() => {
+    if (page) {
+      console.log('page home ' + page);  
+      dispatch(getStories(page, filter, searchTerm));
+    }
+  }, [dispatch, page, filter, searchTerm]);
 
   const openCreateStoryScreen = () => navigate("/createStory");
 
@@ -121,15 +132,62 @@ const Home = () => {
                 </div>
               </Stack>
 
-              <SearchBar stories={stories} setSearchResults={setSearchResults} />
+              {/*<SearchBar stories={stories} setSearchResults={setSearchResults} />*/}
+              <Container>
+                <Paper className={classes.searchContainer}>
+                  <TextField
+                    className={classes.searchInput}
+                    variant="standard"
+                    placeholder="Search for a story"
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                    /*InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton onClick={handleSearch} edge="end">
+                            <SearchIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}*/
+                  />
+                </Paper>
+                <>
+
+                  <div className={classes.filterFlex}>
+
+                    <Button onClick={() => setFilter('today')} variant="contained"
+                    >Today</Button>
+                    <Button onClick={() => setFilter('week')} variant="contained"
+                    >This week</Button>
+                    <Button onClick={() => setFilter('month')} variant="contained"
+                    >This month</Button>
+                    <Button onClick={() => setFilter('year')} variant="contained"
+                    >This year</Button>
+                    <Button onClick={() => setFilter('all')} variant="contained"
+                    >All</Button>
+                  </div>
+                </>
+
+              </Container>
 
               <Paper className={classes.pagination} elevation={6}>
-                <Pagination page={page} />
+                {/*<Pagination page={page} />*/}
+                <Pagination
+                  classes={{ ul: classes.ul, root: classes.root }}
+                  count={numPages}
+                  page={Number(page) || 1}
+                  variant="outlined"
+                  color="primary"
+                  renderItem={(item) => (
+                    <PaginationItem {...item} component={Link} to={`/stories?page=${item.page}`} />
+                  )}
+                />
               </Paper>
             </Container>
           </main>
         </Container>
-        <Stories setCurrentId={setCurrentId} searchResults={searchResults} isLoading={isLoading} />
+        <Stories setCurrentId={setCurrentId} searchResults={stories} isLoading={isLoading} />
       </Box>
     </Container>
   );
