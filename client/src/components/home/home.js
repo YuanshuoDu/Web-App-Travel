@@ -5,7 +5,7 @@ import {
   Container,
   Button,
   //InputAdornment,
-  TextField, 
+  TextField,
   //IconButton,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
@@ -43,7 +43,7 @@ const Home = () => {
   const [filter, setFilter] = useState('all');
 
   const handleInputChange = (event) => {
-      setSearchTerm(event.target.value);
+    setSearchTerm(event.target.value);
   };
 
   // check if the user is authenticated
@@ -71,7 +71,7 @@ const Home = () => {
 
   useEffect(() => {
     if (page) {
-      console.log('page home ' + page);  
+      console.log('page home ' + page);
       dispatch(getStories(page, filter, searchTerm));
     }
   }, [dispatch, page, filter, searchTerm]);
@@ -141,31 +141,30 @@ const Home = () => {
                     placeholder="Search for a story"
                     value={searchTerm}
                     onChange={handleInputChange}
-                    /*InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton onClick={handleSearch} edge="end">
-                            <SearchIcon />
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}*/
+                  /*InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={handleSearch} edge="end">
+                          <SearchIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}*/
                   />
                 </Paper>
                 <>
 
                   <div className={classes.filterFlex}>
-
-                    <Button onClick={() => setFilter('today')} variant="contained"
-                    >Today</Button>
-                    <Button onClick={() => setFilter('week')} variant="contained"
-                    >This week</Button>
-                    <Button onClick={() => setFilter('month')} variant="contained"
-                    >This month</Button>
-                    <Button onClick={() => setFilter('year')} variant="contained"
-                    >This year</Button>
-                    <Button onClick={() => setFilter('all')} variant="contained"
+                    <Button onClick={() => setFilter('all')} variant="contained" color={filter === 'all' ? 'primary' : 'default'}
                     >All</Button>
+                    <Button onClick={() => setFilter('today')} variant="contained" color={filter === 'today' ? 'primary' : 'default'}
+                    >Today</Button>
+                    <Button onClick={() => setFilter('week')} variant="contained" color={filter === 'week' ? 'primary' : 'default'}
+                    >This week</Button>
+                    <Button onClick={() => setFilter('month')} variant="contained" color={filter === 'month' ? 'primary' : 'default'}
+                    >This month</Button>
+                    <Button onClick={() => setFilter('year')} variant="contained" color={filter === 'year' ? 'primary' : 'default'}
+                    >This year</Button>
                   </div>
                 </>
 
