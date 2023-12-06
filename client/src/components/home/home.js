@@ -55,7 +55,7 @@ const Home = () => {
 
   useEffect(() => {
     if (page) {
-      console.log('page home ' + page);
+      console.log('Page home ' + page);
       dispatch(getStories(page, filter, search));
     }
   }, [dispatch, page, filter, search]);
@@ -71,8 +71,9 @@ const Home = () => {
           pt: 8,
           pb: 6,
           background: `url(${backgroundImage})`,
-          backgroundSize: "cover",
-          maxWidth: "100%",
+          backgroundSize: 'cover',
+          width: '100%',
+
         }}
       >
         <Container maxWidth="lg">
@@ -164,7 +165,7 @@ const Home = () => {
             </Container>
           </main>
         </Container>
-        <Stories setCurrentId={setCurrentId} searchResults={stories} isLoading={isLoading} />
+        <Stories setCurrentId={setCurrentId} stories={stories} isLoading={isLoading} />
       </Box>
     </Container>
   );

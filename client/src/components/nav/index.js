@@ -45,7 +45,11 @@ function Nav(props) {
 
   function handleLogOut(e) {
     e.preventDefault();
-    dispatch({ type: LOGOUT });
+    try {
+      dispatch({ type: LOGOUT });
+    } catch (error) {
+      alert(`Error: couldn't log out.`);
+    }
   }
 
   const goHome = () => navigate('/');

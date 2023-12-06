@@ -34,13 +34,22 @@ function Signup() {
 
     function handleGoogleLoginSuccess(tokenResponse) {
         const accessToken = tokenResponse.access_token;
-        dispatch(signupGoogle(accessToken, navigate));
+        try {
+            dispatch(signupGoogle(accessToken, navigate));
+        } catch (error) {
+            alert(`Error: couldn't sign up with Google.`);
+        }
+       
     }
 
     function handleOnSubmit(e) {
         e.preventDefault();
         if (sForm.firstName !== "" && sForm.lastName !== "" && sForm.password !== "" && sForm.confirmPassword !== "" && sForm.email !== "" && sForm.password === sForm.confirmPassword && sForm.password.length >= 4) {
-            dispatch(signup(sForm, navigate));
+            try {
+                dispatch(signup(sForm, navigate));
+            } catch (error) {
+                alert(`Error: couldn't sign up.`);
+            }
         } else {
             alert("Please fill in all the fields. Password and confirm password must be the same and at least 4 characters long.")
         }
@@ -107,7 +116,6 @@ function Signup() {
                                 value={sForm.email}
                             />
                         </Grid>
-
                         <Grid item xs={12}>
                             <TextField
                                 required

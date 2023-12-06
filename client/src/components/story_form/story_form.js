@@ -20,7 +20,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const { selectedStory, isLoading, error } = useSelector((state) => state.stories);
+    const { selectedStory, isLoading } = useSelector((state) => state.stories);
     const authData = useSelector((state) => state.auth.authData);
     const [storyData, setStoryData] = useState({ title: '', message: '', country: '', city: '', tags: [], selectedPicture: '', creatorId: '', creatorName: '' });
     const user = JSON.parse(localStorage.getItem('user_info'));
@@ -53,21 +53,21 @@ const StoryForm = ({ currentId, setCurrentId }) => {
         e.preventDefault();
 
         if (id) {
-            console.log("Updated stroy id: ", id);
-            dispatch(updateStory(id, { ...storyData, creatorName: user?.result?.firstName + ' ' + user?.result?.lastName, creatorId: user?.result?._id }));
+            try {
+                console.log("Updated stroy id: ", id);
+                dispatch(updateStory(id, { ...storyData, creatorName: user?.result?.firstName + ' ' + user?.result?.lastName, creatorId: user?.result?._id }));
+            } catch (error) {
+                alert(`Error: couldn't update the story.`);
+            }
         } else {
-            console.log("Story that will be created: ", storyData);
-            console.log("Creator username: ", user?.result?.firstName + ' ' + user?.result?.lastName);
-            console.log("Creator id", user?.result?._id);
-            dispatch(createStory({ ...storyData, creatorName: user?.result?.firstName + ' ' + user?.result?.lastName, creatorId: user?.result?._id }));
-        }
-        while (isLoading) {
-        }
-        if (!error) {
-            alert("Error: Story not created. Please try again.");
-        } else {
-            alert("Story created successfully!");
-            navigate(-1);
+            try {
+                console.log("Story that will be created: ", storyData);
+                console.log("Creator username: ", user?.result?.firstName + ' ' + user?.result?.lastName);
+                console.log("Creator id", user?.result?._id);
+                dispatch(createStory({ ...storyData, creatorName: user?.result?.firstName + ' ' + user?.result?.lastName, creatorId: user?.result?._id }));
+            } catch (error) {
+                alert(`Error: couldn't create the story.`);
+            }
         }
     };
 
