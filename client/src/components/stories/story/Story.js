@@ -49,7 +49,7 @@ const Story = ({ story, setCurrentId }) => {
               
                 <CardMedia className={classes.picture} image={story.selectedPicture || 'https://sanantoniosports.org/wp-content/uploads/2022/07/placeholder-image.jpeg'} title={story.title} />
                 <div className={classes.overlay}>
-                    <Typography variant="h6">{story.firstName}</Typography>
+                    <Typography variant="h6">{story.creatorName ?? 'Anonymous'}</Typography>
                     <Typography variant="body2">{moment(story.createdAt).fromNow()}</Typography>
                 </div>
                 <div className={classes.tags}>

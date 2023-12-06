@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
 const storySchema = mongoose.Schema({
-    creator: String,
-    firstName: String,
+    creatorId: String,
+    creatorName: String,
     title: String,
     country: String,
     city: String,

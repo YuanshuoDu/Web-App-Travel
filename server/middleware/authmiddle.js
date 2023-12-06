@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import JWT_SECRET from "config";
+const secret = 'secret';
 
 // to like a story, 
 //click the like button ==> auth middleware checks if the user is authenticated ==> if yes,next to the controller
@@ -12,7 +12,7 @@ const authmiddle = async (req, res, next) => {
       let decodedData;
   
       if (token && isCustomAuth) {      
-        decodedData = jwt.verify(token, JWT_SECRET);
+        decodedData = jwt.verify(token, secret);
   
         req.userId = decodedData?.id;
       } else {

@@ -24,7 +24,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     const { selectedStory, stories, isLoading, error } = useSelector((state) => state.stories);
     const authData = useSelector((state) => state.auth.authData);
     const user = JSON.parse(localStorage.getItem('user_info'));
-    console.log("user", user);
+    //console.log("user", user);
 
     useEffect(() => {
         if (id) {
@@ -33,12 +33,13 @@ const StoryForm = ({ currentId, setCurrentId }) => {
 
     }, [id]);
 
-    const [storyData, setStoryData] = useState({title: '', message: '', country: '', city: '', tags: [], selectedPicture: '' });
+    const [storyData, setStoryData] = useState({title: '', message: '', country: '', city: '', tags: [], selectedPicture: '', creatorId: '', creatorName: ''});
 
     useEffect(() => {
         if (id && selectedStory) {
             setStoryData({
-                // creator: selectedStory.creator || '',
+                creator: selectedStory.creatorId || '',
+                creatorName: selectedStory.creatorName || '',
                 title: selectedStory.title || '',
                 message: selectedStory.message || '',
                 country: selectedStory.country || '',
@@ -57,11 +58,14 @@ const StoryForm = ({ currentId, setCurrentId }) => {
         navigate(-1);
         if (id) {
             console.log("id", id);
-            dispatch(updateStory(id, { ...storyData, firstName: user?.result?.firstName }));
+            dispatch(updateStory(id, { ...storyData, creatorName: user?.result?.firstName + ' ' +  user?.result?.lastName, creatorId: user?.result?._id}));
         } else {
             console.log("storyData", storyData);
             console.log("user?.result?.firstName", user?.result?.firstName);
-            dispatch(createStory({ ...storyData, firstName: user?.result?.firstName }));
+            console.log("user?.result?.lastName", user?.result?.lastName);
+            console.log("user?.result?.id", user?.result?._id);
+
+            dispatch(createStory({ ...storyData, creatorName: user?.result?.firstName + ' ' +  user?.result?.lastName, creatorId: user?.result?._id}));
         }
    
     };

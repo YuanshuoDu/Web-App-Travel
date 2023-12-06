@@ -28,14 +28,15 @@ export const getStory = async (req, res) => {
 
 export const createStory = async (req, res) => {
     const story = req.body;
-    const newStory = new Story({ ...story, creator: req.userId, createdAt: new Date().toISOString() })
+    const newStory = new Story({ ...story, /*creator: req.userId, */createdAt: new Date().toISOString() })
+    console.log("New story: ", newStory);   
 
     try {
         await newStory.save();
-        // Successful creation
         console.log("StoryController: Story created successfully");
         res.status(201).json(newStory);
     } catch(error) {
+        console.log("Error: StoryController: Story not created");
         res.status(409).json({message: error.message});
     }
 }
@@ -52,11 +53,11 @@ export const deleteStory = async (req, res) => {
 
 export const updateStory = async (req, res) => {
     const { id } = req.params;
-    const { title, message, tags, country, city, selectedPicture} = req.body;
+    const { title, message, tags, country, city, selectedPicture, creatorId, creatorName} = req.body;
     
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No story with id: ${id}`);
 
-    const updatedStory = { _id: id, title, message, tags, country, city, selectedPicture };
+    const updatedStory = { _id: id, title, message, tags, country, city, selectedPicture, creatorId, creatorName, createdAt: new Date().toISOString() };
 
     await Story.findByIdAndUpdate(id, updatedStory, { new: true });
 
