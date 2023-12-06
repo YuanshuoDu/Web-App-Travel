@@ -33,6 +33,7 @@ export const createStory = async (req, res) => {
     try {
         await newStory.save();
         // Successful creation
+        console.log("StoryController: Story created successfully");
         res.status(201).json(newStory);
     } catch(error) {
         res.status(409).json({message: error.message});

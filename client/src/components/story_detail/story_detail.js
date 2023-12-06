@@ -132,7 +132,7 @@ var handleButtonClick = () => {
                   </div>
                   <div className={classes.creationInfo}>
                     <Typography variant="body1">
-                      Created by: {selectedStory.creator || ""}
+                      Created by: {selectedStory.firstName || ""}
                     </Typography>
                     <Typography variant="body2">{moment(selectedStory.createdAt || Date()).fromNow()}</Typography>
                   </div>

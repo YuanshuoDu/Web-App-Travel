@@ -33,6 +33,7 @@ export const createStory = (newStory) => async (dispatch) => {
         const { data } = await api.createStory(newStory);
         dispatch({ type: 'CREATE', payload: data });
         dispatch({type: 'SUCCESS'});
+        console.log('Story Actions: Story created successfully');
     } catch (error) {
         console.log(error.message);
         dispatch({type: 'ERROR'});
