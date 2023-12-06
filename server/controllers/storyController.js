@@ -102,14 +102,16 @@ export const getStory = async (req, res) => {
 
 export const createStory = async (req, res) => {
     const story = req.body;
-    const newStory = new Story({ ...story, creator: "Test"/*req.userId*/, createdAt: new Date().toISOString() })
+    const newStory = new Story({ ...story, /*creator: req.userId, */createdAt: new Date().toISOString() })
+    console.log("New story: ", newStory);   
 
     try {
         await newStory.save();
-        // Successful creation
+        console.log("StoryController: Story created successfully");
         res.status(201).json(newStory);
-    } catch (error) {
-        res.status(409).json({ message: error.message });
+    } catch(error) {
+        console.log("Error: StoryController: Story not created");
+        res.status(409).json({message: error.message});
     }
 }
 
@@ -125,11 +127,11 @@ export const deleteStory = async (req, res) => {
 
 export const updateStory = async (req, res) => {
     const { id } = req.params;
-    const { title, message, tags, country, city, selectedPicture } = req.body;
-
+    const { title, message, tags, country, city, selectedPicture, creatorId, creatorName} = req.body;
+    
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No story with id: ${id}`);
 
-    const updatedStory = { _id: id, title, message, tags, country, city, selectedPicture };
+    const updatedStory = { _id: id, title, message, tags, country, city, selectedPicture, creatorId, creatorName, createdAt: new Date().toISOString() };
 
     await Story.findByIdAndUpdate(id, updatedStory, { new: true });
 
@@ -139,11 +141,26 @@ export const updateStory = async (req, res) => {
 export const likeStory = async (req, res) => {
     const { id } = req.params;
 
+    if (!req.userId) {
+        return res.json({ message: "Unauthenticated" });
+    }
+    
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No story with id: ${id}`);
 
     const stories = await Story.findById(id);
-    const updatedStory = await Story.findByIdAndUpdate(id, { likeCount: stories.likeCount + 1 }, { new: true });
 
+    const index = stories.likes.findIndex((id) => id === String(req.userId));
+
+    if (index === -1) {
+        // like the story
+        stories.likes.push(req.userId);
+    } else {
+        // dislike the story
+        stories.likes = stories.likes.filter((id) => id !== String(req.userId));
+    }
+
+    const updatedStory = await Story.findByIdAndUpdate(id, stories, { new: true });
+   
     res.json(updatedStory);
 }
 

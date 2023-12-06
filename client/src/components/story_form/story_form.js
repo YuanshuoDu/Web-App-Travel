@@ -23,6 +23,8 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     const dispatch = useDispatch();
     const { selectedStory, stories, isLoading, error } = useSelector((state) => state.stories);
     const authData = useSelector((state) => state.auth.authData);
+    const user = JSON.parse(localStorage.getItem('user_info'));
+    //console.log("user", user);
 
     useEffect(() => {
         if (id) {
@@ -31,12 +33,13 @@ const StoryForm = ({ currentId, setCurrentId }) => {
 
     }, [id]);
 
-    const [storyData, setStoryData] = useState({ creator: '', title: '', message: '', country: '', city: '', tags: [], selectedPicture: '' });
+    const [storyData, setStoryData] = useState({title: '', message: '', country: '', city: '', tags: [], selectedPicture: '', creatorId: '', creatorName: ''});
 
     useEffect(() => {
         if (id && selectedStory) {
             setStoryData({
-                creator: selectedStory.creator || '',
+                creator: selectedStory.creatorId || '',
+                creatorName: selectedStory.creatorName || '',
                 title: selectedStory.title || '',
                 message: selectedStory.message || '',
                 country: selectedStory.country || '',
@@ -54,9 +57,15 @@ const StoryForm = ({ currentId, setCurrentId }) => {
         e.preventDefault();
         navigate(-1);
         if (id) {
-            dispatch(updateStory(id, storyData));
+            console.log("id", id);
+            dispatch(updateStory(id, { ...storyData, creatorName: user?.result?.firstName + ' ' +  user?.result?.lastName, creatorId: user?.result?._id}));
         } else {
-            dispatch(createStory(storyData));
+            console.log("storyData", storyData);
+            console.log("user?.result?.firstName", user?.result?.firstName);
+            console.log("user?.result?.lastName", user?.result?.lastName);
+            console.log("user?.result?.id", user?.result?._id);
+
+            dispatch(createStory({ ...storyData, creatorName: user?.result?.firstName + ' ' +  user?.result?.lastName, creatorId: user?.result?._id}));
         }
    
     };
@@ -76,10 +85,21 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     });
   };
 
+  if (!user?.result?.firstName) {
+    console.log("user not logged in");
+    return (
+        <div>
+        <Alert severity="warning">
+  <AlertTitle>Info</AlertTitle>
+  Please <strong>log in</strong> to access this page - check it out!
+  </Alert>
+        <Login />
+    </div>)
+    };
   // check if the user is authenticated
   const isAuthenticated = !!authData; // if authData is exist, then user is authenticated
 
-  if (isAuthenticated) {
+//   if (isAuthenticated) {
     return (
         <div style={{ backgroundImage: `url(${backgroundImage})` }}>
             <Container maxWidth="xl">
@@ -122,17 +142,17 @@ const StoryForm = ({ currentId, setCurrentId }) => {
             </Container>
         </div>
     );
-  } else {
-    return (
-    <div>
-        <Alert severity="warning">
-  <AlertTitle>Info</AlertTitle>
-  Please <strong>log in</strong> to access this page - check it out!
-  </Alert>
-      <Login />
-    </div>
-    )
-  }
+//   } else {
+//     return (
+//     <div>
+//         <Alert severity="warning">
+//   <AlertTitle>Info</AlertTitle>
+//   Please <strong>log in</strong> to access this page - check it out!
+//   </Alert>
+//       <Login />
+//     </div>
+//     )
+//   }
 };
 
 
