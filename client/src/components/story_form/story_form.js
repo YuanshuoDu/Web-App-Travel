@@ -51,15 +51,16 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     }, [selectedStory]);
 
 
-
-  const handleCreate = (e) => {
-    e.preventDefault();
-    dispatch(createStory({ ...storyData, firstName: user?.result?.firstName }));
-    navigate(-1);
-    console.log(storyData);
-    console.log(user?.result?.firstName);
-    console.log("create story");
-  } ;
+    const handleCreate = (e) => {
+        e.preventDefault();
+        navigate(-1);
+        if (id) {
+            dispatch(updateStory(id, { ...storyData, firstName: user?.result?.firstName }));
+        } else {
+            dispatch(createStory({ ...storyData, firstName: user?.result?.firstName }));
+        }
+   
+    };
 
   const handleGoBack = () => {
     navigate(-1);

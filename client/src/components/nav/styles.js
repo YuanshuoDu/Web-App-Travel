@@ -18,9 +18,7 @@ export default makeStyles(() => ({
         flexDirection: 'row',
         justifyContent: 'center'
     },
-
     button: {
         color: 'white',
     },
-
 }));

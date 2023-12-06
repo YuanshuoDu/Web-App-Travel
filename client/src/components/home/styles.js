@@ -12,6 +12,14 @@ export default makeStyles(() => ({
  
     button: {
         color: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',    
+        margin: '10px 0 40px 0px',  
     },
+    pagination: {
+        borderRadius: 4,
+        marginTop: '2rem',
+        padding: '6px',
+      },
 
 }));

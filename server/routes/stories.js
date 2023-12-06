@@ -1,4 +1,5 @@
 import express from 'express';
+import authmiddle from "../middleware/authmiddle.js";
 import { getStories, getStory, createStory, deleteStory, updateStory, likeStory } from '../controllers/storyController.js';
 import auth from '../middleware/authmiddle.js';
 
