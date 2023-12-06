@@ -9,26 +9,26 @@ export default makeStyles((theme) => ({
     //     alignItems: 'center',
     //     borderRadius: 15,
     // },
- 
+
     button: {
         color: 'white',
         justifyContent: 'center',
-        alignItems: 'center',    
-        margin: '10px 0 40px 0px',  
+        alignItems: 'center',
+        margin: '10px 0 40px 0px',
     },
     pagination: {
         borderRadius: 4,
         marginTop: '2rem',
         padding: '6px',
-      },
+    },
 
-      ul: {
+    ul: {
         justifyContent: 'space-around',
-      },
-      root: {
-        borderRadius: '40px', 
-      },
-      searchContainer: {
+    },
+    root: {
+        borderRadius: '40px',
+    },
+    searchContainer: {
         display: 'flex',
         alignItems: 'center',
         borderRadius: theme.shape.borderRadius,
@@ -47,9 +47,6 @@ export default makeStyles((theme) => ({
         '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
             borderBottom: 'none', // Remove the underline when hovering
         },
-
-
-
     },
     filterFlex: {
         display: 'flex',
@@ -57,6 +54,6 @@ export default makeStyles((theme) => ({
         gap: '10px', // Adjust the gap (separation) between buttons
         marginTop: '10px', // Adjust top margin as needed
         color: 'white',
-      },
+    },
 
 }));

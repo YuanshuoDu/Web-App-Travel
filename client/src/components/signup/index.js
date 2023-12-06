@@ -8,8 +8,6 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -41,7 +39,7 @@ function Signup() {
 
     function handleOnSubmit(e) {
         e.preventDefault();
-        if (sForm.firstName !== "" && sForm.lastName !== "" &&  sForm.password !== "" && sForm.confirmPassword !== "" && sForm.email !== "" && sForm.password === sForm.confirmPassword && sForm.password.length >= 4) {
+        if (sForm.firstName !== "" && sForm.lastName !== "" && sForm.password !== "" && sForm.confirmPassword !== "" && sForm.email !== "" && sForm.password === sForm.confirmPassword && sForm.password.length >= 4) {
             dispatch(signup(sForm, navigate));
         } else {
             alert("Please fill in all the fields. Password and confirm password must be the same and at least 4 characters long.")
@@ -68,9 +66,9 @@ function Signup() {
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
-                <Box component="form" noValidate 
-                // onSubmit={handleOnSubmit} 
-                sx={{ mt: 3 }}>
+                <Box component="form" noValidate
+                    // onSubmit={handleOnSubmit} 
+                    sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -153,7 +151,7 @@ function Signup() {
                         variant="contained"
                         sx={{ mt: 1, mb: 2, height: '50px' }}
                         color="primary"
-                        ><GoogleIcon sx={{ mr: 1 }}/>
+                    ><GoogleIcon sx={{ mr: 1 }} />
                         Sign in with google
                     </Button>
                     <Grid container justifyContent="flex-end">

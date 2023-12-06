@@ -31,5 +31,3 @@ export const createStory = (newStory) => API.post("/stories", newStory);
 export const deleteStory = (id) => API.delete(`/stories/${id}`);
 export const updateStory = (id, updatedStory) => API.patch(`/stories/${id}`, updatedStory);
 export const likeStory = (id) => API.patch(`/stories/${id}/likeStory`);
-
-

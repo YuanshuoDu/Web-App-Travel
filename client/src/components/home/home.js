@@ -4,12 +4,12 @@ import {
   Typography,
   Container,
   Button,
-  //InputAdornment,
+  InputAdornment,
   TextField,
-  //IconButton,
+  IconButton,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-//import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch, useSelector } from "react-redux";
 import { getStories } from "../../redux/actions/stories";
 import Stories from "../stories/Stories";
@@ -19,62 +19,46 @@ import Nav from "../nav";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import backgroundImage from "../../images/background.png";
-//import SearchBar from './search/search.js';
-//import FilterButtons from '../home/filter_buttons/filter_buttons';
-//import Pagination from '../Pagination';
 import { Link } from 'react-router-dom';
 import { Pagination, PaginationItem } from '@material-ui/lab';
 
 
-// to obtain the query string from the url
+// To obtain the query string from the url
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
 const Home = () => {
   const classes = homeStyles();
-  const [currentId, setCurrentId] = useState(0);
-  //const [stories, setStories] = useState([]);
-  //const [isLoading, setIsLoading] = useState(false);
-  //const [searchResults, setSearchResults] = useState([])
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [currentId, setCurrentId] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
+  const [search, setSearch] = useState("");
   const [filter, setFilter] = useState('all');
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  // check if the user is authenticated
-  const authData = useSelector((state) => state.auth.authData);
+  const handleSearch = () => {
+    setSearch(searchTerm);
+  };
 
+  // Check if the user is authenticated
+  const authData = useSelector((state) => state.auth.authData);
   const { stories, isLoading, numPages } = useSelector((state) => state.stories);
 
   const query = useQuery();
-  // get the page number from the query string or set it to 1
+  // Get the page number from the query string or set it to 1
   const page = query.get('page') || 1;
-
-  /*useEffect(() => {
-    dispatch(getStories());
-  }, [dispatch]);*/
-
-  /*useEffect(() => {
-    //console.log('stories home ' + stories.isArray);
-    //console.log('isLoading home ' + isLoading);
-    setSearchResults(stories);
-    //console.log('searchResults home ' + searchResults.isArray);
-  }, [stories]);*/
-
-
-
 
   useEffect(() => {
     if (page) {
       console.log('page home ' + page);
-      dispatch(getStories(page, filter, searchTerm));
+      dispatch(getStories(page, filter, search));
     }
-  }, [dispatch, page, filter, searchTerm]);
+  }, [dispatch, page, filter, search]);
 
   const openCreateStoryScreen = () => navigate("/createStory");
 
@@ -124,15 +108,13 @@ const Home = () => {
                       startIcon={<AddIcon />}
                       onClick={openCreateStoryScreen}
                     >
-                      Create Story
+                      Create a story
                     </Button>
                   ) : (
                     <p></p>
                   )}
                 </div>
               </Stack>
-
-              {/*<SearchBar stories={stories} setSearchResults={setSearchResults} />*/}
               <Container>
                 <Paper className={classes.searchContainer}>
                   <TextField
@@ -141,19 +123,18 @@ const Home = () => {
                     placeholder="Search for a story"
                     value={searchTerm}
                     onChange={handleInputChange}
-                  /*InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton onClick={handleSearch} edge="end">
-                          <SearchIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}*/
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton onClick={handleSearch} edge="end">
+                            <SearchIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Paper>
                 <>
-
                   <div className={classes.filterFlex}>
                     <Button onClick={() => setFilter('all')} variant="contained" color={filter === 'all' ? 'primary' : 'default'}
                     >All</Button>
@@ -167,11 +148,8 @@ const Home = () => {
                     >This year</Button>
                   </div>
                 </>
-
               </Container>
-
               <Paper className={classes.pagination} elevation={6}>
-                {/*<Pagination page={page} />*/}
                 <Pagination
                   classes={{ ul: classes.ul, root: classes.root }}
                   count={numPages}

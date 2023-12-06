@@ -11,29 +11,25 @@ import { getStory } from '../../redux/actions/stories';
 import backgroundImage from '../../images/background.png';
 import Nav from "../nav"
 import { Alert, AlertTitle } from '@mui/material';
-
 import Login from "../login";
 
 
 const StoryForm = ({ currentId, setCurrentId }) => {
     const { id } = useParams();
     const classes = storyFormStyles();
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { selectedStory, stories, isLoading, error } = useSelector((state) => state.stories);
+
+    const { selectedStory, isLoading, error } = useSelector((state) => state.stories);
     const authData = useSelector((state) => state.auth.authData);
+    const [storyData, setStoryData] = useState({ title: '', message: '', country: '', city: '', tags: [], selectedPicture: '', creatorId: '', creatorName: '' });
     const user = JSON.parse(localStorage.getItem('user_info'));
-    //console.log("user", user);
 
     useEffect(() => {
         if (id) {
             dispatch(getStory(id));
         }
-
     }, [id]);
-
-    const [storyData, setStoryData] = useState({title: '', message: '', country: '', city: '', tags: [], selectedPicture: '', creatorId: '', creatorName: ''});
 
     useEffect(() => {
         if (id && selectedStory) {
@@ -55,51 +51,56 @@ const StoryForm = ({ currentId, setCurrentId }) => {
 
     const handleCreate = (e) => {
         e.preventDefault();
-        navigate(-1);
+
         if (id) {
-            console.log("id", id);
-            dispatch(updateStory(id, { ...storyData, creatorName: user?.result?.firstName + ' ' +  user?.result?.lastName, creatorId: user?.result?._id}));
+            console.log("Updated stroy id: ", id);
+            dispatch(updateStory(id, { ...storyData, creatorName: user?.result?.firstName + ' ' + user?.result?.lastName, creatorId: user?.result?._id }));
         } else {
-            console.log("storyData", storyData);
-            console.log("user?.result?.firstName", user?.result?.firstName);
-            console.log("user?.result?.lastName", user?.result?.lastName);
-            console.log("user?.result?.id", user?.result?._id);
-
-            dispatch(createStory({ ...storyData, creatorName: user?.result?.firstName + ' ' +  user?.result?.lastName, creatorId: user?.result?._id}));
+            console.log("Story that will be created: ", storyData);
+            console.log("Creator username: ", user?.result?.firstName + ' ' + user?.result?.lastName);
+            console.log("Creator id", user?.result?._id);
+            dispatch(createStory({ ...storyData, creatorName: user?.result?.firstName + ' ' + user?.result?.lastName, creatorId: user?.result?._id }));
         }
-   
+        while (isLoading) {
+        }
+        if (!error) {
+            alert("Error: Story not created. Please try again.");
+        } else {
+            alert("Story created successfully!");
+            navigate(-1);
+        }
     };
 
-  const handleGoBack = () => {
-    navigate(-1);
-  };
-
-  const addTag = (tag) => {
-    setStoryData({ ...storyData, tags: [...storyData.tags, tag] });
-  };
-
-  const deleteTag = (deleteTag) => {
-    setStoryData({
-      ...storyData,
-      tags: storyData.tags.filter((tag) => tag !== deleteTag),
-    });
-  };
-
-  if (!user?.result?.firstName) {
-    console.log("user not logged in");
-    return (
-        <div>
-        <Alert severity="warning">
-  <AlertTitle>Info</AlertTitle>
-  Please <strong>log in</strong> to access this page - check it out!
-  </Alert>
-        <Login />
-    </div>)
+    const handleGoBack = () => {
+        navigate(-1);
     };
-  // check if the user is authenticated
-  const isAuthenticated = !!authData; // if authData is exist, then user is authenticated
 
-//   if (isAuthenticated) {
+    const addTag = (tag) => {
+        setStoryData({ ...storyData, tags: [...storyData.tags, tag] });
+    };
+
+    const deleteTag = (deleteTag) => {
+        setStoryData({
+            ...storyData,
+            tags: storyData.tags.filter((tag) => tag !== deleteTag),
+        });
+    };
+
+    if (!user?.result?.firstName) {
+        console.log("user not logged in");
+        return (
+            <div>
+                <Alert severity="warning">
+                    <AlertTitle>Info</AlertTitle>
+                    Please <strong>log in</strong> to access this page - check it out!
+                </Alert>
+                <Login />
+            </div>)
+    };
+    // Check if the user is authenticated
+    const isAuthenticated = !!authData; // if authData is exist, then user is authenticated
+
+    //   if (isAuthenticated) {
     return (
         <div style={{ backgroundImage: `url(${backgroundImage})` }}>
             <Container maxWidth="xl">
@@ -142,17 +143,17 @@ const StoryForm = ({ currentId, setCurrentId }) => {
             </Container>
         </div>
     );
-//   } else {
-//     return (
-//     <div>
-//         <Alert severity="warning">
-//   <AlertTitle>Info</AlertTitle>
-//   Please <strong>log in</strong> to access this page - check it out!
-//   </Alert>
-//       <Login />
-//     </div>
-//     )
-//   }
+    //   } else {
+    //     return (
+    //     <div>
+    //         <Alert severity="warning">
+    //   <AlertTitle>Info</AlertTitle>
+    //   Please <strong>log in</strong> to access this page - check it out!
+    //   </Alert>
+    //       <Login />
+    //     </div>
+    //     )
+    //   }
 };
 
 
