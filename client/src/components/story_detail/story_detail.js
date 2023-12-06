@@ -105,10 +105,8 @@ const StoryDetail = () => {
           <Nav />
           <main>
             <div style={{ marginTop: '60px' }} />
-
             <Card className={classes.storyPaper} elevation={6}>
               <div className={classes.card}>
-
                 <div className={classes.textSection}>
                   <div className={classes.titleRow}>
                     <Typography variant="h4" component="h2">{selectedStory.title || ""}</Typography>
@@ -132,7 +130,7 @@ const StoryDetail = () => {
                   </div>
                   <div className={classes.creationInfo}>
                     <Typography variant="body1">
-                      Created by: {selectedStory.firstName || ""}
+                      Created by: {selectedStory.creatorName || "Anonymous"}
                     </Typography>
                     <Typography variant="body2">{moment(selectedStory.createdAt || Date()).fromNow()}</Typography>
                   </div>
