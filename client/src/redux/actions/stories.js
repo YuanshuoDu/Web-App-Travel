@@ -31,6 +31,7 @@ export const createStory = (newStory) => async (dispatch) => {
     try {
         dispatch({ type: 'START_LOADING' });
         const { data } = await api.createStory(newStory);
+        console.log('Story Actions: I have data from created story: ', data);
         dispatch({ type: 'CREATE', payload: data });
         dispatch({ type: 'SUCCESS' });
         console.log('Story Actions: Story created successfully');
