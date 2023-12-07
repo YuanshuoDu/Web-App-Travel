@@ -81,7 +81,7 @@ const Profile = () => {
             </Container>
           </main>
         </Container>
-        <Stories setCurrentId={setCurrentId} />
+        {/* <Stories setCurrentId={setCurrentId} /> */}
       </Box>
     </Container>
   );

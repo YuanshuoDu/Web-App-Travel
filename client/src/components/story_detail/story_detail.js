@@ -29,31 +29,31 @@ const StoryDetail = () => {
 
   
 
-  // const [likes, setLikes] = useState(story?.likes);
+  // const [likes, setLikes] = useState(selectedStory?.likes);
 
   //   // var userLikePost = false;
   //   const user = JSON.parse(localStorage.getItem('user_info'));
 
   //   const userId = user?.result.googleId || user?.result?._id;
-  //   const hasLikedStory = stories.likes.find((like) => like === userId);
+  //   const hasLikedStory = selectedStory.likes.find((like) => like === userId);
 
   //   const handleLike = () => {
-  //       dispatch(likeStory(Story._id));
+  //       dispatch(likeStory(selectedStory._id));
     
   //       if (hasLikedStory) {
-  //         setLikes(Story.likes.filter((id) => id !== userId));
+  //         setLikes(selectedStory.likes.filter((id) => id !== userId));
   //       } else {
-  //         setLikes([...story.likes, userId]);
+  //         setLikes([...selectedStory.likes, userId]);
   //       }
   //     };
 
   //   const Likes = () => {
-  //       if (story.likes.length > 0) {
-  //         return story.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
+  //       if (selectedStory.likes.length > 0) {
+  //         return selectedStory.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
   //           ? (
-  //             <><FavoriteIcon fontSize="small" />&nbsp;{story.likes.length > 2 ? `You and ${story.likes.length - 1} others` : `${story.likes.length} like${story.likes.length > 1 ? 's' : ''}` }</>
+  //             <><FavoriteIcon fontSize="small" />&nbsp;{selectedStory.likes.length > 2 ? `You and ${selectedStory.likes.length - 1} others` : `${selectedStory.likes.length} like${selectedStory.likes.length > 1 ? 's' : ''}` }</>
   //           ) : (
-  //             <><FavoriteBorderOutlinedIcon fontSize="small" />&nbsp;{story.likes.length} {story.likes.length === 1 ? 'Like' : 'Likes'}</>
+  //             <><FavoriteBorderOutlinedIcon fontSize="small" />&nbsp;{selectedStory.likes.length} {selectedStory.likes.length === 1 ? 'Like' : 'Likes'}</>
   //           );
   //       }
     

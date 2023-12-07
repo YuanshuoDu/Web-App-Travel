@@ -81,6 +81,22 @@ export const likeStory = (id, story) => async (dispatch) => {
 
 }
 
+
+export const getLikedStories = (id) => async (dispatch) => {
+    const user = JSON.parse(localStorage.getItem('user_info'));
+
+    try {
+        dispatch({ type: 'START_LOADING' });
+        const { data } = await api.fetchLikedStories(id, user?.token);
+        dispatch({ type: 'FETCH_LIKED_STORIES', payload: data });
+        dispatch({ type: 'SUCCESS' });
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: 'ERROR' });
+    }
+};
+
+
 // export const likeStory = (id, story) => async (dispatch, getState) => {
 //     try {
 //         // update the like status of the story

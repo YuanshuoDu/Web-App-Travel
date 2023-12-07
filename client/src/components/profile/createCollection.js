@@ -41,7 +41,7 @@ const LikeCollection = () => {
                     Render other story details
                 </div>
             ))} */}
-            <Stories setCurrentId={setCurrentId} />
+            {/* <Stories setCurrentId={setCurrentId} /> */}
         </Box>
         </>
     );
