@@ -3,10 +3,12 @@ import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import User from '../models/user.js';
 
-const secret = 'test';
+
+const secret = 'secret';
 
 
 export const signinController = async(req, res) => {
+    
     if(req.body.googleAccessToken){
         // google-auth
         const {googleAccessToken} = req.body;
