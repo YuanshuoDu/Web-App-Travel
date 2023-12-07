@@ -9,7 +9,7 @@ const authmiddle = async (req, res, next) => {
       let decodedData;
   
       if (token && isCustomAuth) {      
-        decodedData = jwt.verify(token, JWT_SECRET.get("jwtSecret"));
+        decodedData = jwt.verify(token, JWT_SECRET.get("JWT_SECRET"));
   
         req.userId = decodedData?.id;
       } else {
