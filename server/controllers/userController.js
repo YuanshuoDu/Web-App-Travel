@@ -1,12 +1,12 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
-import config from 'config';
 import User from '../models/user.js';
 
-
+const secret = 'secret';
 
 export const signinController = async(req, res) => {
+    
     if(req.body.googleAccessToken){
         // google-auth
         const {googleAccessToken} = req.body;
@@ -31,7 +31,7 @@ export const signinController = async(req, res) => {
                 const token = jwt.sign({
                     email: existingUser.email,
                     id: existingUser._id
-                }, config.get("JWT_SECRET"), {expiresIn: "1h"})
+                }, secret, {expiresIn: "1h"})
         
                 res
                     .status(200)
@@ -63,7 +63,7 @@ export const signinController = async(req, res) => {
             const token = jwt.sign({
                 email: existingUser.email,
                 id: existingUser._id
-            }, config.get("JWT_SECRET"), {expiresIn: "1h"})
+            }, secret, {expiresIn: "1h"})
     
             res
                 .status(200)
@@ -105,7 +105,7 @@ export const signupController = async(req, res) => {
                 const token = jwt.sign({
                     email: result.email,
                     id: result._id
-                }, config.get("JWT_SECRET"), {expiresIn: "1h"})
+                }, secret, {expiresIn: "1h"})
 
                 res
                     .status(200)
@@ -139,7 +139,7 @@ export const signupController = async(req, res) => {
             const token = jwt.sign({
                 email: result.email,
                 id: result._id
-            }, config.get("JWT_SECRET"), {expiresIn: "1h"})
+            }, secret, {expiresIn: "1h"})
 
             res
                 .status(200)
