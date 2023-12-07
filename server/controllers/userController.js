@@ -3,7 +3,9 @@ import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import User from '../models/user.js';
 
+
 const secret = 'secret';
+
 
 export const signinController = async(req, res) => {
     
