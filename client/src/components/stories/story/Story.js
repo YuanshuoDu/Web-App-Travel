@@ -37,8 +37,8 @@ const Story = ({ story, setCurrentId }) => {
     const Likes = () => {
         if (story.likes.length > 0) {
 
-            console.log("story likes: ", story.likes);
-            console.log( "story", story);
+            //console.log("story likes: ", story.likes);
+            //console.log( "story", story);
           return story.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
             ? (
               <><FavoriteIcon fontSize="small" />&nbsp;{story.likes.length > 2 ? `You and ${story.likes.length - 1} others` : `${story.likes.length} like${story.likes.length > 1 ? 's' : ''}` }</>
@@ -74,7 +74,7 @@ const Story = ({ story, setCurrentId }) => {
                         <Chip className={classes.chip} label={tag} color="default" component="h2" />
                     ))}
                 </div>
-                <Typography className={classes.title} variant="h5">{story.title}</Typography>
+                <Typography className={classes.title} color="textPrimary"  variant="h5">{story.title}</Typography>
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">{story.message}</Typography>
                 </CardContent>

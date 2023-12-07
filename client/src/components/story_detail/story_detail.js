@@ -25,9 +25,10 @@ const StoryDetail = () => {
   const classes = useStyles();
   const navigate = useNavigate();
   const { id } = useParams();
+  const user = JSON.parse(localStorage.getItem('user_info'));
   // var userLikePost = false;
 
-  
+
 
   // const [likes, setLikes] = useState(story?.likes);
 
@@ -39,7 +40,7 @@ const StoryDetail = () => {
 
   //   const handleLike = () => {
   //       dispatch(likeStory(Story._id));
-    
+
   //       if (hasLikedStory) {
   //         setLikes(Story.likes.filter((id) => id !== userId));
   //       } else {
@@ -56,7 +57,7 @@ const StoryDetail = () => {
   //             <><FavoriteBorderOutlinedIcon fontSize="small" />&nbsp;{story.likes.length} {story.likes.length === 1 ? 'Like' : 'Likes'}</>
   //           );
   //       }
-    
+
   //       return <><FavoriteBorderOutlinedIcon fontSize="small" />&nbsp;Like</>;
   //     };
 
@@ -75,7 +76,20 @@ const StoryDetail = () => {
 
   const authData = useSelector((state) => state.auth.authData);
 
-
+  function checkIfUserIsCreator () {
+    if (authData) {
+      if (user.result._id === selectedStory.creatorId) {
+        console.log("User is creator");
+        return true;
+      } else {
+        console.log("User is NOT creator");
+        return false;
+      }
+    } else {
+      console.log("User hasn't logged in");
+      return false;
+    }
+  }
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -86,15 +100,15 @@ const StoryDetail = () => {
   };
 
   const handleEdit = (id) => {
-    if (authData) {
+    if (checkIfUserIsCreator()) {
       navigate(`/editStory/${id}`);
     } else {
-      alert('You must be logged in to edit a story.');
+      alert('Error: you can only edit your own stories!');
     }
   }
 
   const handleDelete = (id) => {
-    if (authData) {
+    if (checkIfUserIsCreator()) {
       // User has logged in to delete a story
       try {
         dispatch(deleteStory(id));
@@ -105,7 +119,7 @@ const StoryDetail = () => {
       }
     } else {
       // User has not logged in to popup an alert
-      alert('You must be logged in to delete a story.');
+      alert('Error: you can only delete your own stories!');
     }
   }
 
@@ -136,7 +150,6 @@ const StoryDetail = () => {
   }
 
   return (
-    console.log("selectedStory: ", selectedStory),
     <div style={{ backgroundImage: `url(${backgroundImage})` }}>
       <Container maxWidth="xl">
         <Container maxWidth="lg">
@@ -175,11 +188,11 @@ const StoryDetail = () => {
                   <TagList tags={selectedStory.tags || []} />
                   <Typography gutterBottom variant="body1" component="p">{selectedStory.message || ""}</Typography>
                   <CardActions className={classes.likeButton} >
-                  {/* onClick={() => dispatch(likeStory(selectedStory._id))} */}
-                  {/* <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
+                    {/* onClick={() => dispatch(likeStory(selectedStory._id))} */}
+                    {/* <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
                     <Likes />
                     </Button> */}
-                    
+
                     {/* {userLikePost ?
                       (
                         <IconButton size="small" onClick={handleButtonClick}>
