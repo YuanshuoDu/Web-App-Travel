@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 export const getStories = async (req, res) => {
     const { page = 1, searchTerm = '', filter = 'all' } = req.query;
 
-    console.log('Filter: ', filter);
-    console.log('Search Term: ', searchTerm);
+    //console.log('Filter: ', filter);
+    //console.log('Search Term: ', searchTerm);
 
 
     try {
@@ -67,7 +67,7 @@ export const getStories = async (req, res) => {
         };
 
         const combinedCondition = { ...searchCondition, ...filterCondition };
-        console.log('Combined Condition: ', combinedCondition);
+        //console.log('Combined Condition: ', combinedCondition);
 
         const total = await Story.countDocuments(combinedCondition);
         console.log('total ' + total);
@@ -77,8 +77,8 @@ export const getStories = async (req, res) => {
             .skip(startIndex)
             .limit(LIMIT);
 
-        console.log('Start Index: ', startIndex);
-        console.log('Limit: ', LIMIT);
+        //console.log('Start Index: ', startIndex);
+        //console.log('Limit: ', LIMIT);
 
 
 
@@ -164,4 +164,32 @@ export const likeStory = async (req, res) => {
    
     res.json(updatedStory);
 }
+
+export const fetchLikedStories = async (req, res) => {
+    console.log('IM HERE ');
+
+    try {
+       
+        if (!req.userId) {
+            return res.json({ message: "Unauthenticated" });
+        }
+
+        const userId = req.userId;  
+        console.log('User id: ' + userId);
+        
+
+        // Build the filter condition based on user likes
+        const likesCondition = {
+            likes: { $in: [userId] },
+        };
+
+        const likedStories = await Story.find(likesCondition);
+        console.log("I have the liked stories: " + likedStories);
+
+        res.status(200).json({ data: likedStories });
+    } catch (error) {
+        // Not found or other error
+        res.status(404).json({ message: error.message });
+    }
+};
 

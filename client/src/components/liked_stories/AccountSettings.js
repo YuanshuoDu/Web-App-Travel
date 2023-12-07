@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import settingsStyle from './settingsStyle.js'; // Import the styles
 import { TextField, Button } from '@mui/material';
 import Drawer from "./drawer";
@@ -54,4 +54,4 @@ const AccountSettings = () => {
   );
 };
 
-export default AccountSettings;
+export default AccountSettings;*/

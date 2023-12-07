@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+/*import { useNavigate } from "react-router-dom";
 import useStyles from './styles';
 import React from 'react';
 import {
@@ -188,7 +188,7 @@ export default function MiniDrawer() {
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
-        {/* <Nav   position="fixed" open={open} /> */}
+
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -237,9 +237,9 @@ Welcome to Profile  </Typography>
    
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        {/* <DrawerHeader /> */}
+   
       </Box>
     </Box>
   );
 }
-  
+  */

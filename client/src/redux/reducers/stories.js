@@ -3,7 +3,6 @@ const initialState = {
     selectedStory: null,
     isLoading: true,
     error: false,
-    likedStories: [],
 };
 
 export default (state = initialState, action) => {
@@ -28,8 +27,7 @@ export default (state = initialState, action) => {
         case 'LIKE':
             return { ...state, stories: state.stories.map((story) => (story._id === action.payload._id ? action.payload : story)) };
         case 'FETCH_LIKED_STORIES':
-            return { ...state, likedStories: action.payload.story };
-            
+            return { ...state, stories: action.payload.data };
         case 'START_LOADING':
             return { ...state, isLoading: true };
         case 'SUCCESS':

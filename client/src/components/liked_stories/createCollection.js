@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
@@ -40,11 +40,11 @@ const LikeCollection = () => {
                     <h3>{story.title}</h3>
                     Render other story details
                 </div>
-            ))} */}
-            {/* <Stories setCurrentId={setCurrentId} /> */}
+            ))} }
+
         </Box>
         </>
     );
 };
 
-export default LikeCollection;
+export default LikeCollection;*/

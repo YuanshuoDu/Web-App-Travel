@@ -71,25 +71,26 @@ export const likeStory = (id, story) => async (dispatch) => {
     try {
         const data = await api.likeStory(id, user?.token);
         dispatch({ type: 'UPDATE', payload: data });
-        // dispatch({ type: 'ADD_TO_LIKE_COLLECTION', payload: story });
         dispatch({ type: 'SUCCESS' });
-        //alert('Story updated successfully');
-
+        console.log('Story Actions: Story liked/unliked successfully');
     } catch (error) {
         console.log(error);
+        dispatch({ type: 'ERROR' });
     }
-
 }
 
 
-export const getLikedStories = (id) => async (dispatch) => {
-    const user = JSON.parse(localStorage.getItem('user_info'));
+export const getLikedStories = () => async (dispatch) => {
+   
+
 
     try {
         dispatch({ type: 'START_LOADING' });
-        const { data } = await api.fetchLikedStories(id, user?.token);
+        console.log('Story Actions: Start loading to get liked stories');
+        const { data } = await api.fetchLikedStories();
         dispatch({ type: 'FETCH_LIKED_STORIES', payload: data });
         dispatch({ type: 'SUCCESS' });
+        console.log('Story Actions: Liked stories fetched successfully: ' + data);
     } catch (error) {
         console.log(error);
         dispatch({ type: 'ERROR' });

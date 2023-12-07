@@ -7,6 +7,9 @@ const Stories = ({ setCurrentId, stories, isLoading }) => {
     const classes = storiesStyles();
     //console.log("Stories: ", stories);
     //console.log("isLoading: ", isLoading);
+    if (!Array.isArray(stories)) {
+        return <div className={classes.containerProgress}><CircularProgress style={{ color: 'white' }} /></div>
+    }
 
     if (!stories.length && !isLoading) {
         return <div className={classes.containerProgress}><Typography variant="h6">No stories found</Typography></div>;
