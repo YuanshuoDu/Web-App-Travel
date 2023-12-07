@@ -15,7 +15,7 @@ import backgroundImage from '../../images/background.png';
 import Nav from "../nav"
 import { likeStory } from '../../api';
 import { Button } from '@material-ui/core';
-import Story from './story/Story';
+// import Story from './story/Story';
 
 
 
@@ -29,36 +29,36 @@ const StoryDetail = () => {
 
   
 
-  const [likes, setLikes] = useState(story?.likes);
+  // const [likes, setLikes] = useState(story?.likes);
 
-    // var userLikePost = false;
-    const user = JSON.parse(localStorage.getItem('user_info'));
+  //   // var userLikePost = false;
+  //   const user = JSON.parse(localStorage.getItem('user_info'));
 
-    const userId = user?.result.googleId || user?.result?._id;
-    const hasLikedStory = stories.likes.find((like) => like === userId);
+  //   const userId = user?.result.googleId || user?.result?._id;
+  //   const hasLikedStory = stories.likes.find((like) => like === userId);
 
-    const handleLike = () => {
-        dispatch(likeStory(Story._id));
+  //   const handleLike = () => {
+  //       dispatch(likeStory(Story._id));
     
-        if (hasLikedStory) {
-          setLikes(Story.likes.filter((id) => id !== userId));
-        } else {
-          setLikes([...story.likes, userId]);
-        }
-      };
+  //       if (hasLikedStory) {
+  //         setLikes(Story.likes.filter((id) => id !== userId));
+  //       } else {
+  //         setLikes([...story.likes, userId]);
+  //       }
+  //     };
 
-    const Likes = () => {
-        if (story.likes.length > 0) {
-          return story.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
-            ? (
-              <><FavoriteIcon fontSize="small" />&nbsp;{story.likes.length > 2 ? `You and ${story.likes.length - 1} others` : `${story.likes.length} like${story.likes.length > 1 ? 's' : ''}` }</>
-            ) : (
-              <><FavoriteBorderOutlinedIcon fontSize="small" />&nbsp;{story.likes.length} {story.likes.length === 1 ? 'Like' : 'Likes'}</>
-            );
-        }
+  //   const Likes = () => {
+  //       if (story.likes.length > 0) {
+  //         return story.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
+  //           ? (
+  //             <><FavoriteIcon fontSize="small" />&nbsp;{story.likes.length > 2 ? `You and ${story.likes.length - 1} others` : `${story.likes.length} like${story.likes.length > 1 ? 's' : ''}` }</>
+  //           ) : (
+  //             <><FavoriteBorderOutlinedIcon fontSize="small" />&nbsp;{story.likes.length} {story.likes.length === 1 ? 'Like' : 'Likes'}</>
+  //           );
+  //       }
     
-        return <><FavoriteBorderOutlinedIcon fontSize="small" />&nbsp;Like</>;
-      };
+  //       return <><FavoriteBorderOutlinedIcon fontSize="small" />&nbsp;Like</>;
+  //     };
 
 
   // var handleButtonClick = () => {
