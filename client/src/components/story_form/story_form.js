@@ -89,7 +89,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     };
 
     if (!user?.result?.firstName) {
-        console.log("user not logged in");
+        //console.log("user not logged in");
         return (
             <div>
                 <Alert severity="warning">
