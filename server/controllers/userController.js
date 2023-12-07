@@ -4,8 +4,8 @@ import axios from 'axios';
 import User from '../models/user.js';
 import config from 'config';
 
-
 export const signinController = async(req, res) => {
+    
     if(req.body.googleAccessToken){
         // google-auth
         const {googleAccessToken} = req.body;
