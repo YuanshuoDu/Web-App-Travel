@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Paper, Typography, CircularProgress, Divider, Chip, Card, CardActions, IconButton, Container, Box } from '@material-ui/core/';
+import { Paper, Typography, CircularProgress, Divider, Chip, Card, CardActions, IconButton, Container } from '@material-ui/core/';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import { getStory, deleteStory } from '../../redux/actions/stories';
@@ -15,67 +15,73 @@ import backgroundImage from '../../images/background.png';
 import Nav from "../nav"
 import { likeStory } from '../../api';
 import { Button } from '@material-ui/core';
-// import Story from './story/Story';
-
 
 
 const StoryDetail = () => {
   const { selectedStory, stories, isLoading } = useSelector((state) => state.stories);
+  const [likes, setLikes] = useState(0);
   const dispatch = useDispatch();
   const classes = useStyles();
   const navigate = useNavigate();
   const { id } = useParams();
-  // var userLikePost = false;
 
-  
-
-  // const [likes, setLikes] = useState(selectedStory?.likes);
-
-  //   // var userLikePost = false;
-  //   const user = JSON.parse(localStorage.getItem('user_info'));
-
-  //   const userId = user?.result.googleId || user?.result?._id;
-  //   const hasLikedStory = selectedStory.likes.find((like) => like === userId);
-
-  //   const handleLike = () => {
-  //       dispatch(likeStory(selectedStory._id));
-    
-  //       if (hasLikedStory) {
-  //         setLikes(selectedStory.likes.filter((id) => id !== userId));
-  //       } else {
-  //         setLikes([...selectedStory.likes, userId]);
-  //       }
-  //     };
-
-  //   const Likes = () => {
-  //       if (selectedStory.likes.length > 0) {
-  //         return selectedStory.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
-  //           ? (
-  //             <><FavoriteIcon fontSize="small" />&nbsp;{selectedStory.likes.length > 2 ? `You and ${selectedStory.likes.length - 1} others` : `${selectedStory.likes.length} like${selectedStory.likes.length > 1 ? 's' : ''}` }</>
-  //           ) : (
-  //             <><FavoriteBorderOutlinedIcon fontSize="small" />&nbsp;{selectedStory.likes.length} {selectedStory.likes.length === 1 ? 'Like' : 'Likes'}</>
-  //           );
-  //       }
-    
-  //       return <><FavoriteBorderOutlinedIcon fontSize="small" />&nbsp;Like</>;
-  //     };
-
-
-  // var handleButtonClick = () => {
-  //   setUserLikePost(!userLikePost);
-  //   dispatch(likeStory(selectedStory._id, selectedStory.likeCount));
-  // };
+  const user = JSON.parse(localStorage.getItem('user_info'));
+  const userId = user?.result.googleId || user?.result?._id;
+  var hasLikedStory = false;
 
 
   useEffect(() => {
     dispatch(getStory(id));
   }, [id]);
 
+  useEffect(() => {
+    if (selectedStory) {
+      setLikes(selectedStory.likes ?? 0);
+      hasLikedStory = selectedStory.likes.find((like) => like === userId);
+    }
+  }, [selectedStory]);
+
   const [anchorEl, setAnchorEl] = useState(null);
 
   const authData = useSelector((state) => state.auth.authData);
 
+  const handleLike = () => {
+    dispatch(likeStory(selectedStory._id));
 
+    if (hasLikedStory) {
+      setLikes(selectedStory.likes.filter((id) => id !== userId));
+    } else {
+      setLikes([...selectedStory.likes, userId]);
+    }
+  };
+
+  const Likes = () => {
+    if (selectedStory.likes.length > 0) {
+      return selectedStory.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
+        ? (
+          <><FavoriteIcon fontSize="small" />&nbsp;{selectedStory.likes.length > 2 ? `You and ${selectedStory.likes.length - 1} others` : `${selectedStory.likes.length} like${selectedStory.likes.length > 1 ? 's' : ''}`}</>
+        ) : (
+          <><FavoriteBorderOutlinedIcon fontSize="small" />&nbsp;{selectedStory.likes.length} {selectedStory.likes.length === 1 ? 'Like' : 'Likes'}</>
+        );
+    }
+
+    return <><FavoriteBorderOutlinedIcon fontSize="small" />&nbsp;Like</>;
+  };
+
+  function checkIfUserIsCreator() {
+    if (authData) {
+      if (user.result._id === selectedStory.creatorId) {
+        console.log("User is creator");
+        return true;
+      } else {
+        console.log("User is NOT creator");
+        return false;
+      }
+    } else {
+      console.log("User hasn't logged in");
+      return false;
+    }
+  }
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -86,15 +92,15 @@ const StoryDetail = () => {
   };
 
   const handleEdit = (id) => {
-    if (authData) {
+    if (checkIfUserIsCreator()) {
       navigate(`/editStory/${id}`);
     } else {
-      alert('You must be logged in to edit a story.');
+      alert('Error: you can only edit your own stories!');
     }
   }
 
   const handleDelete = (id) => {
-    if (authData) {
+    if (checkIfUserIsCreator()) {
       // User has logged in to delete a story
       try {
         dispatch(deleteStory(id));
@@ -105,7 +111,7 @@ const StoryDetail = () => {
       }
     } else {
       // User has not logged in to popup an alert
-      alert('You must be logged in to delete a story.');
+      alert('Error: you can only delete your own stories!');
     }
   }
 
@@ -136,7 +142,6 @@ const StoryDetail = () => {
   }
 
   return (
-    console.log("selectedStory: ", selectedStory),
     <div style={{ backgroundImage: `url(${backgroundImage})` }}>
       <Container maxWidth="xl">
         <Container maxWidth="lg">
@@ -175,26 +180,9 @@ const StoryDetail = () => {
                   <TagList tags={selectedStory.tags || []} />
                   <Typography gutterBottom variant="body1" component="p">{selectedStory.message || ""}</Typography>
                   <CardActions className={classes.likeButton} >
-                  {/* onClick={() => dispatch(likeStory(selectedStory._id))} */}
-                  {/* <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
-                    <Likes />
-                    </Button> */}
-                    
-                    {/* {userLikePost ?
-                      (
-                        <IconButton size="small" onClick={handleButtonClick}>
-                          <FavoriteIcon color="error" />
-                        </IconButton>
-                      ) :
-                      (
-                        <IconButton size="small" onClick={handleButtonClick}>
-                          <FavoriteBorderOutlinedIcon />
-                        </IconButton>
-                      )
-                    }
-                    <Typography variant="body2">{selectedStory.likeCount}</Typography> */}
-
-
+                    <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
+                      <Likes />
+                    </Button>
                   </CardActions>
                   <Divider style={{ margin: '20px' }} />
                 </div>

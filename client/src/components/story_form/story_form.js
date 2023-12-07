@@ -56,6 +56,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
             try {
                 console.log("Updated stroy id: ", id);
                 dispatch(updateStory(id, { ...storyData, creatorName: user?.result?.firstName + ' ' + user?.result?.lastName, creatorId: user?.result?._id }));
+                navigate(-1);
             } catch (error) {
                 alert(`Error: couldn't update the story.`);
             }
@@ -65,6 +66,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
                 console.log("Creator username: ", user?.result?.firstName + ' ' + user?.result?.lastName);
                 console.log("Creator id", user?.result?._id);
                 dispatch(createStory({ ...storyData, creatorName: user?.result?.firstName + ' ' + user?.result?.lastName, creatorId: user?.result?._id }));
+                navigate(-1);
             } catch (error) {
                 alert(`Error: couldn't create the story.`);
             }
@@ -87,7 +89,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     };
 
     if (!user?.result?.firstName) {
-        console.log("user not logged in");
+        //console.log("user not logged in");
         return (
             <div>
                 <Alert severity="warning">
