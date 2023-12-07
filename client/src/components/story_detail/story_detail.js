@@ -3,7 +3,7 @@ import { Paper, Typography, CircularProgress, Divider, Chip, Card, CardActions, 
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import { useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import { getStory, deleteStory } from '../../redux/actions/stories';

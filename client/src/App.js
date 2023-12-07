@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { loadUser } from './redux/actions/auth';
 import LikedStories from './components/liked_stories/likedStories';
+import UserStories from './components/user_stories/user_stories';
 
 
 const App = () => {
@@ -43,9 +44,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-
       <Container maxWidth="xl">
-
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -55,11 +54,9 @@ const App = () => {
           <Route path="/editStory/:id" element={<StoryForm />} />
           <Route path="/stories/:id" element={<StoryDetail />} />
           <Route path="/likedStories" element={<LikedStories />} />
-          {/*<Route path="/profile/accountsettings" element={<AccountSettings />} />*/}
-          {/* <Route path="/forgotpassowrd" element={<Forgotpassord/>}/>  */}
+          <Route path="/userStories" element={<UserStories />} />
         </Routes>
       </Container>
-
     </ThemeProvider>
   );
 };

@@ -120,9 +120,11 @@ function Nav(props) {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-
-            <MenuItem component={Link} to="/likedStories" onClick={handleCloseUserMenu}>
-              <Typography textAlign="center">Liked stories </Typography>
+            <MenuItem component={Link} to={`/userStories`} onClick={handleCloseUserMenu}>
+              <Typography textAlign="center">User Stories </Typography>
+            </MenuItem>
+            <MenuItem component={Link} to={`/likedStories`} onClick={handleCloseUserMenu}>
+              <Typography textAlign="center">Liked Stories </Typography>
             </MenuItem>
             <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
           </Menu>

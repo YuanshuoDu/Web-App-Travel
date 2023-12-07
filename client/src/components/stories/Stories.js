@@ -5,8 +5,6 @@ import { CircularProgress, Grid, Typography } from '@material-ui/core';
 
 const Stories = ({ setCurrentId, stories, isLoading }) => {
     const classes = storiesStyles();
-    //console.log("Stories: ", stories);
-    //console.log("isLoading: ", isLoading);
     if (!Array.isArray(stories)) {
         return <div className={classes.containerProgress}><CircularProgress style={{ color: 'white' }} /></div>
     }

@@ -26,7 +26,6 @@ export default makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-
   },
   textSection: {
     flex: 1,
@@ -57,5 +56,4 @@ export default makeStyles((theme) => ({
     borderRadius: '15px',
     maxHeight: '400px',
   },
-
 }));

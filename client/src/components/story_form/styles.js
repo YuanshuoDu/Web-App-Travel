@@ -40,7 +40,7 @@ export default makeStyles((theme) => ({
     margin: '15px 8px 0px 8px',
   },
   selectFileText: {
-    fontSize: '12px', // Adjust the font size as needed
+    fontSize: '12px',
   },
   submitButton: {
     margin: '30px 8px 10px 8px',

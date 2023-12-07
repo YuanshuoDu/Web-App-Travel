@@ -1,17 +1,16 @@
 import Story from '../models/story.js';
 import mongoose from 'mongoose';
 
+
 export const getStories = async (req, res) => {
     const { page = 1, searchTerm = '', filter = 'all' } = req.query;
 
     //console.log('Filter: ', filter);
     //console.log('Search Term: ', searchTerm);
 
-
     try {
         const LIMIT = 8;
         const startIndex = (Number(page) - 1) * LIMIT;
-        // const total = await Story.countDocuments({});
 
         let filterCondition = {};
 
@@ -80,12 +79,10 @@ export const getStories = async (req, res) => {
         //console.log('Start Index: ', startIndex);
         //console.log('Limit: ', LIMIT);
 
-
-
-        //const stories = await Story.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
         res.status(200).json({ data: filteredObjects, currentPage: Number(page), numPages: Math.ceil(total / LIMIT) });
     } catch (error) {
         // Not found
+        console.log('IM HERE ERROR'); 
         res.status(404).json({ message: error.message });
     }
 }
@@ -165,18 +162,16 @@ export const likeStory = async (req, res) => {
     res.json(updatedStory);
 }
 
-export const fetchLikedStories = async (req, res) => {
-    console.log('IM HERE ');
+export const getLikedStories = async (req, res) => {
+    console.log("I'm in getLikedStories in controller");
 
     try {
-       
         if (!req.userId) {
             return res.json({ message: "Unauthenticated" });
         }
 
         const userId = req.userId;  
         console.log('User id: ' + userId);
-        
 
         // Build the filter condition based on user likes
         const likesCondition = {
@@ -188,8 +183,31 @@ export const fetchLikedStories = async (req, res) => {
 
         res.status(200).json({ data: likedStories });
     } catch (error) {
-        // Not found or other error
         res.status(404).json({ message: error.message });
     }
-};
+}
 
+export const getUserStories = async (req, res) => {
+    console.log("I'm in getUserStories in controller");
+
+    try {
+        if (!req.userId) {
+            return res.json({ message: "Unauthenticated" });
+        }
+
+        const userId = req.userId;  
+        console.log('User id: ' + userId);
+
+        // Build the filter condition based on user's stories
+        const userStoriesCondition = {
+            creatorId: userId,
+        };
+
+        const userStories = await Story.find(userStoriesCondition);
+        console.log("I have the user's stories: " + userStories);
+
+        res.status(200).json({ data: userStories });
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}

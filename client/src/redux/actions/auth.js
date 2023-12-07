@@ -27,7 +27,6 @@ export const signinGoogle = (accessToken, navigate) => async (dispatch) => {
     try {
         // Login user Google
         const { data } = await api.signInGoogle(accessToken)
-
         dispatch({ type: AUTH, data })
         console.log("I have logged in with google");
         navigate("/")
@@ -42,7 +41,6 @@ export const signup = (formData, navigate) => async (dispatch) => {
         // Signup user
         const { data } = await api.signUp(formData)
         console.log("I have signed up");
-
         dispatch({ type: AUTH, data })
         navigate("/")
     } catch (err) {
@@ -56,7 +54,6 @@ export const signupGoogle = (accessToken, navigate) => async (dispatch) => {
         // Signup user Google
         const { data } = await api.signUpGoogle(accessToken)
         console.log("I have signed up with google");
-
         dispatch({ type: AUTH, data })
         navigate("/")
     } catch (err) {

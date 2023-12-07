@@ -89,7 +89,6 @@ const StoryForm = ({ currentId, setCurrentId }) => {
     };
 
     if (!user?.result?.firstName) {
-        //console.log("user not logged in");
         return (
             <div>
                 <Alert severity="warning">
@@ -99,10 +98,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
                 <Login />
             </div>)
     };
-    // Check if the user is authenticated
-    const isAuthenticated = !!authData; // if authData is exist, then user is authenticated
 
-    //   if (isAuthenticated) {
     return (
         <div style={{ backgroundImage: `url(${backgroundImage})` }}>
             <Container maxWidth="xl">
@@ -136,7 +132,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
                                 </div>
                                 <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setStoryData({ ...storyData, selectedPicture: base64 })} style={{ fontSize: '10px' }} /></div>
                                 <Button className={classes.submitButton} variant="contained" color="primary" size="large" type="submit" fullWidth onClick={handleCreate}>{id ? 'Edit story' : 'Create story'}</Button>
-                                <Button className={classes.cancelButton} variant="contained" color="grey" size="large" fullWidth onClick={handleGoBack}>Cancel</Button>
+                                <Button className={classes.cancelButton} variant="contained" size="large" fullWidth onClick={handleGoBack}>Cancel</Button>
                             </form>
                         </Paper>
                         <Divider style={{ margin: '40px' }} />
@@ -145,19 +141,6 @@ const StoryForm = ({ currentId, setCurrentId }) => {
             </Container>
         </div>
     );
-    //   } else {
-    //     return (
-    //     <div>
-    //         <Alert severity="warning">
-    //   <AlertTitle>Info</AlertTitle>
-    //   Please <strong>log in</strong> to access this page - check it out!
-    //   </Alert>
-    //       <Login />
-    //     </div>
-    //     )
-    //   }
 };
 
-
 export default StoryForm;
-

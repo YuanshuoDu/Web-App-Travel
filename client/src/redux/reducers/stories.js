@@ -8,11 +8,11 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case 'FETCH_ALL':
-            return { 
-                ...state, 
-                stories: action.payload.data,  
+            return {
+                ...state,
+                stories: action.payload.data,
                 currentPage: action.payload.currentPage,
-                numPages: action.payload.numPages, 
+                numPages: action.payload.numPages,
             };
         case 'FETCH_STORY':
             return { ...state, selectedStory: action.payload.story };

@@ -39,7 +39,6 @@ function Signup() {
         } catch (error) {
             alert(`Error: couldn't sign up with Google.`);
         }
-       
     }
 
     function handleOnSubmit(e) {

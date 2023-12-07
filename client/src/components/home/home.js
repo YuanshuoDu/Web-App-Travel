@@ -90,7 +90,7 @@ const Home = () => {
                 Welcome to Stories
               </Typography>
               {
-                <Typography variant="h5" align="center" color="black" paragraph>
+                <Typography variant="h5" align="center" paragraph>
                   Your passport to a world of adventure and inspiration
                 </Typography>
               }
