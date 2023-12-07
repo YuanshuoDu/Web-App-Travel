@@ -36,6 +36,9 @@ const Story = ({ story, setCurrentId }) => {
 
     const Likes = () => {
         if (story.likes.length > 0) {
+
+            console.log("story likes: ", story.likes);
+            console.log( "story", story);
           return story.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
             ? (
               <><FavoriteIcon fontSize="small" />&nbsp;{story.likes.length > 2 ? `You and ${story.likes.length - 1} others` : `${story.likes.length} like${story.likes.length > 1 ? 's' : ''}` }</>

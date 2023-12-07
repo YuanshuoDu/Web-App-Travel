@@ -6,13 +6,18 @@ import moment from 'moment';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
-import { getStory, deleteStory, likeStory } from '../../redux/actions/stories';
+import { getStory, deleteStory } from '../../redux/actions/stories';
 import useStyles from './styles';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import backgroundImage from '../../images/background.png';
 import Nav from "../nav"
+import { likeStory } from '../../api';
+import { Button } from '@material-ui/core';
+import Story from './story/Story';
+
+
 
 const StoryDetail = () => {
   const { selectedStory, stories, isLoading } = useSelector((state) => state.stories);
@@ -22,12 +27,44 @@ const StoryDetail = () => {
   const { id } = useParams();
   // var userLikePost = false;
 
-  const [userLikePost, setUserLikePost] = useState(false);
+  
 
-  var handleButtonClick = () => {
-    setUserLikePost(!userLikePost);
-    dispatch(likeStory(selectedStory._id, selectedStory.likeCount));
-  };
+  const [likes, setLikes] = useState(story?.likes);
+
+    // var userLikePost = false;
+    const user = JSON.parse(localStorage.getItem('user_info'));
+
+    const userId = user?.result.googleId || user?.result?._id;
+    const hasLikedStory = stories.likes.find((like) => like === userId);
+
+    const handleLike = () => {
+        dispatch(likeStory(Story._id));
+    
+        if (hasLikedStory) {
+          setLikes(Story.likes.filter((id) => id !== userId));
+        } else {
+          setLikes([...story.likes, userId]);
+        }
+      };
+
+    const Likes = () => {
+        if (story.likes.length > 0) {
+          return story.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
+            ? (
+              <><FavoriteIcon fontSize="small" />&nbsp;{story.likes.length > 2 ? `You and ${story.likes.length - 1} others` : `${story.likes.length} like${story.likes.length > 1 ? 's' : ''}` }</>
+            ) : (
+              <><FavoriteBorderOutlinedIcon fontSize="small" />&nbsp;{story.likes.length} {story.likes.length === 1 ? 'Like' : 'Likes'}</>
+            );
+        }
+    
+        return <><FavoriteBorderOutlinedIcon fontSize="small" />&nbsp;Like</>;
+      };
+
+
+  // var handleButtonClick = () => {
+  //   setUserLikePost(!userLikePost);
+  //   dispatch(likeStory(selectedStory._id, selectedStory.likeCount));
+  // };
 
 
   useEffect(() => {
@@ -99,6 +136,7 @@ const StoryDetail = () => {
   }
 
   return (
+    console.log("selectedStory: ", selectedStory),
     <div style={{ backgroundImage: `url(${backgroundImage})` }}>
       <Container maxWidth="xl">
         <Container maxWidth="lg">
@@ -136,8 +174,13 @@ const StoryDetail = () => {
                   </div>
                   <TagList tags={selectedStory.tags || []} />
                   <Typography gutterBottom variant="body1" component="p">{selectedStory.message || ""}</Typography>
-                  <CardActions className={classes.likeButton} onClick={() => dispatch(likeStory(selectedStory._id))}>
-                    {userLikePost ?
+                  <CardActions className={classes.likeButton} >
+                  {/* onClick={() => dispatch(likeStory(selectedStory._id))} */}
+                  {/* <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
+                    <Likes />
+                    </Button> */}
+                    
+                    {/* {userLikePost ?
                       (
                         <IconButton size="small" onClick={handleButtonClick}>
                           <FavoriteIcon color="error" />
@@ -149,7 +192,8 @@ const StoryDetail = () => {
                         </IconButton>
                       )
                     }
-                    <Typography variant="body2">{selectedStory.likeCount}</Typography>
+                    <Typography variant="body2">{selectedStory.likeCount}</Typography> */}
+
 
                   </CardActions>
                   <Divider style={{ margin: '20px' }} />
