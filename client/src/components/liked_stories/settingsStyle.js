@@ -1,5 +1,5 @@
 // settingsStyle.js
-import { makeStyles } from "@material-ui/core/styles";
+/*import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
   accountsettings: {
@@ -57,5 +57,5 @@ export default makeStyles((theme) => ({
     // Define styles for mainbutton1 here if needed
   },
 }));
-
+*/
 

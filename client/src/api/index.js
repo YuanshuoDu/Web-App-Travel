@@ -1,9 +1,9 @@
 import axios from "axios"
 
-const API = axios.create({baseURL:"http://localhost:3000"})
+const API = axios.create({ baseURL: "http://localhost:3000" })
 
-API.interceptors.request.use((req)=>{
-    if(localStorage.getItem("user_info")){
+API.interceptors.request.use((req) => {
+    if (localStorage.getItem("user_info")) {
         req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem("user_info")).token}`
     }
 
@@ -22,12 +22,13 @@ export const signUpGoogle = (accessToken) => API.post("/users/signup", {
 
 export const fetchStories = (page, filter, searchTerm) => API.get(`/stories?page=${page}`, {
     params: {
-      filter: filter,
-      searchTerm: searchTerm,
+        filter: filter,
+        searchTerm: searchTerm,
     },
-  });
+});
 export const fetchStory = (id) => API.get(`/stories/${id}`);
 export const createStory = (newStory) => API.post("/stories", newStory);
 export const deleteStory = (id) => API.delete(`/stories/${id}`);
 export const updateStory = (id, updatedStory) => API.patch(`/stories/${id}`, updatedStory);
 export const likeStory = (id) => API.patch(`/stories/${id}/likeStory`);
+export const fetchLikedStories = () => API.get('/likedStories');
