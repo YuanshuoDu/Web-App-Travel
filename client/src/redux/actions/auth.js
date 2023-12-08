@@ -61,3 +61,18 @@ export const signupGoogle = (accessToken, navigate) => async (dispatch) => {
         console.log("Error in signup with google");
     }
 }
+
+export const changePassword = (passwordData) => async (dispatch) => {
+    try {
+        const response = await api.changePassword(passwordData);
+        console.log(response.data.message);
+        dispatch({ type: 'SUCCESS' });
+
+        // Dispatch any additional actions you might need on success
+    } catch (error) {
+        console.log(error.response.data.message);
+        // Dispatch any additional actions you might need on failure
+        dispatch({ type: 'ERROR' });
+
+    }
+};
