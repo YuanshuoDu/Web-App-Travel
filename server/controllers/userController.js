@@ -150,3 +150,32 @@ export const signupController = async (req, res) => {
         }
     }
 }
+
+// Change Password Controller
+export const changePasswordController = async (req, res) => {
+    const { oldPassword, newPassword, userId } = req.body;
+
+    if (newPassword.length < 4) {
+        return res.status(400).json({ message: "Password must be at least 4 characters long." });
+    }
+
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found!" });
+        }
+
+        const isPasswordCorrect = await bcrypt.compare(oldPassword, user.password);
+        if (!isPasswordCorrect) {
+            return res.status(400).json({ message: "Old password is incorrect." });
+        }
+
+        const hashedNewPassword = await bcrypt.hash(newPassword, 12);
+        user.password = hashedNewPassword;
+        await user.save();
+
+        res.status(200).json({ message: "Password changed successfully." });
+    } catch (error) {
+        res.status(500).json({ message: "Something went wrong." });
+    }
+};

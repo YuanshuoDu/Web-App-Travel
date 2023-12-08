@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { loadUser } from './redux/actions/auth';
 import LikedStories from './components/liked_stories/likedStories';
 import UserStories from './components/user_stories/user_stories';
+import ChangePassword from './components/changepassword';
 
 
 const App = () => {
@@ -55,6 +56,7 @@ const App = () => {
           <Route path="/stories/userStories" element={<UserStories />} />
           <Route path="/stories/getStoryById/:id" element={<StoryDetail />} />
           <Route path="/stories" element={<HomePage />} />
+          <Route path="/changePassword" element={<ChangePassword />} />
         </Routes>
       </Container>
     </ThemeProvider>
