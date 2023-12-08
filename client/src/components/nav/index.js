@@ -128,6 +128,9 @@ function Nav(props) {
             <MenuItem component={Link} to={`/stories/likedStories`} onClick={handleCloseUserMenu}>
               <Typography textAlign="center">Liked Stories </Typography>
             </MenuItem>
+            <MenuItem component={Link} to={`/changePassword`} onClick={handleCloseUserMenu}>
+              <Typography textAlign="center">Change Password </Typography>
+            </MenuItem>
             <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
           </Menu>
         </div>

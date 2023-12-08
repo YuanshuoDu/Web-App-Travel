@@ -11,6 +11,7 @@ API.interceptors.request.use((req) => {
 })
 
 export const signIn = (data) => API.post("/users/signin", data)
+export const changePassword = (passwordData) => API.post('/users/changePassword', passwordData);
 export const signInGoogle = (accessToken) => API.post("/users/signin", {
     googleAccessToken: accessToken
 })
@@ -33,3 +34,4 @@ export const createStory = (newStory) => API.post("/stories", newStory);
 export const deleteStory = (id) => API.delete(`/stories/${id}`);
 export const updateStory = (id, updatedStory) => API.patch(`/stories/${id}`, updatedStory);
 export const likeStory = (id) => API.patch(`/stories/${id}/likeStory`);
+
