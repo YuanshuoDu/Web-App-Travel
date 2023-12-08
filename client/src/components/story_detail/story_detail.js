@@ -46,12 +46,17 @@ const StoryDetail = () => {
   const authData = useSelector((state) => state.auth.authData);
 
   const handleLike = () => {
-    dispatch(likeStory(selectedStory._id));
+    try {
+      dispatch(likeStory(selectedStory._id));
 
-    if (hasLikedStory) {
-      setLikes(selectedStory.likes.filter((id) => id !== userId));
-    } else {
-      setLikes([...selectedStory.likes, userId]);
+      if (hasLikedStory) {
+        setLikes(selectedStory.likes.filter((id) => id !== userId));
+      } else {
+        setLikes([...selectedStory.likes, userId]);
+      }
+    } catch (error) {
+      alert(`Error: couldn't like/dislike the story.`);
+      console.log(error);
     }
   };
 
