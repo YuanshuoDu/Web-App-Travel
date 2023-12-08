@@ -27,14 +27,14 @@ const LikedStories = () => {
 
   if (!user?.result?.firstName) {
     return (
-        <div>
-            <Alert severity="warning">
-                <AlertTitle>Info</AlertTitle>
-                Please <strong>log in</strong> to access this page - check it out!
-            </Alert>
-            <Login />
-        </div>)
-};
+      <div>
+        <Alert severity="warning">
+          <AlertTitle>Info</AlertTitle>
+          Please <strong>log in</strong> to access this page - check it out!
+        </Alert>
+        <Login />
+      </div>)
+  };
 
   return (
     <Container maxWidth="xl">
@@ -53,13 +53,10 @@ const LikedStories = () => {
           <Nav />
           <main>
             <div style={{ marginTop: "60px" }} />
-            <Container maxWidth="sm">
-              <Typography component="h1" variant="h2" align="center" gutterBottom>
-                Stories you liked
-              </Typography>
-
-              <Stories setCurrentId={setCurrentId} stories={likedStories} isLoading={isLoading} />
-            </Container>
+            <Typography component="h1" variant="h2" align="center" gutterBottom>
+              Stories you liked
+            </Typography>
+            <Stories setCurrentId={setCurrentId} stories={likedStories} isLoading={isLoading} />
           </main>
         </Container>
       </Box>
