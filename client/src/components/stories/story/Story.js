@@ -21,12 +21,17 @@ const Story = ({ story, setCurrentId }) => {
     const hasLikedStory = story.likes.find((like) => like === userId);
 
     const handleLike = () => {
-        dispatch(likeStory(story._id));
+        try {
+            dispatch(likeStory(story._id));
 
-        if (hasLikedStory) {
-            setLikes(story.likes.filter((id) => id !== userId));
-        } else {
-            setLikes([...story.likes, userId]);
+            if (hasLikedStory) {
+                setLikes(story.likes.filter((id) => id !== userId));
+            } else {
+                setLikes([...story.likes, userId]);
+            }
+        } catch (error) {
+            alert(`Error: couldn't like/dislike the story.`);
+            console.log(error);
         }
     };
 
