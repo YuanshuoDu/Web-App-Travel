@@ -9,6 +9,8 @@ import Stories from "../stories/Stories";
 import Nav from "../nav";
 import Box from "@mui/material/Box";
 import backgroundImage from "../../images/background.png";
+import { Alert, AlertTitle } from '@mui/material';
+import Login from "../login";
 
 const UserStories = () => {
   const [currentId, setCurrentId] = useState(0);
@@ -22,6 +24,17 @@ const UserStories = () => {
       dispatch(getUserStories());
     }
   }, [dispatch]);
+
+  if (!user?.result?.firstName) {
+    return (
+        <div>
+            <Alert severity="warning">
+                <AlertTitle>Info</AlertTitle>
+                Please <strong>log in</strong> to access this page - check it out!
+            </Alert>
+            <Login />
+        </div>)
+};
 
   return (
     <Container maxWidth="xl">
