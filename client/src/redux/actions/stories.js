@@ -86,6 +86,7 @@ export const getLikedStories = () => async (dispatch) => {
         dispatch({ type: 'START_LOADING' });
         console.log('Story Actions: Start loading to get liked stories');
         const { data } = await api.fetchLikedStories();
+        console.log('Story Actions: Data from liked stories: ', data);
         dispatch({ type: 'FETCH_LIKED_STORIES', payload: data });
         dispatch({ type: 'SUCCESS' });
         console.log('Story Actions: Liked stories fetched successfully: ' + data);
@@ -100,6 +101,7 @@ export const getUserStories = () => async (dispatch) => {
         dispatch({ type: 'START_LOADING' });
         console.log('Story Actions: Start loading to get user stories');
         const { data } = await api.fetchUserStories();
+        console.log('Story Actions: Data from user stories: ', data);
         dispatch({ type: 'FETCH_USER_STORIES', payload: data });
         dispatch({ type: 'SUCCESS' });
         console.log('Story Actions: User stories fetched successfully: ' + data);

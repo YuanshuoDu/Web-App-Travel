@@ -58,7 +58,8 @@ const StoryForm = ({ currentId, setCurrentId }) => {
                 dispatch(updateStory(id, { ...storyData, creatorName: user?.result?.firstName + ' ' + user?.result?.lastName, creatorId: user?.result?._id }));
                 navigate(-1);
             } catch (error) {
-                alert(`Error: couldn't update the story.`);
+                console.log(error);
+                alert(`Error: couldn't update the story. `);
             }
         } else {
             try {
@@ -68,6 +69,7 @@ const StoryForm = ({ currentId, setCurrentId }) => {
                 dispatch(createStory({ ...storyData, creatorName: user?.result?.firstName + ' ' + user?.result?.lastName, creatorId: user?.result?._id }));
                 navigate(-1);
             } catch (error) {
+                console.log(error);
                 alert(`Error: couldn't create the story.`);
             }
         }

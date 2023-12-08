@@ -26,9 +26,9 @@ export const fetchStories = (page, filter, searchTerm) => API.get(`/stories?page
         searchTerm: searchTerm,
     },
 });
-export const fetchStory = (id) => API.get(`/stories/${id}`);
-export const fetchLikedStories = () => API.get('/likedStories');
-export const fetchUserStories = () => API.get('/userStories');
+export const fetchStory = (id) => API.get(`/stories/getStoryById/${id}`);
+export const fetchLikedStories = () => API.get('/stories/likedStories');
+export const fetchUserStories = () => API.get('/stories/userStories');
 export const createStory = (newStory) => API.post("/stories", newStory);
 export const deleteStory = (id) => API.delete(`/stories/${id}`);
 export const updateStory = (id, updatedStory) => API.patch(`/stories/${id}`, updatedStory);

@@ -47,6 +47,8 @@ function Nav(props) {
     e.preventDefault();
     try {
       dispatch({ type: LOGOUT });
+      goHome();
+      alert(`You have logged out. See you soon!`);
     } catch (error) {
       alert(`Error: couldn't log out.`);
     }
@@ -120,10 +122,10 @@ function Nav(props) {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            <MenuItem component={Link} to={`/userStories`} onClick={handleCloseUserMenu}>
+            <MenuItem component={Link} to={`/stories/userStories`} onClick={handleCloseUserMenu}>
               <Typography textAlign="center">User Stories </Typography>
             </MenuItem>
-            <MenuItem component={Link} to={`/likedStories`} onClick={handleCloseUserMenu}>
+            <MenuItem component={Link} to={`/stories/likedStories`} onClick={handleCloseUserMenu}>
               <Typography textAlign="center">Liked Stories </Typography>
             </MenuItem>
             <MenuItem onClick={handleLogOut}>Log Out</MenuItem>

@@ -179,7 +179,7 @@ export const getLikedStories = async (req, res) => {
         };
 
         const likedStories = await Story.find(likesCondition);
-        console.log("I have the liked stories: " + likedStories);
+        console.log("I have the liked stories");
 
         res.status(200).json({ data: likedStories });
     } catch (error) {
@@ -204,7 +204,7 @@ export const getUserStories = async (req, res) => {
         };
 
         const userStories = await Story.find(userStoriesCondition);
-        console.log("I have the user's stories: " + userStories);
+        console.log("I have the user's stories");
 
         res.status(200).json({ data: userStories });
     } catch (error) {

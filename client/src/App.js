@@ -49,12 +49,12 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<HomePage />} />
-          <Route path="/stories" element={<HomePage />} />
           <Route path="/createStory" element={<StoryForm />} />
           <Route path="/editStory/:id" element={<StoryForm />} />
-          <Route path="/stories/:id" element={<StoryDetail />} />
-          <Route path="/likedStories" element={<LikedStories />} />
-          <Route path="/userStories" element={<UserStories />} />
+          <Route path="/stories/likedStories" element={<LikedStories />} />
+          <Route path="/stories/userStories" element={<UserStories />} />
+          <Route path="/stories/getStoryById/:id" element={<StoryDetail />} />
+          <Route path="/stories" element={<HomePage />} />
         </Routes>
       </Container>
     </ThemeProvider>

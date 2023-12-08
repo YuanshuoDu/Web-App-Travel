@@ -44,7 +44,7 @@ const Story = ({ story, setCurrentId }) => {
 
     return (
         <Card className={classes.card}>
-            <Link to={`/stories/${story._id}`} className={classes.link}>
+            <Link to={`/stories/getStoryById/${story._id}`} className={classes.link}>
 
                 <CardMedia className={classes.picture} image={story.selectedPicture || 'https://sanantoniosports.org/wp-content/uploads/2022/07/placeholder-image.jpeg'} title={story.title} />
                 <div className={classes.overlay}>
